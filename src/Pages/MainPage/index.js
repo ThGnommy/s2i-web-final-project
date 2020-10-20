@@ -2,45 +2,32 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export const MainPage = () => {
-  const [data, setData] = useState([]);
-  const [query, setQuery] = useState("");
-
-  const myKey = process.env.REACT_APP_PEXELS_KEY;
-
   const fetchYoutube = async (e) => {
     e.preventDefault();
     await axios
-      .get(`https://api.pexels.com/v1/search`, {
+      .get(`https://id.twitch.tv/oauth2/authorize`, {
         params: {
-          query: query,
-          per_page: 80,
+          client_id: "lygnd4tsud660cag5g2354e4w2ucyz",
+          redirect_uri: "http://localhost:3000",
+          response_type: "token",
+          scope: "channel:read:subscriptions",
         },
         headers: {
-          Authorization: myKey,
+          mode: "no-cors",
+          Authorization: "token",
         },
       })
       .then((response) => {
-        console.log(response.data.photos);
-        setData(response.data.photos);
+        console.log(response);
       });
-  };
-
-  const handleQuery = (e) => {
-    setQuery(e.target.value);
   };
 
   return (
     <>
       <form onSubmit={fetchYoutube}>
-        <input onChange={handleQuery} type='text' />
+        <input type='text' />
         <button>FETCH</button>
       </form>
-      {data.map((image) => (
-        <>
-          <img key={image.id} alt={image.id} src={image.src.medium} />
-          <span key={image.photographer_id}>{image.photographer}</span>
-        </>
-      ))}
     </>
   );
 };
