@@ -111,3 +111,10 @@ export const SearchInput = styled.input.attrs({
     outline: none;
   }
 `;
+
+export const ChannelImage = styled.img`
+  border-radius: 25%;
+  height: 15vw;
+  width: 15vw;
+  box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+`;
