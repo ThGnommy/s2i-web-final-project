@@ -10,17 +10,41 @@ export const Container = styled.section`
   background: #303236;
 `;
 
+export const ContainerSection = styled(Container)`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-direction: row;
+  background: #303236;
+`;
+
 export const LoginContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  width: 500px;
-  height: 1000px;
+  min-width: 40vw;
+  height: 90vh;
   margin: auto;
   background-color: #3d3f43;
   border-radius: 25px;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+`;
+
+export const SearchSection = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 40vh;
+  width: 70vh;
+`;
+
+export const FavoritesSection = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 40vh;
+  width: 30vh;
 `;
 
 /* ***COMPONENTS*** */
@@ -28,6 +52,11 @@ export const LoginContainer = styled.div`
 export const Title = styled.h1`
   display: flex;
   color: #fff;
+`;
+
+export const Image = styled.img`
+  width: 20vw;
+  height: 20vw;
 `;
 
 export const TitleName = styled(Title)`
@@ -55,6 +84,10 @@ export const Button = styled.a`
   }
 `;
 
+export const ButtonSearch = styled(Button)`
+  margin: 2rem 0;
+`;
+
 export const SearchInput = styled.input.attrs({
   type: "text",
   placeholder: "Cerca...",
@@ -77,27 +110,4 @@ export const SearchInput = styled.input.attrs({
   &:focus {
     outline: none;
   }
-`;
-
-/* NAVBAR */
-
-export const Navbar = styled.nav`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 90%;
-  height: 100px;
-  background-color: #3d3f43;
-  margin-top: 1rem;
-`;
-
-export const NavItem = styled.li`
-  color: #6d6f72;
-  font-size: 1.2rem;
-  list-style-type: none;
-`;
-
-export const NavButton = styled(Button)`
-  box-shadow: none;
 `;

@@ -4,6 +4,7 @@ import {
   LoginContainer,
   Title,
   Button,
+  Image,
 } from "./../../styled-component";
 import twitchIcon from "./../../assets/img/twitch-brands.svg";
 
@@ -32,7 +33,7 @@ export const LoginPage = () => {
         <LoginContainer>
           <Title>TWITCH LOGIN</Title>
           <Button href={url_redirect}>LOGIN</Button>
-          <img src={twitchIcon} alt="twitch logo" width="200" height="200" />
+          <Image src={twitchIcon} alt='twitch logo' />
         </LoginContainer>
       </Container>
     </>

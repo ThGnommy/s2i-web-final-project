@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, TitleName } from "./../../styled-component";
-import { Searchbar } from "../../components/Searchbar";
-import { Menu } from "../../components/Menu";
+import {
+  Container,
+  ContainerSection,
+  TitleName,
+} from "./../../styled-component";
+import { SearchContainer } from "../../components/SearchContainer";
+import { FavoritesContainer } from "../../components/FavoritesContainer";
 
 export const HomePage = () => {
   const [name, setName] = useState("");
@@ -33,26 +37,15 @@ export const HomePage = () => {
       });
   }, []);
 
-  // const fetchTwitch = (e) => {
-  //   e.preventDefault();
-  //   if (window.location.hash !== "") getTokenFromHash();
-  //   else return;
-  //   axios
-  //     .get(`https://api.twitch.tv/helix/users`, {
-  //       headers: {
-  //         "Client-id": client_id,
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     })
-  //     .then((response) => console.log(response));
-  // };
-
   return (
     <>
       <Container>
-        <Menu />
         <TitleName>Ciao {name}!</TitleName>
-        <Searchbar />
+        <p>Here you can find and save your favorites streamers!</p>
+        <ContainerSection>
+          <SearchContainer />
+          <FavoritesContainer />
+        </ContainerSection>
       </Container>
     </>
   );
