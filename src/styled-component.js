@@ -18,6 +18,10 @@ export const ContainerSection = styled(Container)`
   flex-direction: row;
   background: ${(props) => props.theme.bgDark};
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const LoginContainer = styled.div`
@@ -38,7 +42,11 @@ export const SearchSection = styled.section`
   align-items: center;
   flex-direction: column;
   min-height: 40vh;
-  width: 70vh;
+  width: 70vw;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
 `;
 
 export const FavoritesSection = styled.section`
@@ -46,7 +54,12 @@ export const FavoritesSection = styled.section`
   align-items: center;
   flex-direction: column;
   min-height: 40vh;
-  width: 30vh;
+  width: 30vw;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    margin-top: 2rem;
+  }
 `;
 
 /* ***COMPONENTS*** */
@@ -116,13 +129,10 @@ export const ChannelList = styled.section`
   align-items: center;
   height: 60vh;
   overflow-y: scroll;
-  width: 100%;
+  width: 80%;
   background-color: ${(props) => props.theme.bgLight};
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
   color: ${(props) => props.theme.textLight};
-  /* &::-webkit-scrollbar {
-    display: none;
-  } */
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -141,6 +151,10 @@ export const ChannelList = styled.section`
     background: ${(props) => props.theme.bgLight};
     border-radius: 50px;
   }
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 export const SingleChannel = styled.div`
@@ -151,7 +165,7 @@ export const SingleChannel = styled.div`
   border-radius: 5px;
   margin: 2rem 0;
   padding: 1rem;
-  width: 30vw;
+  width: 50%;
   text-align: center;
   font-size: 2vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
@@ -161,6 +175,17 @@ export const SingleChannel = styled.div`
   }
   & > h3 {
     font-size: 3vw;
+  }
+  & > img {
+    transition: transform 300ms linear;
+  }
+
+  & > img:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    width: 80%;
   }
 `;
 
@@ -181,8 +206,7 @@ export const LiveContainer = styled.div`
 `;
 
 export const IsLive = styled.div`
-  display: ${(props) => props.show || "block"};
-  background-color: green;
+  background-color: ${(props) => props.show || props.theme.bgDark};
   width: 30px;
   height: 30px;
   border-radius: 50%;

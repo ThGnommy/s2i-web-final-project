@@ -31,7 +31,9 @@ export const ChannelContainer = () => {
               isLiveText={channel.is_live ? "Online" : "Offline"}
               islive={
                 channel.is_live ? (
-                  <IsLive show={live ? "block" : "none"} />
+                  <IsLive
+                    show={(props) => (live ? "green" : props.theme.bgDark)}
+                  />
                 ) : (
                   <IsNotLive />
                 )

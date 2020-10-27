@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { SearchInput } from "./../../styled-component";
 import { StoreContext } from "./../../StoreContext";
 export const Searchbar = () => {
-  const { setQuery } = useContext(StoreContext);
+  const { query, setQuery } = useContext(StoreContext);
 
   const handleSearch = (e) => {
     setQuery(e.target.value);
@@ -10,7 +10,7 @@ export const Searchbar = () => {
 
   return (
     <>
-      <SearchInput onChange={handleSearch} />
+      <SearchInput value={query} onChange={handleSearch} />
     </>
   );
 };
