@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ButtonSearch, SearchSection } from "../../styled-component";
-import { Channel } from "../Channel";
 import { Searchbar } from "../Searchbar";
 import { StoreContext, client_id } from "./../../StoreContext";
 import axios from "axios";
@@ -35,14 +34,7 @@ export const SearchContainer = () => {
       <SearchSection>
         <Searchbar />
         <ButtonSearch onClick={handleClick}>Search</ButtonSearch>
-        {channels.map((channel) => (
-          <Channel
-            key={channel.id}
-            thumbnail={channel.thumbnail_url}
-            name={channel.display_name}
-            title={channel.title}
-          />
-        ))}
+        <ChannelContainer />
       </SearchSection>
     </>
   );

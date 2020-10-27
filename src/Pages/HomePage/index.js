@@ -40,7 +40,7 @@ export const HomePage = () => {
   return (
     <>
       <Container>
-        <TitleName>Ciao {name}!</TitleName>
+        <TitleName>Hi {name}!</TitleName>
         <p>Here you can find and save your favorites streamers!</p>
         <ContainerSection>
           <SearchContainer />

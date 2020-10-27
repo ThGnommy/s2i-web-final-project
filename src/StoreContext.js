@@ -7,6 +7,7 @@ export const client_id = "lygnd4tsud660cag5g2354e4w2ucyz";
 export const StoreContextProvider = ({ children }) => {
   const [channels, setChannels] = useState([]);
   const [query, setQuery] = useState("");
+  const [favorites, setFavorites] = useState([]);
 
   // fetch all the channls
   const fetchChannels = () => {

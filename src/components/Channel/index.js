@@ -1,14 +1,21 @@
 import React from "react";
-import { ChannelImage } from "./../../styled-component";
-export const Channel = ({ name, thumbnail, islive, title }) => {
+import {
+  ChannelImage,
+  SingleChannel,
+  LiveContainer,
+} from "./../../styled-component";
+export const Channel = ({ name, thumbnail, islive, isLiveText, title }) => {
   return (
     <>
-      <div>
+      <SingleChannel>
         <ChannelImage src={thumbnail} alt='thumbnail' />
         <h3>{name}</h3>
         <h4>{title}</h4>
-        <p>Is live: {islive}</p>
-      </div>
+        <LiveContainer>
+          <p>{isLiveText}</p>
+          <div>{islive}</div>
+        </LiveContainer>
+      </SingleChannel>
     </>
   );
 };

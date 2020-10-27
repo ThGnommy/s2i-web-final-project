@@ -7,15 +7,17 @@ export const Container = styled.section`
   flex-direction: column;
   min-height: 100vh;
   height: 100%;
-  background: #303236;
+  background: ${(props) => props.theme.bgDark};
 `;
 
 export const ContainerSection = styled(Container)`
   display: flex;
+  align-items: flex-start;
   justify-content: space-around;
   width: 100%;
   flex-direction: row;
-  background: #303236;
+  background: ${(props) => props.theme.bgDark};
+  margin-top: 2rem;
 `;
 
 export const LoginContainer = styled.div`
@@ -26,7 +28,7 @@ export const LoginContainer = styled.div`
   min-width: 40vw;
   height: 90vh;
   margin: auto;
-  background-color: #3d3f43;
+  background-color: ${(props) => props.theme.bgLight};
   border-radius: 25px;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
 `;
@@ -66,11 +68,7 @@ export const TitleName = styled(Title)`
 `;
 
 export const Button = styled.a`
-  background: linear-gradient(
-    90deg,
-    rgba(44, 161, 192, 1) 0%,
-    rgba(41, 145, 162, 1) 150%
-  );
+  background: ${(props) => props.theme.button.green};
   cursor: pointer;
   color: #fff;
   border-radius: 20px;
@@ -96,13 +94,13 @@ export const SearchInput = styled.input.attrs({
   border: none;
   padding: 1rem 2rem;
   border-radius: 0.3rem;
-  background-color: #3d3f43;
-  color: #6d6f72;
+  background-color: ${(props) => props.theme.bgLight};
+  color: ${(props) => props.theme.textLight};
   font-weight: bold;
   font-size: 1.2rem;
 
   &::placeholder {
-    color: #6d6f72;
+    color: ${(props) => props.theme.textDark};
     font-weight: bold;
     font-size: 1.2rem;
   }
@@ -112,9 +110,89 @@ export const SearchInput = styled.input.attrs({
   }
 `;
 
+export const ChannelList = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60vh;
+  overflow-y: scroll;
+  width: 100%;
+  background-color: ${(props) => props.theme.bgLight};
+  box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+  color: ${(props) => props.theme.textLight};
+  /* &::-webkit-scrollbar {
+    display: none;
+  } */
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    padding: 1rem;
+  }
+  &::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.button.green};
+    border-radius: 50px;
+  }
+  &::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.bgLight};
+    border-radius: 50px;
+  }
+`;
+
+export const SingleChannel = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${(props) => props.theme.bgDark};
+  border-radius: 5px;
+  margin: 2rem 0;
+  padding: 1rem;
+  width: 30vw;
+  text-align: center;
+  font-size: 2vw;
+  box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+
+  & > * {
+    margin: 0.5rem;
+  }
+  & > h3 {
+    font-size: 3vw;
+  }
+`;
+
 export const ChannelImage = styled.img`
   border-radius: 25%;
   height: 15vw;
   width: 15vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+`;
+
+// Is live component
+
+export const LiveContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const IsLive = styled.div`
+  display: ${(props) => props.show || "block"};
+  background-color: green;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0.5rem;
+`;
+
+export const IsNotLive = styled.div`
+  background-color: red;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0.5rem;
 `;
