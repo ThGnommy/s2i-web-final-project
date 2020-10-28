@@ -9,7 +9,7 @@ export const StoreContextProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [favorites, setFavorites] = useState([]);
 
-  // fetch all the channls
+  // fetch all the channels
   const fetchChannels = () => {
     axios
       .get(`https://api.twitch.tv/helix/search/channels?query=${query}`, {

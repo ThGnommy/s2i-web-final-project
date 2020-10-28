@@ -175,6 +175,7 @@ export const SingleChannel = styled.div`
   }
   & > h3 {
     font-size: 3vw;
+    color: rgba(44, 161, 192, 1);
   }
   & > img {
     transition: transform 300ms linear;

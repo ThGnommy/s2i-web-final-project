@@ -9,12 +9,12 @@ export const ChannelContainer = () => {
   const [live, setLive] = useState(false);
 
   useEffect(() => {
-    const intervel = setInterval(() => {
+    const interval = setInterval(() => {
       setLive((prevState) => !prevState);
     }, 1000);
 
     return () => {
-      clearInterval(intervel);
+      clearInterval(interval);
     };
   }, []);
 
@@ -25,6 +25,7 @@ export const ChannelContainer = () => {
           {channels.map((channel) => (
             <Channel
               key={channel.id}
+              heartColor=''
               thumbnail={channel.thumbnail_url}
               name={channel.display_name}
               title={channel.title}
