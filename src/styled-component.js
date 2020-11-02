@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 /* ***LAYOUT*** */
 
 export const Container = styled.section`
@@ -153,28 +154,10 @@ export const SearchInput = styled.input.attrs({
 
 export const PhotoList = styled.section`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-y: scroll;
-  width: 100%;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    padding: 1rem;
-  }
-  &::-webkit-scrollbar-button {
-    width: 0px;
-    height: 0px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${(props) => props.theme.button.green};
-    border-radius: 50px;
-  }
-  &::-webkit-scrollbar-track {
-    background: ${(props) => props.theme.bgLight};
-    border-radius: 50px;
-  }
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90vw;
 
   @media (max-width: 768px) {
     width: 80%;
@@ -183,31 +166,22 @@ export const PhotoList = styled.section`
 
 export const SinglePhoto = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   background-image: ${(props) => props.backgroundImage};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   border-radius: 5px;
-  margin: 2rem 0;
-  padding: 1rem;
-  width: 50%;
-  height: 200px;
+  margin: 1rem;
+  width: 400px;
+  height: 500px;
   text-align: center;
   font-size: 2vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+  transition: filter 250ms ease-in;
 
-  & > * {
-    margin: 0.5rem;
-  }
-  & > h3 {
-    font-size: 3vw;
-    color: rgba(44, 161, 192, 1);
-  }
-  & > img {
-    transition: transform 300ms linear;
-  }
-
-  & > img:hover {
-    transform: scale(1.1);
+  &:hover {
+    filter: grayscale(1);
   }
 
   @media (max-width: 768px) {
