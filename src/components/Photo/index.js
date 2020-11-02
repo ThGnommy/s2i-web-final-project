@@ -1,6 +1,4 @@
 import React, { useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { SinglePhoto } from "../../styled-component";
 import { StoreContext } from "../../StoreContext";
 export const Photo = ({ image, photographer }) => {
@@ -8,7 +6,7 @@ export const Photo = ({ image, photographer }) => {
 
   return (
     <>
-      <SinglePhoto backgroundImage={image}></SinglePhoto>
+      <SinglePhoto backgroundImage={`url(${image})`}></SinglePhoto>
     </>
   );
 };

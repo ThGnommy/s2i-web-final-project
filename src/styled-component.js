@@ -190,6 +190,7 @@ export const SinglePhoto = styled.div`
   margin: 2rem 0;
   padding: 1rem;
   width: 50%;
+  height: 200px;
   text-align: center;
   font-size: 2vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);

@@ -18,7 +18,10 @@ export const StoreContextProvider = ({ children }) => {
     await axios
       .get(`https://api.pexels.com/v1/search?query=${query}`, {
         headers: {
-          Authorization: process.env.REACT_APP_KEY,
+          Authorization: process.env.REACT_APP_PEXELS_KEY,
+        },
+        params: {
+          per_page: 50,
         },
       })
       .then((res) => setPhotos(res.data.photos));
