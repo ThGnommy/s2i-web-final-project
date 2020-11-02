@@ -1,3 +1,5 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 /* ***LAYOUT*** */
 
@@ -8,65 +10,98 @@ export const Container = styled.section`
   min-height: 100vh;
   height: 100%;
   background: ${(props) => props.theme.bgDark};
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, roboto, oxygen,
+    cantarell, helvetica neue, ubuntu, sans-serif;
 `;
 
 export const ContainerSection = styled(Container)`
   display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
-  width: 100%;
-  flex-direction: row;
-  background: ${(props) => props.theme.bgDark};
-  margin-top: 2rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-export const LoginContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   flex-direction: column;
-  min-width: 40vw;
-  height: 90vh;
-  margin: auto;
-  background-color: ${(props) => props.theme.bgLight};
-  border-radius: 25px;
-  box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+  margin-top: 2rem;
 `;
 
 export const SearchSection = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 40vh;
-  width: 70vw;
-
-  @media (max-width: 768px) {
-    width: 100vw;
-  }
-`;
-
-export const FavoritesSection = styled.section`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  min-height: 40vh;
-  width: 30vw;
-
-  @media (max-width: 768px) {
-    width: 100vw;
-    margin-top: 2rem;
-  }
 `;
 
 /* ***COMPONENTS*** */
 
+export const Menu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+
+  & hr {
+    display: none;
+  }
+
+  & h1 {
+    color: #fff;
+    font-size: 2rem;
+    cursor: default;
+    transition: color 300ms ease-in-out;
+  }
+
+  & h1:hover {
+    color: #2ca1c0;
+  }
+
+  & ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (max-width: 470px) {
+    flex-direction: column;
+    justify-content: center;
+
+    & ul {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    & hr {
+      display: flex;
+      width: 90%;
+    }
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 0 1rem;
+  transition: color 300ms ease-in-out;
+
+  &:hover {
+    color: #2ca1c0;
+  }
+`;
+
 export const Title = styled.h1`
   display: flex;
+  font-size: 2rem;
   color: #fff;
+  margin-bottom: 2rem;
+`;
+
+export const SmallTitle = styled.h2`
+  display: flex;
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0;
 `;
 
 export const Image = styled.img`
@@ -74,13 +109,8 @@ export const Image = styled.img`
   height: 20vw;
 `;
 
-export const TitleName = styled(Title)`
-  margin-top: 2rem;
-  justify-content: center;
-  font-size: 3rem;
-`;
-
-export const Button = styled.a`
+export const ButtonSearch = styled.button`
+  margin: 2rem 0;
   background: ${(props) => props.theme.button.green};
   cursor: pointer;
   color: #fff;
@@ -89,21 +119,19 @@ export const Button = styled.a`
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
   user-select: none;
   text-decoration: none;
+  outline: none;
+  border-style: none;
 
   &:active {
     transform: scale(0.9);
   }
 `;
 
-export const ButtonSearch = styled(Button)`
-  margin: 2rem 0;
-`;
-
 export const SearchInput = styled.input.attrs({
   type: "text",
-  placeholder: "Cerca...",
+  placeholder: "Search for free photos and videos",
 })`
-  width: 300px;
+  width: 80vw;
   border: none;
   padding: 1rem 2rem;
   border-radius: 0.3rem;
@@ -123,16 +151,12 @@ export const SearchInput = styled.input.attrs({
   }
 `;
 
-export const ChannelList = styled.section`
+export const PhotoList = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60vh;
   overflow-y: scroll;
-  width: 80%;
-  background-color: ${(props) => props.theme.bgLight};
-  box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
-  color: ${(props) => props.theme.textLight};
+  width: 100%;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -157,11 +181,11 @@ export const ChannelList = styled.section`
   }
 `;
 
-export const SingleChannel = styled.div`
+export const SinglePhoto = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${(props) => props.theme.bgDark};
+  background-image: ${(props) => props.backgroundImage};
   border-radius: 5px;
   margin: 2rem 0;
   padding: 1rem;
@@ -206,18 +230,17 @@ export const LiveContainer = styled.div`
   flex-direction: column;
 `;
 
-export const IsLive = styled.div`
-  background-color: ${(props) => props.show || props.theme.bgDark};
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin: 0.5rem;
+export const OnlineText = styled.p`
+  color: "green";
+`;
+export const OfflineText = styled.p`
+  color: "red";
 `;
 
-export const IsNotLive = styled.div`
-  background-color: red;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin: 0.5rem;
+export const AddToFavorite = styled(ButtonSearch)`
+  font-size: 1rem;
+
+  &:disabled {
+    background: ${(props) => props.theme.bgLight};
+  }
 `;

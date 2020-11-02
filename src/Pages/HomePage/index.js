@@ -1,50 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
+  PhotoList,
   Container,
   ContainerSection,
-  TitleName,
+  Title,
 } from "./../../styled-component";
 import { SearchContainer } from "../../components/SearchContainer";
-import { FavoritesContainer } from "../../components/FavoritesContainer";
+import { Navbar } from "../../components/Navbar";
 
 export const HomePage = () => {
-  const [name, setName] = useState("");
-
-  const client_id = "lygnd4tsud660cag5g2354e4w2ucyz";
-
-  const getTokenFromHash = () => {
-    const hash = window.location.hash.substr(1);
-    const split1 = hash.split("=");
-    const split2 = split1[1].split("&");
-    const hash_value = split2[0];
-    localStorage.setItem("token", hash_value);
-  };
-
-  useEffect(() => {
-    if (window.location.hash !== "") getTokenFromHash();
-    else return;
-
-    axios
-      .get(`https://api.twitch.tv/helix/users`, {
-        headers: {
-          "Client-id": client_id,
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        setName(response.data.data[0].display_name);
-      });
-  }, []);
-
   return (
     <>
       <Container>
-        <TitleName>Hi {name}!</TitleName>
-        <p>Here you can find and save your favorites streamers!</p>
+        <Navbar />
         <ContainerSection>
+          <Title>A free stock videos and photos website.</Title>
           <SearchContainer />
-          <FavoritesContainer />
+          <PhotoList />
         </ContainerSection>
       </Container>
     </>

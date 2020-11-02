@@ -19,11 +19,11 @@ const theme = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreContextProvider>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <StoreContextProvider>
         <App />
-      </ThemeProvider>
-    </StoreContextProvider>
+      </StoreContextProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

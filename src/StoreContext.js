@@ -8,8 +8,22 @@ export const StoreContextProvider = ({ children }) => {
   const [channels, setChannels] = useState([]);
   const [query, setQuery] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [heart, setHeart] = useState(false);
+
+  const [photos, setPhotos] = useState([]);
 
   // fetch all the channels
+
+  const getPhotos = async (query) => {
+    await axios
+      .get(`https://api.pexels.com/v1/search?query=${query}`, {
+        headers: {
+          Authorization: process.env.REACT_APP_KEY,
+        },
+      })
+      .then((res) => setPhotos(res.data.photos));
+  };
+
   const fetchChannels = () => {
     axios
       .get(`https://api.twitch.tv/helix/search/channels?query=${query}`, {
@@ -25,7 +39,16 @@ export const StoreContextProvider = ({ children }) => {
 
   return (
     <StoreContext.Provider
-      value={{ channels, setChannels, fetchChannels, query, setQuery }}
+      value={{
+        photos,
+        setPhotos,
+        getPhotos,
+        fetchChannels,
+        query,
+        setQuery,
+        favorites,
+        setFavorites,
+      }}
     >
       {children}
     </StoreContext.Provider>
