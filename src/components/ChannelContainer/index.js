@@ -11,7 +11,11 @@ export const ChannelContainer = () => {
       {photos.length > 0 ? (
         <PhotoList>
           {photos.map((photo) => (
-            <Photo key={photo.id} image={photo.src.medium} />
+            <Photo
+              key={photo.id}
+              photographer={photo.photographer}
+              image={photo.src.large}
+            />
           ))}
         </PhotoList>
       ) : null}
