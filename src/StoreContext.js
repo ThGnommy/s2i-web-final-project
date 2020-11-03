@@ -7,7 +7,6 @@ export const client_id = "lygnd4tsud660cag5g2354e4w2ucyz";
 export const StoreContextProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
-  const [checked, setChecked] = useState(false);
 
   // fetch all the channels
 
@@ -24,30 +23,14 @@ export const StoreContextProvider = ({ children }) => {
       .then((res) => setPhotos(res.data.photos));
   };
 
-  const getVideos = async (query) => {
-    await axios
-      .get(`https://api.pexels.com/videos/search?query=${query}`, {
-        headers: {
-          Authorization: process.env.REACT_APP_PEXELS_KEY,
-        },
-        params: {
-          per_page: 50,
-        },
-      })
-      .then((res) => setPhotos(res.data.photos));
-  };
-
   return (
     <StoreContext.Provider
       value={{
         photos,
         setPhotos,
         getPhotos,
-        getVideos,
         query,
         setQuery,
-        checked,
-        setChecked,
       }}
     >
       {children}
