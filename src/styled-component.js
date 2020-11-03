@@ -156,14 +156,15 @@ export const SwitchContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+`;
 
-  & p {
-    margin-top: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    color: ${(props) => props.color};
-    font-size: 1.2rem;
-  }
+export const SwitchText = styled.p`
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: ${(props) => props.TextColor};
+  transition: color 0.4s ease-in;
+  font-size: 1.2rem;
 `;
 
 export const Switch = styled.div`

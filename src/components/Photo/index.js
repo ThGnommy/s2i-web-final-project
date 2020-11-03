@@ -12,8 +12,8 @@ export const Photo = ({ image, photographer }) => {
     setHover(false);
   };
 
-  useMemo(() => isHover, [hover]);
-  useMemo(() => isNotHover, [hover]);
+  useMemo(() => isHover, []);
+  useMemo(() => isNotHover, []);
 
   return (
     <>

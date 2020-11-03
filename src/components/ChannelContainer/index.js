@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Photo } from "../Photo";
 import { PhotoList } from "./../../styled-component";
 import { StoreContext } from "./../../StoreContext";
