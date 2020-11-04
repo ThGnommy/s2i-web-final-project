@@ -2,12 +2,12 @@ import React, { useMemo, useState, useContext } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeContext } from "styled-components";
-import { StoreContext } from "./../../StoreContext";
+import { StoreContext } from "../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-export const Photo = ({ image, photographer, photoArray, colorStar }) => {
+export const FavoritePhoto = ({ image, photographer, photoArray, photo }) => {
   const [hover, setHover] = useState(false);
 
   const themeContext = useContext(ThemeContext);
@@ -23,8 +23,7 @@ export const Photo = ({ image, photographer, photoArray, colorStar }) => {
 
   const handleFavorite = (photo) => {
     setFavorites((prevState) => [...prevState, photo]);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    console.log(JSON.parse(localStorage.getItem("favorites")));
+    localStorage.setItem("favorites", [JSON.stringify(favorites)]);
   };
 
   return (
@@ -53,7 +52,7 @@ export const Photo = ({ image, photographer, photoArray, colorStar }) => {
                 >
                   <FontAwesomeIcon
                     icon={faStar}
-                    color={colorStar || "white"}
+                    color={themeContext.textLight}
                     style={{ marginLeft: "0.5rem" }}
                     onClick={() => handleFavorite(photoArray)}
                   />

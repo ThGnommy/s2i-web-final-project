@@ -7,11 +7,10 @@ export const client_id = "lygnd4tsud660cag5g2354e4w2ucyz";
 export const StoreContextProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
-  const [favorites, setFavorites] = useState([
-    localStorage.getItem("favorites")
-      ? JSON.parse(localStorage.getItem("favorites"))
-      : [],
-  ]);
+
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites"))
+  );
 
   // fetch all the channels
   const getPhotos = async (query) => {
@@ -28,7 +27,7 @@ export const StoreContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setFavorites(JSON.parse(favorites));
+    setFavorites(favorites);
   }, []);
 
   return (
