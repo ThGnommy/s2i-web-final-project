@@ -1,7 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useContext } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-// import { StoreContext } from "../../StoreContext";
+import { StoreContext } from "./../../StoreContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 export const Photo = ({ image, photographer }) => {
   const [hover, setHover] = useState(false);
 
@@ -23,9 +25,10 @@ export const Photo = ({ image, photographer }) => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5 }}
-          exit={{ scale: 0, transition: { duration: 0.5 } }}
+          exit={{ scale: 0 }}
         >
           <SinglePhoto
+            as={motion.div}
             onMouseEnter={isHover}
             onMouseLeave={isNotHover}
             backgroundImage={`url(${image})`}
@@ -35,12 +38,16 @@ export const Photo = ({ image, photographer }) => {
                 <PhotoContainer
                   as={motion.div}
                   initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: "100%", opacity: 0.5 }}
                   transition={{ duration: 0.5 }}
+                  animate={{ width: "100%", opacity: 0.7 }}
                   exit={{ width: 0, opacity: 0 }}
                 >
                   <TextPhoto>{photographer}</TextPhoto>
-                  <TextPhoto>Icon</TextPhoto>
+                  <FontAwesomeIcon
+                    icon={faArrowDown}
+                    color='white'
+                    style={{ marginRight: "0.5rem" }}
+                  />
                 </PhotoContainer>
               </>
             )}
