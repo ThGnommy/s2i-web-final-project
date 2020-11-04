@@ -157,10 +157,6 @@ export const PhotoList = styled.section`
   flex-wrap: wrap;
   justify-content: center;
   width: 90vw;
-
-  @media (max-width: 768px) {
-    width: 80%;
-  }
 `;
 
 export const SinglePhoto = styled.div`
@@ -178,14 +174,32 @@ export const SinglePhoto = styled.div`
   font-size: 2vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
   transition: filter 250ms ease-in;
+  align-items: flex-end;
+  justify-content: space-evenly;
 
-  &:hover {
-    filter: grayscale(1);
+  & div {
+    width: 100%;
   }
 
-  @media (max-width: 768px) {
-    width: 80%;
+  @media (max-width: 959px) {
+    width: 90vw;
   }
+`;
+
+export const PhotoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: #000;
+  opacity: 0.5;
+`;
+
+export const TextPhoto = styled.p`
+  color: #fff;
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0 0.5rem;
 `;
 
 export const ChannelImage = styled.img`
