@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 
 export const StoreContext = createContext();
@@ -7,9 +7,13 @@ export const client_id = "lygnd4tsud660cag5g2354e4w2ucyz";
 export const StoreContextProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [favorites, setFavorites] = useState([
+    localStorage.getItem("favorites")
+      ? JSON.parse(localStorage.getItem("favorites"))
+      : [],
+  ]);
 
   // fetch all the channels
-
   const getPhotos = async (query) => {
     await axios
       .get(`https://api.pexels.com/v1/search?query=${query}`, {
@@ -23,6 +27,10 @@ export const StoreContextProvider = ({ children }) => {
       .then((res) => setPhotos(res.data.photos));
   };
 
+  useEffect(() => {
+    setFavorites(JSON.parse(favorites));
+  }, []);
+
   return (
     <StoreContext.Provider
       value={{
@@ -31,6 +39,8 @@ export const StoreContextProvider = ({ children }) => {
         getPhotos,
         query,
         setQuery,
+        favorites,
+        setFavorites,
       }}
     >
       {children}

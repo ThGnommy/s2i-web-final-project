@@ -12,9 +12,11 @@ export const ChannelContainer = () => {
         <PhotoList>
           {photos.map((photo) => (
             <Photo
+              photoArray={photo}
               key={photo.id}
               photographer={photo.photographer}
               image={photo.src.large}
+              downloadUrl={photo.src.original}
             />
           ))}
         </PhotoList>
