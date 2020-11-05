@@ -129,7 +129,7 @@ export const ButtonSearch = styled.button`
 
 export const SearchInput = styled.input.attrs({
   type: "text",
-  placeholder: "Search for free photos and videos",
+  placeholder: "Search for free photos...",
 })`
   width: 80vw;
   border: none;

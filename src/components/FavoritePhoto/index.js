@@ -1,16 +1,14 @@
-import React, { useMemo, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThemeContext } from "styled-components";
 import { StoreContext } from "../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-export const FavoritePhoto = ({ image, photographer, photoArray, photo }) => {
+export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
   const [hover, setHover] = useState(false);
 
-  const themeContext = useContext(ThemeContext);
   const { setFavorites, favorites } = useContext(StoreContext);
 
   const isHover = () => {
@@ -21,9 +19,9 @@ export const FavoritePhoto = ({ image, photographer, photoArray, photo }) => {
     setHover(false);
   };
 
-  const handleFavorite = (photo) => {
-    setFavorites((prevState) => [...prevState, photo]);
-    localStorage.setItem("favorites", [JSON.stringify(favorites)]);
+  const handleDeletePhoto = (photo) => {
+    JSON.stringify(favorites.filter((o) => o.id !== photo.id));
+    setFavorites(favorites.filter((o) => o.id !== photo.id));
   };
 
   return (
@@ -51,16 +49,16 @@ export const FavoritePhoto = ({ image, photographer, photoArray, photo }) => {
                   exit={{ width: 0, opacity: 0 }}
                 >
                   <FontAwesomeIcon
-                    icon={faStar}
-                    color={themeContext.textLight}
+                    icon={faDownload}
+                    color='green'
                     style={{ marginLeft: "0.5rem" }}
-                    onClick={() => handleFavorite(photoArray)}
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   <FontAwesomeIcon
-                    icon={faArrowDown}
-                    color={themeContext.textLight}
+                    icon={faTimes}
+                    color='red'
                     style={{ marginRight: "0.5rem" }}
+                    onClick={() => handleDeletePhoto(currentPhoto)}
                   />
                 </PhotoContainer>
               </>

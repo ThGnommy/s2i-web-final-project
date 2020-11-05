@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
 import axios from "axios";
 
 export const StoreContext = createContext();
@@ -8,9 +8,11 @@ export const StoreContextProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
 
-  const [favorites, setFavorites] = useState(
-    JSON.parse(localStorage.getItem("favorites"))
-  );
+  const initialState = localStorage.getItem("favorites")
+    ? JSON.parse(localStorage.getItem("favorites"))
+    : [];
+
+  const [favorites, setFavorites] = useState(initialState);
 
   // fetch all the channels
   const getPhotos = async (query) => {
@@ -25,10 +27,6 @@ export const StoreContextProvider = ({ children }) => {
       })
       .then((res) => setPhotos(res.data.photos));
   };
-
-  useEffect(() => {
-    setFavorites(favorites);
-  }, []);
 
   return (
     <StoreContext.Provider

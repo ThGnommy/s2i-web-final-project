@@ -14,7 +14,7 @@ export const HomePage = () => {
       <Container>
         <Navbar />
         <ContainerSection>
-          <Title>A free stock videos and photos website.</Title>
+          <Title>A free stock photos website.</Title>
           <SearchContainer />
           <PhotoList />
         </ContainerSection>

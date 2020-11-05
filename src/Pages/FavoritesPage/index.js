@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  PhotoList,
-  Container,
-  ContainerSection,
-  Title,
-} from "./../../styled-component";
-import { SearchContainer } from "../../components/SearchContainer";
+import { Container, ContainerSection, Title } from "./../../styled-component";
 import { Navbar } from "../../components/Navbar";
+import { FavoritesContainer } from "../../components/FavoritesContainer";
 
 export const FavoritesPage = () => {
   return (
@@ -15,6 +10,7 @@ export const FavoritesPage = () => {
         <Navbar />
         <ContainerSection>
           <Title>Favorites Photos</Title>
+          <FavoritesContainer />
         </ContainerSection>
       </Container>
     </>

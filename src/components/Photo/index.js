@@ -1,16 +1,14 @@
-import React, { useMemo, useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThemeContext } from "styled-components";
 import { StoreContext } from "./../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export const Photo = ({ image, photographer, photoArray, colorStar }) => {
   const [hover, setHover] = useState(false);
 
-  const themeContext = useContext(ThemeContext);
   const { setFavorites, favorites } = useContext(StoreContext);
 
   const isHover = () => {
@@ -23,9 +21,11 @@ export const Photo = ({ image, photographer, photoArray, colorStar }) => {
 
   const handleFavorite = (photo) => {
     setFavorites((prevState) => [...prevState, photo]);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    console.log(JSON.parse(localStorage.getItem("favorites")));
   };
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <>
@@ -46,22 +46,24 @@ export const Photo = ({ image, photographer, photoArray, colorStar }) => {
               <>
                 <PhotoContainer
                   as={motion.div}
-                  initial={{ width: 0, opacity: 0 }}
+                  initial={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  animate={{ width: "100%", opacity: 0.7 }}
-                  exit={{ width: 0, opacity: 0 }}
+                  animate={{ opacity: 0.7 }}
+                  exit={{ opacity: 0 }}
                 >
+                  {/* Download icon */}
+                  <FontAwesomeIcon
+                    icon={faDownload}
+                    color='green'
+                    style={{ marginLeft: "0.5rem" }}
+                  />
+                  <TextPhoto>{photographer}</TextPhoto>
+                  {/* Favorite icon */}
                   <FontAwesomeIcon
                     icon={faStar}
                     color={colorStar || "white"}
-                    style={{ marginLeft: "0.5rem" }}
-                    onClick={() => handleFavorite(photoArray)}
-                  />
-                  <TextPhoto>{photographer}</TextPhoto>
-                  <FontAwesomeIcon
-                    icon={faArrowDown}
-                    color={themeContext.textLight}
                     style={{ marginRight: "0.5rem" }}
+                    onClick={() => handleFavorite(photoArray)}
                   />
                 </PhotoContainer>
               </>
