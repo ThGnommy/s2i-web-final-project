@@ -15,7 +15,7 @@ export const Photo = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites } = useContext(StoreContext);
+  const { setFavorites, favorites, mediaQuery } = useContext(StoreContext);
 
   const isHover = () => {
     setHover(true);
@@ -65,12 +65,15 @@ export const Photo = ({
                   exit={{ opacity: 0 }}
                 >
                   {/* Download icon */}
-                  <a href={downloadUrl} download='image'>
+                  <a href={downloadUrl} download="image">
                     <FontAwesomeIcon
                       icon={faDownload}
-                      color='green'
+                      color="green"
                       style={{ marginLeft: "0.5rem" }}
                       onClick={downloadImage}
+                      size={
+                        mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"
+                      }
                     />
                   </a>
                   <TextPhoto>{photographer}</TextPhoto>
@@ -80,6 +83,9 @@ export const Photo = ({
                     color={starColor}
                     style={{ marginRight: "0.5rem" }}
                     onClick={() => handleFavorite(photoArray)}
+                    size={
+                      mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"
+                    }
                   />
                 </PhotoContainer>
               </>

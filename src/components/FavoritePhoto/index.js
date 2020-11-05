@@ -9,12 +9,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites } = useContext(StoreContext);
-
-  useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 1000px)").matches;
-    console.log(isMobile);
-  }, []);
+  const { setFavorites, favorites, mediaQuery } = useContext(StoreContext);
 
   const isHover = () => {
     setHover(true);
@@ -54,15 +49,21 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
                 >
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color='green'
+                    color="green"
                     style={{ marginLeft: "0.5rem" }}
+                    size={
+                      mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"
+                    }
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   <FontAwesomeIcon
                     icon={faTimes}
-                    color='red'
+                    color="red"
                     style={{ marginRight: "0.5rem" }}
                     onClick={() => handleDeletePhoto(currentPhoto)}
+                    size={
+                      mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"
+                    }
                   />
                 </PhotoContainer>
               </>

@@ -2,7 +2,12 @@ import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 
 export const StoreContext = createContext();
-export const client_id = "lygnd4tsud660cag5g2354e4w2ucyz";
+
+export const mediaQuery = {
+  isMobile: window.matchMedia("(max-width: 600px)").matches,
+  isTablet: window.matchMedia("(max-width: 960px)").matches,
+  isLargeScreen: window.matchMedia("(max-width: 1920px)").matches,
+};
 
 export const StoreContextProvider = ({ children }) => {
   const initialState = localStorage.getItem("favorites")
@@ -41,6 +46,7 @@ export const StoreContextProvider = ({ children }) => {
         setQuery,
         favorites,
         setFavorites,
+        mediaQuery,
       }}
     >
       {children}
