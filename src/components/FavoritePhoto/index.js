@@ -20,7 +20,6 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
   };
 
   const handleDeletePhoto = (photo) => {
-    JSON.stringify(favorites.filter((o) => o.id !== photo.id));
     setFavorites(favorites.filter((o) => o.id !== photo.id));
   };
 

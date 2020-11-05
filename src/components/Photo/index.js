@@ -19,8 +19,13 @@ export const Photo = ({ image, photographer, photoArray, colorStar }) => {
     setHover(false);
   };
 
+  let isFavorite = favorites.find((o) => o.id === colorStar.id);
+  const starColor = isFavorite ? "yellow" : "white";
+
   const handleFavorite = (photo) => {
-    setFavorites((prevState) => [...prevState, photo]);
+    if (!isFavorite) {
+      setFavorites((prevState) => [...prevState, photo]);
+    } else return;
   };
 
   useEffect(() => {
@@ -61,7 +66,7 @@ export const Photo = ({ image, photographer, photoArray, colorStar }) => {
                   {/* Favorite icon */}
                   <FontAwesomeIcon
                     icon={faStar}
-                    color={colorStar || "white"}
+                    color={starColor}
                     style={{ marginRight: "0.5rem" }}
                     onClick={() => handleFavorite(photoArray)}
                   />

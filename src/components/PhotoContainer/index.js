@@ -13,6 +13,7 @@ export const PhotoContainer = () => {
           {photos.map((photo) => (
             <Photo
               photoArray={photo}
+              colorStar={photo}
               key={photo.id}
               photographer={photo.photographer}
               image={photo.src.large}

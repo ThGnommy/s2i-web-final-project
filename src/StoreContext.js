@@ -1,18 +1,21 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 
 export const StoreContext = createContext();
 export const client_id = "lygnd4tsud660cag5g2354e4w2ucyz";
 
 export const StoreContextProvider = ({ children }) => {
-  const [query, setQuery] = useState("");
-  const [photos, setPhotos] = useState([]);
-
   const initialState = localStorage.getItem("favorites")
     ? JSON.parse(localStorage.getItem("favorites"))
     : [];
 
+  const [query, setQuery] = useState("");
+  const [photos, setPhotos] = useState([]);
   const [favorites, setFavorites] = useState(initialState);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   // fetch all the channels
   const getPhotos = async (query) => {

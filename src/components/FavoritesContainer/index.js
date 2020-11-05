@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { FavoritePhoto } from "../FavoritePhoto";
 import { PhotoList } from "../../styled-component";
 import { StoreContext } from "../../StoreContext";
