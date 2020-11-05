@@ -208,27 +208,3 @@ export const ChannelImage = styled.img`
   width: 15vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
 `;
-
-// Is live component
-
-export const LiveContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-`;
-
-export const OnlineText = styled.p`
-  color: "green";
-`;
-export const OfflineText = styled.p`
-  color: "red";
-`;
-
-export const AddToFavorite = styled(ButtonSearch)`
-  font-size: 1rem;
-
-  &:disabled {
-    background: ${(props) => props.theme.bgLight};
-  }
-`;

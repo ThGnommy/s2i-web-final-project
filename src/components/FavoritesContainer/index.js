@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { FavoritePhoto } from "../FavoritePhoto";
-import { PhotoList } from "../../styled-component";
+import { PhotoList, Title } from "../../styled-component";
 import { StoreContext } from "../../StoreContext";
 
 export const FavoritesContainer = () => {
@@ -20,7 +20,9 @@ export const FavoritesContainer = () => {
             />
           ))}
         </PhotoList>
-      ) : null}
+      ) : (
+        <Title>You don't have favorites.</Title>
+      )}
     </>
   );
 };

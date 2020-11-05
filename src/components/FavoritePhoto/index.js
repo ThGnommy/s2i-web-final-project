@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
 import { StoreContext } from "../../StoreContext";
@@ -10,6 +10,11 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
   const [hover, setHover] = useState(false);
 
   const { setFavorites, favorites } = useContext(StoreContext);
+
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 1000px)").matches;
+    console.log(isMobile);
+  }, []);
 
   const isHover = () => {
     setHover(true);
@@ -42,10 +47,10 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
               <>
                 <PhotoContainer
                   as={motion.div}
-                  initial={{ width: 0, opacity: 0 }}
+                  initial={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  animate={{ width: "100%", opacity: 0.7 }}
-                  exit={{ width: 0, opacity: 0 }}
+                  animate={{ opacity: 0.7 }}
+                  exit={{ opacity: 0 }}
                 >
                   <FontAwesomeIcon
                     icon={faDownload}

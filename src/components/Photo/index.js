@@ -6,7 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-export const Photo = ({ image, photographer, photoArray, colorStar }) => {
+export const Photo = ({
+  image,
+  photographer,
+  photoArray,
+  colorStar,
+  downloadUrl,
+}) => {
   const [hover, setHover] = useState(false);
 
   const { setFavorites, favorites } = useContext(StoreContext);
@@ -31,6 +37,8 @@ export const Photo = ({ image, photographer, photoArray, colorStar }) => {
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
+
+  const downloadImage = () => {};
 
   return (
     <>
@@ -57,11 +65,14 @@ export const Photo = ({ image, photographer, photoArray, colorStar }) => {
                   exit={{ opacity: 0 }}
                 >
                   {/* Download icon */}
-                  <FontAwesomeIcon
-                    icon={faDownload}
-                    color='green'
-                    style={{ marginLeft: "0.5rem" }}
-                  />
+                  <a href={downloadUrl} download='image'>
+                    <FontAwesomeIcon
+                      icon={faDownload}
+                      color='green'
+                      style={{ marginLeft: "0.5rem" }}
+                      onClick={downloadImage}
+                    />
+                  </a>
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
                   <FontAwesomeIcon

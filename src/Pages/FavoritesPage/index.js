@@ -10,6 +10,7 @@ export const FavoritesPage = () => {
         <Navbar />
         <ContainerSection>
           <Title>Favorites Photos</Title>
+          <hr style={{ width: "90%", marginBottom: "2rem" }} />
           <FavoritesContainer />
         </ContainerSection>
       </Container>
