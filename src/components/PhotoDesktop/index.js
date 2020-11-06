@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-export const Photo = ({
+export const PhotoDesktop = ({
   image,
   photographer,
   photoArray,
@@ -55,7 +55,7 @@ export const Photo = ({
             onMouseLeave={isNotHover}
             backgroundImage={`url(${image})`}
           >
-            {hover && !mediaQuery.isTablet && (
+            {hover && (
               <>
                 <PhotoContainer
                   as={motion.div}

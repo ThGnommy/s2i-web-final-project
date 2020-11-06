@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
 import { StoreContext } from "../../StoreContext";
@@ -49,7 +49,7 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
                 >
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color="green"
+                    color='green'
                     style={{ marginLeft: "0.5rem" }}
                     size={
                       mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"
@@ -58,7 +58,7 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
                   <TextPhoto>{photographer}</TextPhoto>
                   <FontAwesomeIcon
                     icon={faTimes}
-                    color="red"
+                    color='red'
                     style={{ marginRight: "0.5rem" }}
                     onClick={() => handleDeletePhoto(currentPhoto)}
                     size={
