@@ -5,6 +5,7 @@ import { StoreContext } from "../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import photoPropTypes from "./../../propTypes/propTypes";
 
 export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
   const [hover, setHover] = useState(false);
@@ -49,7 +50,7 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
                 >
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color='green'
+                    color="green"
                     style={{ marginLeft: "0.5rem" }}
                     size={
                       mediaQuery.isTablet || mediaQuery.isMobile ? "x" : "sm"
@@ -58,7 +59,7 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
                   <TextPhoto>{photographer}</TextPhoto>
                   <FontAwesomeIcon
                     icon={faTimes}
-                    color='red'
+                    color="red"
                     style={{ marginRight: "0.5rem" }}
                     onClick={() => handleDeletePhoto(currentPhoto)}
                     size={
@@ -74,3 +75,5 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
     </>
   );
 };
+
+FavoritePhoto.propType = photoPropTypes;

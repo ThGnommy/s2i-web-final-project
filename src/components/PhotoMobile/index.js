@@ -5,6 +5,7 @@ import { StoreContext } from "./../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import photoPropTypes from "./../../propTypes/propTypes";
 
 export const PhotoMobile = ({
   image,
@@ -51,7 +52,7 @@ export const PhotoMobile = ({
                 {/* Download icon */}
                 <FontAwesomeIcon
                   icon={faDownload}
-                  color='green'
+                  color="green"
                   style={{ marginLeft: "0.5rem" }}
                   onClick={() => downloadImage(downloadUrl)}
                   size={mediaQuery.isMobile ? "4x" : "2x"}
@@ -73,3 +74,5 @@ export const PhotoMobile = ({
     </>
   );
 };
+
+PhotoMobile.propType = photoPropTypes;

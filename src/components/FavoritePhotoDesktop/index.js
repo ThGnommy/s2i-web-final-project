@@ -5,6 +5,7 @@ import { StoreContext } from "../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import photoPropTypes from "./../../propTypes/propTypes";
 
 export const FavoritePhotoDesktop = ({
   image,
@@ -54,18 +55,18 @@ export const FavoritePhotoDesktop = ({
                 >
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color='green'
+                    color="green"
                     style={{ marginLeft: "0.5rem", cursor: "pointer" }}
-                    size='1x'
+                    size="1x"
                     onClick={() => downloadImage(downloadUrl)}
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   <FontAwesomeIcon
                     icon={faTimes}
-                    color='red'
+                    color="red"
                     style={{ marginRight: "0.5rem", cursor: "pointer" }}
                     onClick={() => handleDeletePhoto(currentPhoto)}
-                    size='1x'
+                    size="1x"
                   />
                 </PhotoContainer>
               </>
@@ -76,3 +77,5 @@ export const FavoritePhotoDesktop = ({
     </>
   );
 };
+
+FavoritePhotoDesktop.propType = photoPropTypes;

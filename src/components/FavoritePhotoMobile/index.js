@@ -5,6 +5,7 @@ import { StoreContext } from "../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import photoPropTypes from "./../../propTypes/propTypes";
 
 export const FavoritePhotoMobile = ({
   image,
@@ -39,7 +40,7 @@ export const FavoritePhotoMobile = ({
             >
               <FontAwesomeIcon
                 icon={faDownload}
-                color='green'
+                color="green"
                 style={{ marginLeft: "0.5rem" }}
                 size={mediaQuery.isMobile ? "4x" : "2x"}
                 onClick={() => downloadImage(downloadUrl)}
@@ -47,7 +48,7 @@ export const FavoritePhotoMobile = ({
               <TextPhoto>{photographer}</TextPhoto>
               <FontAwesomeIcon
                 icon={faTimes}
-                color='red'
+                color="red"
                 style={{ marginRight: "0.5rem" }}
                 onClick={() => handleDeletePhoto(currentPhoto)}
                 size={mediaQuery.isMobile ? "4x" : "2x"}
@@ -59,3 +60,5 @@ export const FavoritePhotoMobile = ({
     </>
   );
 };
+
+FavoritePhotoMobile.propType = photoPropTypes;
