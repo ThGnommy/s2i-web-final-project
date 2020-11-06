@@ -15,7 +15,7 @@ export const PhotoDesktop = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites, mediaQuery } = useContext(StoreContext);
+  const { setFavorites, favorites, downloadImage } = useContext(StoreContext);
 
   const isHover = () => {
     setHover(true);
@@ -37,8 +37,6 @@ export const PhotoDesktop = ({
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
-
-  const downloadImage = () => {};
 
   return (
     <>
@@ -65,21 +63,19 @@ export const PhotoDesktop = ({
                   exit={{ opacity: 0 }}
                 >
                   {/* Download icon */}
-                  <a href={downloadUrl} download='image'>
-                    <FontAwesomeIcon
-                      icon={faDownload}
-                      color='green'
-                      style={{ marginLeft: "0.5rem" }}
-                      onClick={downloadImage}
-                      size='1x'
-                    />
-                  </a>
+                  <FontAwesomeIcon
+                    icon={faDownload}
+                    color='green'
+                    style={{ marginLeft: "0.5rem", cursor: "pointer" }}
+                    onClick={() => downloadImage(downloadUrl)}
+                    size='1x'
+                  />
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
                   <FontAwesomeIcon
                     icon={faStar}
                     color={starColor}
-                    style={{ marginRight: "0.5rem" }}
+                    style={{ marginRight: "0.5rem", cursor: "pointer" }}
                     onClick={() => handleFavorite(photoArray)}
                     size='1x'
                   />

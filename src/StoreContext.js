@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
+import { saveAs } from "file-saver";
 
 export const StoreContext = createContext();
 
@@ -8,6 +9,10 @@ export const mediaQuery = {
   isTablet: window.matchMedia("(max-width: 960px)").matches,
   isDesktop: window.matchMedia("(min-width: 961px)").matches,
   isLargeScreen: window.matchMedia("(max-width: 1920px)").matches,
+};
+
+export const downloadImage = (url) => {
+  return saveAs(`${url}`, "photo.png");
 };
 
 export const StoreContextProvider = ({ children }) => {
@@ -48,6 +53,7 @@ export const StoreContextProvider = ({ children }) => {
         favorites,
         setFavorites,
         mediaQuery,
+        downloadImage,
       }}
     >
       {children}

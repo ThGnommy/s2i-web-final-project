@@ -6,10 +6,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-export const FavoritePhotoDesktop = ({ image, photographer, currentPhoto }) => {
+export const FavoritePhotoDesktop = ({
+  image,
+  photographer,
+  currentPhoto,
+  downloadUrl,
+}) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites, mediaQuery } = useContext(StoreContext);
+  const { setFavorites, favorites, downloadImage } = useContext(StoreContext);
 
   const isHover = () => {
     setHover(true);
@@ -50,14 +55,15 @@ export const FavoritePhotoDesktop = ({ image, photographer, currentPhoto }) => {
                   <FontAwesomeIcon
                     icon={faDownload}
                     color='green'
-                    style={{ marginLeft: "0.5rem" }}
+                    style={{ marginLeft: "0.5rem", cursor: "pointer" }}
                     size='1x'
+                    onClick={() => downloadImage(downloadUrl)}
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   <FontAwesomeIcon
                     icon={faTimes}
                     color='red'
-                    style={{ marginRight: "0.5rem" }}
+                    style={{ marginRight: "0.5rem", cursor: "pointer" }}
                     onClick={() => handleDeletePhoto(currentPhoto)}
                     size='1x'
                   />

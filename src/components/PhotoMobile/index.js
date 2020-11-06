@@ -13,7 +13,9 @@ export const PhotoMobile = ({
   colorStar,
   downloadUrl,
 }) => {
-  const { setFavorites, favorites, mediaQuery } = useContext(StoreContext);
+  const { setFavorites, favorites, mediaQuery, downloadImage } = useContext(
+    StoreContext
+  );
 
   let isFavorite = favorites.find((o) => o.id === colorStar.id);
   const starColor = isFavorite ? "yellow" : "white";
@@ -27,8 +29,6 @@ export const PhotoMobile = ({
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
-
-  const downloadImage = () => {};
 
   return (
     <>
@@ -49,15 +49,13 @@ export const PhotoMobile = ({
                 exit={{ opacity: 0 }}
               >
                 {/* Download icon */}
-                <a href={downloadUrl} download='image'>
-                  <FontAwesomeIcon
-                    icon={faDownload}
-                    color='green'
-                    style={{ marginLeft: "0.5rem" }}
-                    onClick={downloadImage}
-                    size={mediaQuery.isMobile ? "4x" : "2x"}
-                  />
-                </a>
+                <FontAwesomeIcon
+                  icon={faDownload}
+                  color='green'
+                  style={{ marginLeft: "0.5rem" }}
+                  onClick={() => downloadImage(downloadUrl)}
+                  size={mediaQuery.isMobile ? "4x" : "2x"}
+                />
                 <TextPhoto>{photographer}</TextPhoto>
                 {/* Favorite icon */}
                 <FontAwesomeIcon

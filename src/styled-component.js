@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   display: flex;
+  text-align: center;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;

@@ -6,8 +6,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-export const FavoritePhotoMobile = ({ image, photographer, currentPhoto }) => {
-  const { setFavorites, favorites, mediaQuery } = useContext(StoreContext);
+export const FavoritePhotoMobile = ({
+  image,
+  photographer,
+  currentPhoto,
+  downloadUrl,
+}) => {
+  const { setFavorites, favorites, mediaQuery, downloadImage } = useContext(
+    StoreContext
+  );
 
   const handleDeletePhoto = (photo) => {
     setFavorites(favorites.filter((o) => o.id !== photo.id));
@@ -35,6 +42,7 @@ export const FavoritePhotoMobile = ({ image, photographer, currentPhoto }) => {
                 color='green'
                 style={{ marginLeft: "0.5rem" }}
                 size={mediaQuery.isMobile ? "4x" : "2x"}
+                onClick={() => downloadImage(downloadUrl)}
               />
               <TextPhoto>{photographer}</TextPhoto>
               <FontAwesomeIcon
