@@ -55,9 +55,7 @@ export const PhotoMobile = ({
                     color='green'
                     style={{ marginLeft: "0.5rem" }}
                     onClick={downloadImage}
-                    size={
-                      mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"
-                    }
+                    size={mediaQuery.isMobile ? "4x" : "2x"}
                   />
                 </a>
                 <TextPhoto>{photographer}</TextPhoto>
@@ -67,7 +65,7 @@ export const PhotoMobile = ({
                   color={starColor}
                   style={{ marginRight: "0.5rem" }}
                   onClick={() => handleFavorite(photoArray)}
-                  size={mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"}
+                  size={mediaQuery.isMobile ? "4x" : "2x"}
                 />
               </PhotoContainer>
             </>

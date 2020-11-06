@@ -52,7 +52,7 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
                     color='green'
                     style={{ marginLeft: "0.5rem" }}
                     size={
-                      mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"
+                      mediaQuery.isTablet || mediaQuery.isMobile ? "x" : "sm"
                     }
                   />
                   <TextPhoto>{photographer}</TextPhoto>
@@ -62,7 +62,7 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
                     style={{ marginRight: "0.5rem" }}
                     onClick={() => handleDeletePhoto(currentPhoto)}
                     size={
-                      mediaQuery.isTablet || mediaQuery.isSmall ? "4x" : "sm"
+                      mediaQuery.isTablet || mediaQuery.isMobile ? "2x" : "sm"
                     }
                   />
                 </PhotoContainer>

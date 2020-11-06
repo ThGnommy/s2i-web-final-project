@@ -1,18 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "./../../StoreContext";
+import { StoreContext } from "../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-export const PhotoDesktop = ({
-  image,
-  photographer,
-  photoArray,
-  colorStar,
-  downloadUrl,
-}) => {
+export const FavoritePhotoDesktop = ({ image, photographer, currentPhoto }) => {
   const [hover, setHover] = useState(false);
 
   const { setFavorites, favorites, mediaQuery } = useContext(StoreContext);
@@ -25,20 +19,9 @@ export const PhotoDesktop = ({
     setHover(false);
   };
 
-  let isFavorite = favorites.find((o) => o.id === colorStar.id);
-  const starColor = isFavorite ? "yellow" : "white";
-
-  const handleFavorite = (photo) => {
-    if (!isFavorite) {
-      setFavorites((prevState) => [...prevState, photo]);
-    } else return;
+  const handleDeletePhoto = (photo) => {
+    setFavorites(favorites.filter((o) => o.id !== photo.id));
   };
-
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
-
-  const downloadImage = () => {};
 
   return (
     <>
@@ -64,23 +47,18 @@ export const PhotoDesktop = ({
                   animate={{ opacity: 0.7 }}
                   exit={{ opacity: 0 }}
                 >
-                  {/* Download icon */}
-                  <a href={downloadUrl} download='image'>
-                    <FontAwesomeIcon
-                      icon={faDownload}
-                      color='green'
-                      style={{ marginLeft: "0.5rem" }}
-                      onClick={downloadImage}
-                      size='1x'
-                    />
-                  </a>
-                  <TextPhoto>{photographer}</TextPhoto>
-                  {/* Favorite icon */}
                   <FontAwesomeIcon
-                    icon={faStar}
-                    color={starColor}
+                    icon={faDownload}
+                    color='green'
+                    style={{ marginLeft: "0.5rem" }}
+                    size='1x'
+                  />
+                  <TextPhoto>{photographer}</TextPhoto>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    color='red'
                     style={{ marginRight: "0.5rem" }}
-                    onClick={() => handleFavorite(photoArray)}
+                    onClick={() => handleDeletePhoto(currentPhoto)}
                     size='1x'
                   />
                 </PhotoContainer>
