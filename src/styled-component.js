@@ -37,7 +37,6 @@ export const Menu = styled.div`
   background-color: #000;
   color: #fff;
   width: 100%;
-  height: 100%;
 
   & hr {
     display: none;
@@ -208,4 +207,25 @@ export const ChannelImage = styled.img`
   height: 15vw;
   width: 15vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+`;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90vw;
+`;
+
+export const PaginationButton = styled.button`
+  background: ${(props) => props.theme.button.green};
+  cursor: pointer;
+  color: #fff;
+  padding: 0 1.5rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  text-decoration: none;
+  outline: none;
+  border-style: none;
 `;

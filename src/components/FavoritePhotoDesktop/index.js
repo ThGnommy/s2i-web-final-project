@@ -35,7 +35,7 @@ export const FavoritePhotoDesktop = ({
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           exit={{ scale: 0 }}
         >
           <SinglePhoto
@@ -49,7 +49,7 @@ export const FavoritePhotoDesktop = ({
                 <PhotoContainer
                   as={motion.div}
                   initial={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.4 }}
                   animate={{ opacity: 0.7 }}
                   exit={{ opacity: 0 }}
                 >

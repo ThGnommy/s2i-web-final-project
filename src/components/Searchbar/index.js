@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { StoreContext } from "../../StoreContext";
 import { SearchInput } from "./../../styled-component";
-export const Searchbar = ({ query }) => {
+export const Searchbar = () => {
+  const { setQuery } = useContext(StoreContext);
+
+  const handleInput = (e) => {
+    setQuery(e.target.value);
+  };
+
   return (
     <>
-      <SearchInput ref={query} />
+      <SearchInput onChange={handleInput} />
     </>
   );
 };

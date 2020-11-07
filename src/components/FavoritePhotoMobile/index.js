@@ -31,13 +31,7 @@ export const FavoritePhotoMobile = ({
           exit={{ scale: 0 }}
         >
           <SinglePhoto as={motion.div} backgroundImage={`url(${image})`}>
-            <PhotoContainer
-              as={motion.div}
-              initial={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              animate={{ opacity: 0.7 }}
-              exit={{ opacity: 0 }}
-            >
+            <PhotoContainer>
               <FontAwesomeIcon
                 icon={faDownload}
                 color="green"

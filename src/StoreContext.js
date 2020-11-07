@@ -22,6 +22,7 @@ export const StoreContextProvider = ({ children }) => {
 
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [page, setPage] = useState(1);
   const [favorites, setFavorites] = useState(initialState);
 
   useEffect(() => {
@@ -29,27 +30,35 @@ export const StoreContextProvider = ({ children }) => {
   }, [favorites]);
 
   // fetch all the channels
-  const getPhotos = async (query) => {
-    await axios
-      .get(`https://api.pexels.com/v1/search?query=${query}`, {
-        headers: {
-          Authorization: process.env.REACT_APP_PEXELS_KEY,
-        },
-        params: {
-          per_page: 50,
-        },
-      })
-      .then((res) => setPhotos(res.data.photos));
+  const getPhotos = async () => {
+    try {
+      await axios
+        .get(`https://api.pexels.com/v1/search?query=${query}`, {
+          headers: {
+            Authorization: process.env.REACT_APP_PEXELS_KEY,
+          },
+          params: {
+            total_results: 10000,
+            per_page: 10,
+            page: page,
+          },
+        })
+        .then((res) => setPhotos(res.data.photos));
+    } catch (error) {
+      return error;
+    }
   };
 
   return (
     <StoreContext.Provider
       value={{
         photos,
+        page,
         setPhotos,
+        setQuery,
+        setPage,
         getPhotos,
         query,
-        setQuery,
         favorites,
         setFavorites,
         mediaQuery,
