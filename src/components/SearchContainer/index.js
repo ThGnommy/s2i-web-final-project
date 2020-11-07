@@ -7,8 +7,13 @@ import { PhotoContainer } from "../PhotoContainer";
 export const SearchContainer = () => {
   const { getPhotos } = useContext(StoreContext);
   const query = useRef("");
-  const handleClick = (e) => {
-    getPhotos(query.current.value);
+
+  const handleClick = () => {
+    let value = query.current.value.trim();
+
+    if (value === "") return;
+
+    getPhotos(value);
   };
 
   return (
