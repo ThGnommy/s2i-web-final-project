@@ -1,16 +1,22 @@
-import React from "react";
-import "./App.css";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { MainPage } from "./Pages/MainPage";
-import { FavoritePage } from "./Pages/FavoritePage";
-
+import { FavoritesPage } from "./Pages/FavoritesPage";
+import { HomePage } from "./Pages/HomePage";
+import "./reset.css";
+import { StoreContext } from "./StoreContext";
 const App = () => {
+  const { favorites } = useContext(StoreContext);
+
   return (
     <>
       <Router>
         <Switch>
-          <Route path='/favorites' component={FavoritePage} />
-          <Route path='/' component={MainPage} />
+          <Route
+            state={favorites}
+            path='/favorites'
+            component={FavoritesPage}
+          />
+          <Route state={favorites} path='/' component={HomePage} />
         </Switch>
       </Router>
     </>
