@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { StoreContext } from "../../StoreContext";
 import { SearchInput } from "./../../styled-component";
 export const Searchbar = () => {
-  const { setQuery } = useContext(StoreContext);
+  const { setInput } = useContext(StoreContext);
 
   const handleInput = (e) => {
-    setQuery(e.target.value);
+    setInput(e.target.value);
   };
 
   return (

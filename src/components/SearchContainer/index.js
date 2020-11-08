@@ -5,10 +5,11 @@ import { StoreContext } from "./../../StoreContext";
 import { PhotoContainer } from "../PhotoContainer";
 
 export const SearchContainer = () => {
-  const { getPhotos, query } = useContext(StoreContext);
+  const { input, setQuery, setPage } = useContext(StoreContext);
 
   const handleClick = () => {
-    getPhotos();
+    setQuery(input);
+    setPage(1);
   };
 
   return (

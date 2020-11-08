@@ -20,6 +20,7 @@ export const StoreContextProvider = ({ children }) => {
     ? JSON.parse(localStorage.getItem("favorites"))
     : [];
 
+  const [input, setInput] = useState("");
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
@@ -29,35 +30,44 @@ export const StoreContextProvider = ({ children }) => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
+  useEffect(() => {
+    const getPhotos = async () => {
+      try {
+        await axios
+          .get(`https://api.pexels.com/v1/search?query=${query}`, {
+            headers: {
+              Authorization: process.env.REACT_APP_PEXELS_KEY,
+            },
+            params: {
+              total_results: 10000,
+              per_page: 10,
+              page: page,
+            },
+          })
+          .then((res) => {
+            if (!res) return;
+            setPhotos(res.data.photos);
+          });
+      } catch (error) {
+        return error;
+      }
+    };
+
+    getPhotos();
+  }, [query, page]);
+
   // fetch all the channels
-  const getPhotos = async () => {
-    try {
-      await axios
-        .get(`https://api.pexels.com/v1/search?query=${query}`, {
-          headers: {
-            Authorization: process.env.REACT_APP_PEXELS_KEY,
-          },
-          params: {
-            total_results: 10000,
-            per_page: 10,
-            page: page,
-          },
-        })
-        .then((res) => setPhotos(res.data.photos));
-    } catch (error) {
-      return error;
-    }
-  };
 
   return (
     <StoreContext.Provider
       value={{
         photos,
         page,
+        input,
+        setInput,
         setPhotos,
         setQuery,
         setPage,
-        getPhotos,
         query,
         favorites,
         setFavorites,

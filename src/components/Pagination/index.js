@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import {
   PaginationButton,
   PaginationContainer,
@@ -9,22 +9,16 @@ import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
 import { StoreContext } from "./../../StoreContext";
 import { ThemeContext } from "styled-components";
 export const Pagination = () => {
-  const { mediaQuery, page, setPage, getPhotos, photos } = useContext(
-    StoreContext
-  );
+  const { mediaQuery, page, setPage, photos } = useContext(StoreContext);
   const themeProvider = useContext(ThemeContext);
-
-  const query = useRef();
 
   const pagePrev = () => {
     if (page <= 1) return;
     setPage(page - 1);
-    getPhotos(query);
   };
 
   const pageNext = () => {
     setPage(page + 1);
-    getPhotos(query);
   };
 
   return (
