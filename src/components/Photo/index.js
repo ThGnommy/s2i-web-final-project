@@ -25,6 +25,8 @@ export const Photo = ({
     setHover(false);
   };
 
+  // Check for the favorite icon
+
   let isFavorite = favorites.find((o) => o.id === colorStar.id);
   const starColor = isFavorite ? "yellow" : "white";
 
@@ -37,8 +39,6 @@ export const Photo = ({
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
-
-  const downloadImage = () => {};
 
   return (
     <>
@@ -65,10 +65,10 @@ export const Photo = ({
                   exit={{ opacity: 0 }}
                 >
                   {/* Download icon */}
-                  <a href={downloadUrl} download='image'>
+                  <a href={downloadUrl} download="image">
                     <FontAwesomeIcon
                       icon={faDownload}
-                      color='green'
+                      color="green"
                       style={{ marginLeft: "0.5rem" }}
                       onClick={downloadImage}
                       size={

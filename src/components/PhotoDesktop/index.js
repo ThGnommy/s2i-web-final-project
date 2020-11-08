@@ -26,6 +26,7 @@ export const PhotoDesktop = ({
     setHover(false);
   };
 
+  // Check for the favorite icon
   let isFavorite = favorites.find((o) => o.id === colorStar.id);
   const starColor = isFavorite ? "yellow" : "white";
 
@@ -45,7 +46,7 @@ export const PhotoDesktop = ({
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           exit={{ scale: 0 }}
         >
           <SinglePhoto
@@ -59,7 +60,7 @@ export const PhotoDesktop = ({
                 <PhotoContainer
                   as={motion.div}
                   initial={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.4 }}
                   animate={{ opacity: 0.7 }}
                   exit={{ opacity: 0 }}
                 >
