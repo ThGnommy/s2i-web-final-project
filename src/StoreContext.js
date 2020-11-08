@@ -24,6 +24,7 @@ export const StoreContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [nextPage, setNextPage] = useState(true);
   const [page, setPage] = useState(1);
   const [favorites, setFavorites] = useState(initialState);
 
@@ -46,7 +47,15 @@ export const StoreContextProvider = ({ children }) => {
             },
           })
           .then((res) => {
+            // Check if next page exist
+            if (!res.data.next_page) {
+              setNextPage(false);
+            } else {
+              setNextPage(true);
+            }
+
             if (!res) return;
+
             setPhotos(res.data.photos);
           });
       } catch (error) {
@@ -56,8 +65,6 @@ export const StoreContextProvider = ({ children }) => {
 
     getPhotos();
   }, [query, page]);
-
-  // fetch all the channels
 
   return (
     <StoreContext.Provider
@@ -70,6 +77,7 @@ export const StoreContextProvider = ({ children }) => {
         setQuery,
         setPage,
         query,
+        nextPage,
         favorites,
         setFavorites,
         mediaQuery,
