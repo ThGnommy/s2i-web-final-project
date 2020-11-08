@@ -26,6 +26,7 @@ export const PhotoDesktop = ({
     setHover(false);
   };
 
+  // Check for the favorite icon
   let isFavorite = favorites.find((o) => o.id === colorStar.id);
   const starColor = isFavorite ? "yellow" : "white";
 

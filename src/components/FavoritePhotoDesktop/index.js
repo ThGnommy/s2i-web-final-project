@@ -45,31 +45,31 @@ export const FavoritePhotoDesktop = ({
             backgroundImage={`url(${image})`}
           >
             {hover && (
-              <>
-                <PhotoContainer
-                  as={motion.div}
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  animate={{ opacity: 0.7 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <FontAwesomeIcon
-                    icon={faDownload}
-                    color="green"
-                    style={{ marginLeft: "0.5rem", cursor: "pointer" }}
-                    size="1x"
-                    onClick={() => downloadImage(downloadUrl)}
-                  />
-                  <TextPhoto>{photographer}</TextPhoto>
-                  <FontAwesomeIcon
-                    icon={faTimes}
-                    color="red"
-                    style={{ marginRight: "0.5rem", cursor: "pointer" }}
-                    onClick={() => handleDeletePhoto(currentPhoto)}
-                    size="1x"
-                  />
-                </PhotoContainer>
-              </>
+              <PhotoContainer
+                as={motion.div}
+                initial={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                animate={{ opacity: 0.7 }}
+                exit={{ opacity: 0 }}
+              >
+                {/* Download icon */}
+                <FontAwesomeIcon
+                  icon={faDownload}
+                  color="green"
+                  style={{ marginLeft: "0.5rem", cursor: "pointer" }}
+                  size="1x"
+                  onClick={() => downloadImage(downloadUrl)}
+                />
+                <TextPhoto>{photographer}</TextPhoto>
+                {/* Delete icon */}
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  color="red"
+                  style={{ marginRight: "0.5rem", cursor: "pointer" }}
+                  onClick={() => handleDeletePhoto(currentPhoto)}
+                  size="1x"
+                />
+              </PhotoContainer>
             )}
           </SinglePhoto>
         </motion.div>

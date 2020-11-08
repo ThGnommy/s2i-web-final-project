@@ -4,6 +4,7 @@ import { saveAs } from "file-saver";
 
 export const StoreContext = createContext();
 
+// Breakpoints
 export const mediaQuery = {
   isMobile: window.matchMedia("(max-width: 600px)").matches,
   isTablet: window.matchMedia("(max-width: 960px)").matches,

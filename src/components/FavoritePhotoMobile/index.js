@@ -32,6 +32,7 @@ export const FavoritePhotoMobile = ({
         >
           <SinglePhoto as={motion.div} backgroundImage={`url(${image})`}>
             <PhotoContainer>
+              {/* Download icon */}
               <FontAwesomeIcon
                 icon={faDownload}
                 color="green"
@@ -40,6 +41,7 @@ export const FavoritePhotoMobile = ({
                 onClick={() => downloadImage(downloadUrl)}
               />
               <TextPhoto>{photographer}</TextPhoto>
+              {/* Delete icon */}
               <FontAwesomeIcon
                 icon={faTimes}
                 color="red"

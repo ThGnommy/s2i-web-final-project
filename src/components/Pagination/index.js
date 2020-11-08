@@ -29,13 +29,14 @@ export const Pagination = () => {
             <FontAwesomeIcon
               size={mediaQuery.isTablet || mediaQuery.isMobile ? "2x" : "3x"}
               icon={faLongArrowAltLeft}
-              color={themeProvider}
+              color={themeProvider.bgDark}
             />
           </PaginationButton>
           <PaginationButton onClick={pageNext}>
             <FontAwesomeIcon
               size={mediaQuery.isTablet || mediaQuery.isMobile ? "2x" : "3x"}
               icon={faLongArrowAltRight}
+              color={themeProvider.bgDark}
             />
           </PaginationButton>
         </PaginationContainer>

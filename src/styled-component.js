@@ -15,6 +15,22 @@ export const Container = styled.section`
     cantarell, helvetica neue, ubuntu, sans-serif;
 `;
 
+export const PhotoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: #000;
+  opacity: 0.5;
+`;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90vw;
+`;
+
 export const ContainerSection = styled(Container)`
   display: flex;
   flex-direction: column;
@@ -186,15 +202,6 @@ export const SinglePhoto = styled.div`
   }
 `;
 
-export const PhotoContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-  background-color: #000;
-  opacity: 0.5;
-`;
-
 export const TextPhoto = styled.p`
   color: #fff;
   font-size: 1rem;
@@ -207,13 +214,6 @@ export const ChannelImage = styled.img`
   height: 15vw;
   width: 15vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
-`;
-
-export const PaginationContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 90vw;
 `;
 
 export const PaginationButton = styled.button`

@@ -40,34 +40,30 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
             backgroundImage={`url(${image})`}
           >
             {hover && (
-              <>
-                <PhotoContainer
-                  as={motion.div}
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  animate={{ opacity: 0.7 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <FontAwesomeIcon
-                    icon={faDownload}
-                    color="green"
-                    style={{ marginLeft: "0.5rem" }}
-                    size={
-                      mediaQuery.isTablet || mediaQuery.isMobile ? "x" : "sm"
-                    }
-                  />
-                  <TextPhoto>{photographer}</TextPhoto>
-                  <FontAwesomeIcon
-                    icon={faTimes}
-                    color="red"
-                    style={{ marginRight: "0.5rem" }}
-                    onClick={() => handleDeletePhoto(currentPhoto)}
-                    size={
-                      mediaQuery.isTablet || mediaQuery.isMobile ? "2x" : "sm"
-                    }
-                  />
-                </PhotoContainer>
-              </>
+              <PhotoContainer
+                as={motion.div}
+                initial={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                animate={{ opacity: 0.7 }}
+                exit={{ opacity: 0 }}
+              >
+                <FontAwesomeIcon
+                  icon={faDownload}
+                  color="green"
+                  style={{ marginLeft: "0.5rem" }}
+                  size={mediaQuery.isTablet || mediaQuery.isMobile ? "x" : "sm"}
+                />
+                <TextPhoto>{photographer}</TextPhoto>
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  color="red"
+                  style={{ marginRight: "0.5rem" }}
+                  onClick={() => handleDeletePhoto(currentPhoto)}
+                  size={
+                    mediaQuery.isTablet || mediaQuery.isMobile ? "2x" : "sm"
+                  }
+                />
+              </PhotoContainer>
             )}
           </SinglePhoto>
         </motion.div>

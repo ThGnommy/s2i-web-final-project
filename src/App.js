@@ -5,18 +5,14 @@ import { HomePage } from "./Pages/HomePage";
 import "./reset.css";
 import { StoreContext } from "./StoreContext";
 const App = () => {
-  const { favorites } = useContext(StoreContext);
+  const { photos } = useContext(StoreContext);
 
   return (
     <>
       <Router>
         <Switch>
-          <Route
-            state={favorites}
-            path='/favorites'
-            component={FavoritesPage}
-          />
-          <Route state={favorites} path='/' component={HomePage} />
+          <Route state={photos} path="/favorites" component={FavoritesPage} />
+          <Route state={photos} path="/" component={HomePage} />
         </Switch>
       </Router>
     </>
