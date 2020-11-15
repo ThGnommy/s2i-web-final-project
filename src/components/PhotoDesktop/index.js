@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import photoPropTypes from "./../../propTypes/propTypes";
-
+import { favourite } from "./../../api/firebase";
 export const PhotoDesktop = ({
+  id,
   image,
   photographer,
   photoArray,
@@ -33,6 +34,7 @@ export const PhotoDesktop = ({
   const handleFavorite = (photo) => {
     if (!isFavorite) {
       setFavorites((prevState) => [...prevState, photo]);
+      favourite.addFavourite({ id, src: image, downloadUrl, photographer });
     } else return;
   };
 

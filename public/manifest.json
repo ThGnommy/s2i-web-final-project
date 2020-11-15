@@ -1,10 +1,6 @@
 {
   "short_name": "My Pexels",
-<<<<<<< HEAD
   "name": "A free stock photos website.",
-=======
-  "name": "A free stock photos website powered by Pexels.com",
->>>>>>> main
   "icons": [
     {
       "src": "favicon.ico",

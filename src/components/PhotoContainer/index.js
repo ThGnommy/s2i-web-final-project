@@ -17,6 +17,7 @@ export const PhotoContainer = () => {
                 <PhotoDesktop
                   photoArray={photo}
                   colorStar={photo}
+                  id={photo.id}
                   key={photo.id}
                   photographer={photo.photographer}
                   image={photo.src.large}

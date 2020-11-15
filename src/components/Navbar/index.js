@@ -7,8 +7,9 @@ export const Navbar = () => {
         <h1>My Pexels</h1>
         <hr />
         <ul>
-          <StyledLink to='/'>Home</StyledLink>
-          <StyledLink to='/favorites'>Favorites</StyledLink>
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/favorites">Favorites</StyledLink>
+          <StyledLink>Login</StyledLink>
         </ul>
       </Menu>
     </>
