@@ -1,8 +1,8 @@
 import { db, auth } from "./instance";
-import firebase from "firebase/app";
 
 export const addFavourite = async ({ id, downloadUrl, src, photographer }) => {
   const doc = db.collection("users").doc(auth.currentUser.uid);
+
   const snapshot = await doc.get().then((r) => {
     if (r.exists && r.data().favs) {
       return r.data().favs;
@@ -11,7 +11,7 @@ export const addFavourite = async ({ id, downloadUrl, src, photographer }) => {
   });
 
   doc
-    .update({
+    .set({
       favs: snapshot.concat({
         id,
         downloadUrl,

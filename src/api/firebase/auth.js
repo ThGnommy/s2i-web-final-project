@@ -20,25 +20,18 @@ export const signIn = ({ email, password }) => {
 };
 
 export const signInWithGoogle = () => {
+  return instance.auth().signInWithRedirect(googleProvider);
+};
+
+export const signOutWithGoogle = () => {
   return instance
     .auth()
-    .signInWithPopup(googleProvider)
-    .then(function (result) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const token = result.credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      console.log(result);
-      // ...
+    .signOut()
+    .then(() => {
+      console.log("Signout successfull!");
+      window.location.reload();
     })
     .catch(function (error) {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      const credential = error.credential;
-      // ...
+      throw Promise.reject(error);
     });
 };

@@ -4,25 +4,29 @@ import { FavoritesPage } from "./Pages/FavoritesPage";
 import { HomePage } from "./Pages/HomePage";
 import "./reset.css";
 import { StoreContext } from "./StoreContext";
-import { auth, instance } from "./api/firebase";
+import { instance } from "./api/firebase";
 
 const App = () => {
-  const { photos } = useContext(StoreContext);
+  const { photos, setUserIsLogged, userIsLogged } = useContext(StoreContext);
 
   useEffect(() => {
     instance.auth.onAuthStateChanged((currentUser) => {
       console.log(currentUser);
       if (!currentUser) {
-        auth.signInWithGoogle();
-      }
+        setUserIsLogged(false);
+      } else setUserIsLogged(true);
     });
-  }, []);
+  }, [setUserIsLogged]);
+
   return (
     <>
       <Router>
         <Switch>
-          <Route state={photos} path="/favorites" component={FavoritesPage} />
-          <Route state={photos} path="/" component={HomePage} />
+          {userIsLogged ? (
+            <Route state={photos} path='/favorites' component={FavoritesPage} />
+          ) : null}
+          {/* <Route state={photos} path='/favorites' component={FavoritesPage} /> */}
+          <Route state={photos} path='/' component={HomePage} />
         </Switch>
       </Router>
     </>

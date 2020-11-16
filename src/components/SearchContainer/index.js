@@ -3,6 +3,7 @@ import { ButtonSearch, SearchSection } from "../../styled-component";
 import { Searchbar } from "../Searchbar";
 import { StoreContext } from "./../../StoreContext";
 import { PhotoContainer } from "../PhotoContainer";
+import { SearchSwitch } from "../SearchSwitch";
 
 export const SearchContainer = () => {
   const { input, setQuery, setPage } = useContext(StoreContext);
@@ -16,6 +17,7 @@ export const SearchContainer = () => {
     <>
       <SearchSection>
         <Searchbar />
+        <SearchSwitch />
         <ButtonSearch onClick={handleClick}>Search</ButtonSearch>
         <PhotoContainer />
       </SearchSection>

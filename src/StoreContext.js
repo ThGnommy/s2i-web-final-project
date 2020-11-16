@@ -24,9 +24,12 @@ export const StoreContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
   const [query, setQuery] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [videos, setVideos] = useState([]);
   const [nextPage, setNextPage] = useState(true);
   const [page, setPage] = useState(1);
   const [favorites, setFavorites] = useState(initialState);
+  const [searchSwitch, setSearchSwitch] = useState(false);
+  const [userIsLogged, setUserIsLogged] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -63,17 +66,46 @@ export const StoreContextProvider = ({ children }) => {
       }
     };
 
-    getPhotos();
-  }, [query, page]);
+    const getVideos = async () => {
+      // try {
+      //   await axios
+      //     .get(`https://api.pexels.com/v1/search?query=${query}`, {
+      //       headers: {
+      //         Authorization: process.env.REACT_APP_PEXELS_KEY,
+      //       },
+      //       params: {
+      //         total_results: 10000,
+      //         per_page: 10,
+      //         page: page,
+      //       },
+      //     })
+      //     .then((res) => {
+      //       // Check if next page exist
+      //       if (!res.data.next_page) {
+      //         setNextPage(false);
+      //       } else {
+      //         setNextPage(true);
+      //       }
+      //       if (!res) return;
+      //       setPhotos(res.data.photos);
+      //     });
+      // } catch (error) {
+      //   return error;
+      // }
+    };
+    !searchSwitch ? getPhotos() : getVideos();
+  }, [query, page, searchSwitch]);
 
   return (
     <StoreContext.Provider
       value={{
         photos,
+        videos,
         page,
         input,
         setInput,
         setPhotos,
+        setVideos,
         setQuery,
         setPage,
         query,
@@ -82,6 +114,10 @@ export const StoreContextProvider = ({ children }) => {
         setFavorites,
         mediaQuery,
         downloadImage,
+        setUserIsLogged,
+        userIsLogged,
+        searchSwitch,
+        setSearchSwitch,
       }}
     >
       {children}

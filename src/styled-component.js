@@ -106,6 +106,24 @@ export const StyledLink = styled(Link)`
   }
 `;
 
+export const NavButton = styled.button`
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 0 1rem;
+  padding: 0;
+  transition: color 300ms ease-in-out;
+
+  &:hover {
+    color: #2ca1c0;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const Title = styled.h1`
   display: flex;
   font-size: 2rem;
@@ -228,4 +246,68 @@ export const PaginationButton = styled.button`
   text-decoration: none;
   outline: none;
   border-style: none;
+`;
+
+/* PHOTO - VIDEO SWITCH COMPONENTS */
+
+export const SwitchContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SwitchText = styled.p`
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: ${(props) => props.TextColor};
+  transition: color 0.4s ease-in;
+  font-size: 1.2rem;
+`;
+
+export const Switch = styled.div`
+  position: relative;
+  margin-top: 2rem;
+  width: 80px;
+  height: 30px;
+  & input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  & input:checked {
+    background-color: #2196f3;
+  }
+  & input:checked + ::before {
+    -webkit-transform: translateX(49px);
+    -ms-transform: translateX(49px);
+    transform: translateX(49px);
+  }
+  & span {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: ${(props) => props.theme.bgLight};
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 34px;
+    box-shadow: 0px 3px 12px -6px rgba(0, 0, 0, 0.5);
+  }
+  & span::before {
+    position: absolute;
+    content: "";
+    height: 23px;
+    width: 23px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #2ca1c0;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0px 3px 12px -6px rgba(0, 0, 0, 0.5);
+  }
 `;
