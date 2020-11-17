@@ -2,7 +2,6 @@ import { db, auth } from "./instance";
 
 export const addFavourite = async ({ id, downloadUrl, src, photographer }) => {
   const doc = db.collection("users").doc(auth.currentUser.uid);
-
   const snapshot = await doc.get().then((r) => {
     if (r.exists && r.data().favs) {
       return r.data().favs;
@@ -24,6 +23,20 @@ export const addFavourite = async ({ id, downloadUrl, src, photographer }) => {
     })
     .catch(function (error) {
       console.error("Error adding document: ", error);
+      throw Promise.reject(error);
+    });
+};
+
+export const getFavorites = async () => {
+  const doc = db.collection("users").doc(auth.currentUser.uid);
+  await doc
+    .get()
+    .then((r) => {
+      if (r.exists && r.data().favs) {
+        console.log(r.data().favs);
+      }
+    })
+    .catch((error) => {
       throw Promise.reject(error);
     });
 };

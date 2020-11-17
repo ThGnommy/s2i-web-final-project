@@ -36,9 +36,9 @@ export const Photo = ({
     } else return;
   };
 
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+  // useEffect(() => {
+  //   localStorage.setItem("favorites", JSON.stringify(favorites));
+  // }, [favorites]);
 
   return (
     <>
@@ -65,10 +65,10 @@ export const Photo = ({
                   exit={{ opacity: 0 }}
                 >
                   {/* Download icon */}
-                  <a href={downloadUrl} download="image">
+                  <a href={downloadUrl} download='image'>
                     <FontAwesomeIcon
                       icon={faDownload}
-                      color="green"
+                      color='green'
                       style={{ marginLeft: "0.5rem" }}
                       onClick={downloadImage}
                       size={

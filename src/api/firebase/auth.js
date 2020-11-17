@@ -35,3 +35,16 @@ export const signOutWithGoogle = () => {
       throw Promise.reject(error);
     });
 };
+
+export const getUserAvatar = () => {
+  instance
+    .auth()
+    .getRedirectResult()
+    .then(function (result) {
+      // The signed-in user info.
+      if (result) {
+        const user = result.user;
+        console.log(user.photoURL);
+      } else return;
+    });
+};

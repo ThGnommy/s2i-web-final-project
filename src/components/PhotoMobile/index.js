@@ -27,10 +27,6 @@ export const PhotoMobile = ({
     } else return;
   };
 
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
-
   return (
     <>
       <AnimatePresence>
@@ -46,7 +42,7 @@ export const PhotoMobile = ({
                 {/* Download icon */}
                 <FontAwesomeIcon
                   icon={faDownload}
-                  color="green"
+                  color='green'
                   style={{ marginLeft: "0.5rem" }}
                   onClick={() => downloadImage(downloadUrl)}
                   size={mediaQuery.isMobile ? "4x" : "2x"}

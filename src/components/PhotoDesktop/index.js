@@ -38,10 +38,6 @@ export const PhotoDesktop = ({
     } else return;
   };
 
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
-
   return (
     <>
       <AnimatePresence>
@@ -69,10 +65,10 @@ export const PhotoDesktop = ({
                   {/* Download icon */}
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color="green"
+                    color='green'
                     style={{ marginLeft: "0.5rem", cursor: "pointer" }}
                     onClick={() => downloadImage(downloadUrl)}
-                    size="1x"
+                    size='1x'
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
@@ -81,7 +77,7 @@ export const PhotoDesktop = ({
                     color={starColor}
                     style={{ marginRight: "0.5rem", cursor: "pointer" }}
                     onClick={() => handleFavorite(photoArray)}
-                    size="1x"
+                    size='1x'
                   />
                 </PhotoContainer>
               </>

@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
-
+import { db, auth } from "./api/firebase/instance";
 export const StoreContext = createContext();
 
 // Breakpoints
@@ -30,10 +30,31 @@ export const StoreContextProvider = ({ children }) => {
   const [favorites, setFavorites] = useState(initialState);
   const [searchSwitch, setSearchSwitch] = useState(false);
   const [userIsLogged, setUserIsLogged] = useState(false);
+  const [avatar, setAvatar] = useState();
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+    const getFavorites = async () => {
+      const doc = db.collection("users").doc(auth.currentUser.uid);
+      await doc
+        .get()
+        .then((r) => {
+          if (r.exists && r.data().favs) {
+            console.log(r.data().favs);
+            setFavorites(r.data().favs);
+          }
+        })
+        .catch((error) => {
+          throw Promise.reject(error);
+        });
+    };
+
+    if (auth.currentUser) {
+      const interval = setInterval(() => {
+        getFavorites();
+        clearInterval(interval);
+      }, 1000);
+    } else return;
+  }, []);
 
   useEffect(() => {
     const getPhotos = async () => {
@@ -102,6 +123,8 @@ export const StoreContextProvider = ({ children }) => {
         photos,
         videos,
         page,
+        avatar,
+        setAvatar,
         input,
         setInput,
         setPhotos,

@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../../StoreContext";
 import { Menu, NavButton, StyledLink } from "../../styled-component";
-import { auth, instance } from "./../../api/firebase";
+import { auth, favourite, instance } from "./../../api/firebase";
 export const Navbar = () => {
   const { userIsLogged } = useContext(StoreContext);
 
   const handleRegister = () => {
     instance.auth.onAuthStateChanged((currentUser) => {
-      console.log(currentUser);
       if (!currentUser) {
         auth.signInWithGoogle();
       } else return;
@@ -15,12 +14,13 @@ export const Navbar = () => {
   };
 
   const handleLogout = () => {
-    instance.auth.onAuthStateChanged((currentUser) => {
-      console.log(currentUser);
-      if (currentUser) {
-        auth.signOutWithGoogle();
-      }
-    });
+    if (window.confirm("Are you sure?")) {
+      instance.auth.onAuthStateChanged((currentUser) => {
+        if (currentUser) {
+          auth.signOutWithGoogle();
+        }
+      });
+    } else return;
   };
 
   const registerButton = <NavButton onClick={handleRegister}>Signin</NavButton>;
