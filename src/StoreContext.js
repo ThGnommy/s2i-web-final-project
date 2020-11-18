@@ -38,8 +38,7 @@ export const StoreContextProvider = ({ children }) => {
       await doc
         .get()
         .then((r) => {
-          if (r.exists && r.data().favs) {
-            console.log(r.data().favs);
+          if (r.exists) {
             setFavorites(r.data().favs);
           }
         })
@@ -48,12 +47,13 @@ export const StoreContextProvider = ({ children }) => {
         });
     };
 
-    if (auth.currentUser) {
-      const interval = setInterval(() => {
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
         getFavorites();
-        clearInterval(interval);
-      }, 1000);
-    } else return;
+      } else {
+        return;
+      }
+    });
   }, []);
 
   useEffect(() => {

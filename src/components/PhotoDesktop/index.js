@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
 import { StoreContext } from "./../../StoreContext";

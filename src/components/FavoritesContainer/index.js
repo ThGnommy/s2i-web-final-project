@@ -18,8 +18,8 @@ export const FavoritesContainer = () => {
                   currentPhoto={photo}
                   key={photo.id}
                   photographer={photo.photographer}
-                  image={photo.src.large}
-                  downloadUrl={photo.src.original}
+                  image={photo.src}
+                  downloadUrl={photo.downloadUrl}
                 />
               )) ||
               (mediaQuery.isTablet && (
@@ -27,8 +27,8 @@ export const FavoritesContainer = () => {
                   currentPhoto={photo}
                   key={photo.id}
                   photographer={photo.photographer}
-                  image={photo.src.large}
-                  downloadUrl={photo.src.original}
+                  image={photo.src}
+                  downloadUrl={photo.downloadUrl}
                 />
               ))
           )}

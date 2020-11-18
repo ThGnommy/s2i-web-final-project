@@ -36,10 +36,6 @@ export const Photo = ({
     } else return;
   };
 
-  // useEffect(() => {
-  //   localStorage.setItem("favorites", JSON.stringify(favorites));
-  // }, [favorites]);
-
   return (
     <>
       <AnimatePresence>

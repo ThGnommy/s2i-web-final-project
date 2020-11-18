@@ -1,13 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
 import { StoreContext } from "./../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { favourite } from "./../../api/firebase";
 import photoPropTypes from "./../../propTypes/propTypes";
 
 export const PhotoMobile = ({
+  id,
   image,
   photographer,
   photoArray,
@@ -24,6 +26,7 @@ export const PhotoMobile = ({
   const handleFavorite = (photo) => {
     if (!isFavorite) {
       setFavorites((prevState) => [...prevState, photo]);
+      favourite.addFavourite({ id, src: image, downloadUrl, photographer });
     } else return;
   };
 

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../../StoreContext";
 import { Menu, NavButton, StyledLink } from "../../styled-component";
-import { auth, favourite, instance } from "./../../api/firebase";
+import { auth, instance } from "./../../api/firebase";
 export const Navbar = () => {
   const { userIsLogged } = useContext(StoreContext);
 

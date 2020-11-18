@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import photoPropTypes from "./../../propTypes/propTypes";
+import { db, auth } from "../../api/firebase/instance";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 
 export const FavoritePhotoDesktop = ({
   image,
@@ -27,6 +31,22 @@ export const FavoritePhotoDesktop = ({
 
   const handleDeletePhoto = (photo) => {
     setFavorites(favorites.filter((o) => o.id !== photo.id));
+
+    const doc = db.collection("users").doc(auth.currentUser.uid);
+
+    doc.get().then((r) => {
+      let imgIndex;
+      if (r.exists && r.data().favs) {
+        r.data().favs.forEach((element, index) => {
+          if (element.id === photo.id) {
+            imgIndex = index;
+            doc.update({
+              favs: firebase.firestore.FieldValue.delete(),
+            });
+          }
+        });
+      }
+    });
   };
 
   return (
@@ -55,19 +75,19 @@ export const FavoritePhotoDesktop = ({
                 {/* Download icon */}
                 <FontAwesomeIcon
                   icon={faDownload}
-                  color="green"
+                  color='green'
                   style={{ marginLeft: "0.5rem", cursor: "pointer" }}
-                  size="1x"
+                  size='1x'
                   onClick={() => downloadImage(downloadUrl)}
                 />
                 <TextPhoto>{photographer}</TextPhoto>
                 {/* Delete icon */}
                 <FontAwesomeIcon
                   icon={faTimes}
-                  color="red"
+                  color='red'
                   style={{ marginRight: "0.5rem", cursor: "pointer" }}
                   onClick={() => handleDeletePhoto(currentPhoto)}
-                  size="1x"
+                  size='1x'
                 />
               </PhotoContainer>
             )}
