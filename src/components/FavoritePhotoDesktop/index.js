@@ -7,7 +7,6 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import photoPropTypes from "./../../propTypes/propTypes";
 import { db, auth } from "../../api/firebase/instance";
-import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
@@ -29,20 +28,23 @@ export const FavoritePhotoDesktop = ({
     setHover(false);
   };
 
-  const handleDeletePhoto = (photo) => {
+  const handleDeletePhoto = async (photo) => {
     setFavorites(favorites.filter((o) => o.id !== photo.id));
 
     const doc = db.collection("users").doc(auth.currentUser.uid);
 
-    doc.get().then((r) => {
+    await doc.get().then((r) => {
       let imgIndex;
       if (r.exists && r.data().favs) {
         r.data().favs.forEach((element, index) => {
           if (element.id === photo.id) {
             imgIndex = index;
-            doc.update({
-              favs: firebase.firestore.FieldValue.delete(),
-            });
+            console.log(r.data().favs);
+            if (r.data().favs.length > 1) {
+              doc.set({ favs: r.data().favs.splice(imgIndex) });
+            } else {
+              doc.delete();
+            }
           }
         });
       }
