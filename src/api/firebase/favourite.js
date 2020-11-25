@@ -26,3 +26,17 @@ export const addFavourite = async ({ id, downloadUrl, src, photographer }) => {
       throw Promise.reject(error);
     });
 };
+
+export const deleteFavoriteFromDB = async (photo) => {
+  const doc = db.collection("users").doc(auth.currentUser.uid);
+
+  await doc.get().then((r) => {
+    if (r.exists && r.data().favs) {
+      r.data().favs.forEach((element) => {
+        if (element.id === photo.id) {
+          doc.set({ favs: r.data().favs.filter((o) => o.id !== photo.id) });
+        }
+      });
+    }
+  });
+};

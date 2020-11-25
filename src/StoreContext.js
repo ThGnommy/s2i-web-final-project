@@ -30,7 +30,6 @@ export const StoreContextProvider = ({ children }) => {
   const [favorites, setFavorites] = useState(initialState);
   const [searchSwitch, setSearchSwitch] = useState(false);
   const [userIsLogged, setUserIsLogged] = useState(false);
-  const [avatar, setAvatar] = useState();
 
   useEffect(() => {
     const getFavorites = async () => {
@@ -123,8 +122,6 @@ export const StoreContextProvider = ({ children }) => {
         photos,
         videos,
         page,
-        avatar,
-        setAvatar,
         input,
         setInput,
         setPhotos,

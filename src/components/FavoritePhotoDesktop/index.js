@@ -6,9 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import photoPropTypes from "./../../propTypes/propTypes";
-import { db, auth } from "../../api/firebase/instance";
-import "firebase/firestore";
-import "firebase/auth";
+import { deleteFavoriteFromDB } from "../../api/firebase/favourite";
 
 export const FavoritePhotoDesktop = ({
   image,
@@ -30,25 +28,7 @@ export const FavoritePhotoDesktop = ({
 
   const handleDeletePhoto = async (photo) => {
     setFavorites(favorites.filter((o) => o.id !== photo.id));
-
-    const doc = db.collection("users").doc(auth.currentUser.uid);
-
-    await doc.get().then((r) => {
-      let imgIndex;
-      if (r.exists && r.data().favs) {
-        r.data().favs.forEach((element, index) => {
-          if (element.id === photo.id) {
-            imgIndex = index;
-            console.log(r.data().favs);
-            if (r.data().favs.length > 1) {
-              doc.set({ favs: r.data().favs.splice(imgIndex) });
-            } else {
-              doc.delete();
-            }
-          }
-        });
-      }
-    });
+    deleteFavoriteFromDB(photo);
   };
 
   return (

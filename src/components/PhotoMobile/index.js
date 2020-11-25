@@ -20,6 +20,7 @@ export const PhotoMobile = ({
     StoreContext
   );
 
+  // Check for the favorite icon
   let isFavorite = favorites.find((o) => o.id === colorStar.id);
   const starColor = isFavorite ? "yellow" : "white";
 
