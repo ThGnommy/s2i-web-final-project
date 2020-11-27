@@ -1,12 +1,21 @@
 import React, { useContext, useEffect } from "react";
-import { Container, ContainerSection, Title } from "./../../styled-component";
+import {
+  Container,
+  ContainerSection,
+  PhotoVideoSelector,
+  Title,
+} from "./../../styled-component";
 import { Navbar } from "../../components/Navbar";
-import { FavoritesContainer } from "../../components/FavoritesContainer";
+import { FavoritesContainer } from "./../../components/Favorites/FavoritesContainer";
 import { db, auth } from "../../api/firebase/instance";
 import { StoreContext } from "../../StoreContext";
+import { ThemeContext } from "styled-components";
 
 export const FavoritesPage = () => {
-  const { setFavorites } = useContext(StoreContext);
+  const { setFavorites, setFavoriteSelector, favoriteSelector } = useContext(
+    StoreContext
+  );
+  const themeContext = useContext(ThemeContext);
 
   useEffect(() => {
     const getFavorites = async () => {
@@ -38,7 +47,32 @@ export const FavoritesPage = () => {
         <Navbar />
         <ContainerSection>
           <Title>Favorites Photos</Title>
-          <hr style={{ width: "90%", marginBottom: "2rem" }} />
+          <PhotoVideoSelector>
+            <p
+              onClick={() => setFavoriteSelector(false)}
+              style={{
+                color: !favoriteSelector
+                  ? themeContext.textLight
+                  : themeContext.textDark,
+                textDecoration: !favoriteSelector ? "underline" : "none",
+              }}
+            >
+              Photos
+            </p>
+            <span className='divider'>/</span>
+            <p
+              style={{
+                color: favoriteSelector
+                  ? themeContext.textLight
+                  : themeContext.textDark,
+                textDecoration: favoriteSelector ? "underline" : "none",
+              }}
+              onClick={() => setFavoriteSelector(true)}
+            >
+              Videos
+            </p>
+          </PhotoVideoSelector>
+          {/* <hr style={{ width: "90%", marginBottom: "2rem" }} /> */}
           <FavoritesContainer />
         </ContainerSection>
       </Container>

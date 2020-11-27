@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ButtonSearch, SearchSection } from "../../styled-component";
 import { Searchbar } from "../Searchbar";
 import { StoreContext } from "./../../StoreContext";
-import { PhotoContainer } from "../PhotoContainer";
+import { PhotoContainer } from "./../Photos/PhotoContainer";
 import { SearchSwitch } from "../SearchSwitch";
 
 export const SearchContainer = () => {

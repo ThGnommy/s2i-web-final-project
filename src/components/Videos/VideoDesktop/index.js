@@ -7,7 +7,7 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import photoPropTypes from "./../../propTypes/propTypes";
 import { favourite } from "./../../api/firebase";
-export const PhotoDesktop = ({
+export const VideoDesktop = ({
   id,
   image,
   photographer,

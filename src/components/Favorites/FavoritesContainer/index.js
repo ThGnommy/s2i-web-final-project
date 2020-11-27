@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { PhotoList, Title } from "../../styled-component";
-import { StoreContext } from "../../StoreContext";
-import { FavoritePhotoMobile } from "../FavoritePhotoMobile";
-import { FavoritePhotoDesktop } from "../FavoritePhotoDesktop";
+import { PhotoList, Title } from "./../../../styled-component";
+import { StoreContext } from "./../../../StoreContext";
+import { FavoritePhotoMobile } from "./../FavoritePhotoMobile";
+import { FavoritePhotoDesktop } from "./../FavoritePhotoDesktop";
 
 export const FavoritesContainer = () => {
   const { favorites, mediaQuery } = useContext(StoreContext);

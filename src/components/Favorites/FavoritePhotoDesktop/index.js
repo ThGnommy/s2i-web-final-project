@@ -1,16 +1,26 @@
 import React, { useState, useContext } from "react";
-import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
+import {
+  SinglePhoto,
+  PhotoContainer,
+  TextPhoto,
+} from "../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "../../StoreContext";
+import { StoreContext } from "./../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import photoPropTypes from "./../../propTypes/propTypes";
+import photoPropTypes from "./../../../propTypes/propTypes";
+import { deleteFavoriteFromDB } from "../../../api/firebase/favourite";
 
-export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
+export const FavoritePhotoDesktop = ({
+  image,
+  photographer,
+  currentPhoto,
+  downloadUrl,
+}) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites, mediaQuery } = useContext(StoreContext);
+  const { setFavorites, favorites, downloadImage } = useContext(StoreContext);
 
   const isHover = () => {
     setHover(true);
@@ -20,8 +30,9 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
     setHover(false);
   };
 
-  const handleDeletePhoto = (photo) => {
+  const handleDeletePhoto = async (photo) => {
     setFavorites(favorites.filter((o) => o.id !== photo.id));
+    deleteFavoriteFromDB(photo);
   };
 
   return (
@@ -30,7 +41,7 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           exit={{ scale: 0 }}
         >
           <SinglePhoto
@@ -43,25 +54,26 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
               <PhotoContainer
                 as={motion.div}
                 initial={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4 }}
                 animate={{ opacity: 0.7 }}
                 exit={{ opacity: 0 }}
               >
+                {/* Download icon */}
                 <FontAwesomeIcon
                   icon={faDownload}
-                  color="green"
-                  style={{ marginLeft: "0.5rem" }}
-                  size={mediaQuery.isTablet || mediaQuery.isMobile ? "x" : "sm"}
+                  color='green'
+                  style={{ marginLeft: "0.5rem", cursor: "pointer" }}
+                  size='1x'
+                  onClick={() => downloadImage(downloadUrl)}
                 />
                 <TextPhoto>{photographer}</TextPhoto>
+                {/* Delete icon */}
                 <FontAwesomeIcon
                   icon={faTimes}
-                  color="red"
-                  style={{ marginRight: "0.5rem" }}
+                  color='red'
+                  style={{ marginRight: "0.5rem", cursor: "pointer" }}
                   onClick={() => handleDeletePhoto(currentPhoto)}
-                  size={
-                    mediaQuery.isTablet || mediaQuery.isMobile ? "2x" : "sm"
-                  }
+                  size='1x'
                 />
               </PhotoContainer>
             )}
@@ -72,4 +84,4 @@ export const FavoritePhoto = ({ image, photographer, currentPhoto }) => {
   );
 };
 
-FavoritePhoto.propType = photoPropTypes;
+FavoritePhotoDesktop.propType = photoPropTypes;

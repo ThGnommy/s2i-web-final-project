@@ -311,3 +311,22 @@ export const Switch = styled.div`
     box-shadow: 0px 3px 12px -6px rgba(0, 0, 0, 0.5);
   }
 `;
+
+export const PhotoVideoSelector = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+
+  & p {
+    color: ${(props) => props.theme.textLight};
+    cursor: pointer;
+  }
+
+  & span.divider {
+    color: ${(props) => props.theme.textLight};
+    margin: 0 2rem;
+  }
+`;

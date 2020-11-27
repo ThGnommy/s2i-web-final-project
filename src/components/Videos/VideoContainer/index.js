@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { PhotoDesktop } from "../PhotoDesktop";
-import { PhotoMobile } from "../PhotoMobile";
-import { PhotoList } from "../../styled-component";
-import { StoreContext } from "../../StoreContext";
+import { PhotoDesktop } from "../VideoDesktop";
+import { PhotoMobile } from "../VideoMobile";
+import { PhotoList } from "../../../styled-component";
+import { StoreContext } from "../../../StoreContext";
 
-export const PhotoContainer = () => {
+export const VideoContainer = () => {
   const { photos, mediaQuery } = useContext(StoreContext);
 
   return (

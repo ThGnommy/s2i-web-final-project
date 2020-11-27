@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
-import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
+import {
+  SinglePhoto,
+  PhotoContainer,
+  TextPhoto,
+} from "../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "../../StoreContext";
+import { StoreContext } from "../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import photoPropTypes from "./../../propTypes/propTypes";
-import { deleteFavoriteFromDB } from "../../api/firebase/favourite";
+import photoPropTypes from "./../../../propTypes/propTypes";
+import { deleteFavoriteFromDB } from "../../../api/firebase/favourite";
 
 export const FavoritePhotoMobile = ({
   image,
