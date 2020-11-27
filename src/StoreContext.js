@@ -16,6 +16,10 @@ export const downloadImage = (url) => {
   return saveAs(`${url}`, "photo.png");
 };
 
+export const downloadVideo = (url) => {
+  return saveAs(`${url}`, "video.mp4");
+};
+
 export const StoreContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
   const [query, setQuery] = useState("");
@@ -139,6 +143,7 @@ export const StoreContextProvider = ({ children }) => {
         setFavorites,
         mediaQuery,
         downloadImage,
+        downloadVideo,
         setUserIsLogged,
         userIsLogged,
         searchSwitch,

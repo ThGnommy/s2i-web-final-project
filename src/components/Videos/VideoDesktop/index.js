@@ -1,12 +1,16 @@
 import React, { useState, useContext } from "react";
-import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
+import {
+  SinglePhoto,
+  PhotoContainer,
+  TextPhoto,
+} from "../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "./../../StoreContext";
+import { StoreContext } from "./../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import photoPropTypes from "./../../propTypes/propTypes";
-import { favourite } from "./../../api/firebase";
+import videoPropTypes from "./../../../propTypes/propTypes";
+import { favourite } from "./../../../api/firebase";
 export const VideoDesktop = ({
   id,
   image,
@@ -17,7 +21,7 @@ export const VideoDesktop = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites, downloadImage } = useContext(StoreContext);
+  const { setFavorites, favorites, downloadVideo } = useContext(StoreContext);
 
   const isHover = () => {
     setHover(true);
@@ -67,7 +71,7 @@ export const VideoDesktop = ({
                     icon={faDownload}
                     color='green'
                     style={{ marginLeft: "0.5rem", cursor: "pointer" }}
-                    onClick={() => downloadImage(downloadUrl)}
+                    onClick={() => downloadVideo(downloadUrl)}
                     size='1x'
                   />
                   <TextPhoto>{photographer}</TextPhoto>
@@ -89,4 +93,4 @@ export const VideoDesktop = ({
   );
 };
 
-PhotoDesktop.propType = photoPropTypes;
+VideoDesktop.propType = videoPropTypes.video;

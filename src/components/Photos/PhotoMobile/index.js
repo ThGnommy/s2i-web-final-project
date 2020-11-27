@@ -73,4 +73,4 @@ export const PhotoMobile = ({
   );
 };
 
-PhotoMobile.propType = photoPropTypes;
+PhotoMobile.propType = photoPropTypes.photos;

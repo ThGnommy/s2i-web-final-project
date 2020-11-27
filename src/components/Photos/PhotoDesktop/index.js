@@ -93,4 +93,4 @@ export const PhotoDesktop = ({
   );
 };
 
-PhotoDesktop.propType = photoPropTypes;
+PhotoDesktop.propType = photoPropTypes.photos;

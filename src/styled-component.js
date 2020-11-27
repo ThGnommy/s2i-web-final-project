@@ -193,6 +193,8 @@ export const PhotoList = styled.section`
   width: 90vw;
 `;
 
+export const VideoList = styled(PhotoList)``;
+
 export const SinglePhoto = styled.div`
   display: flex;
   align-items: center;
@@ -227,13 +229,6 @@ export const TextPhoto = styled.p`
   margin: 0 0.5rem;
 `;
 
-export const ChannelImage = styled.img`
-  border-radius: 25%;
-  height: 15vw;
-  width: 15vw;
-  box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
-`;
-
 export const PaginationButton = styled.button`
   background: ${(props) => props.theme.button.green};
   cursor: pointer;
@@ -246,6 +241,33 @@ export const PaginationButton = styled.button`
   text-decoration: none;
   outline: none;
   border-style: none;
+`;
+
+export const SingleVideo = styled.div`
+  display: flex;
+  align-items: center;
+  background-image: ${(props) => props.backgroundImage};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  margin: 1rem;
+  width: 400px;
+  height: 500px;
+  text-align: center;
+  font-size: 2vw;
+  box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
+  transition: filter 250ms ease-in;
+  align-items: flex-end;
+  justify-content: space-evenly;
+
+  & div {
+    width: 100%;
+  }
+
+  @media (max-width: 959px) {
+    width: 90vw;
+  }
 `;
 
 /* PHOTO - VIDEO SWITCH COMPONENTS */

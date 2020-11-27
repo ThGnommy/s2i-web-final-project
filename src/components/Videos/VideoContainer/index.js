@@ -1,43 +1,45 @@
 import React, { useContext } from "react";
-import { PhotoDesktop } from "../VideoDesktop";
-import { PhotoMobile } from "../VideoMobile";
-import { PhotoList } from "../../../styled-component";
+import { VideoDesktop } from "../VideoDesktop";
+import { VideoMobile } from "../VideoMobile";
+import { VideoList } from "../../../styled-component";
 import { StoreContext } from "../../../StoreContext";
+import { Pagination } from "../../Pagination";
 
 export const VideoContainer = () => {
-  const { photos, mediaQuery } = useContext(StoreContext);
+  const { videos, mediaQuery } = useContext(StoreContext);
 
   return (
     <>
-      {photos.length > 0 ? (
-        <PhotoList>
-          {photos.map(
-            (photo) =>
+      {videos.length > 0 ? (
+        <VideoList>
+          {videos.map(
+            (video) =>
               (mediaQuery.isDesktop && (
-                <PhotoDesktop
-                  photoArray={photo}
-                  colorStar={photo}
-                  id={photo.id}
-                  key={photo.id}
-                  photographer={photo.photographer}
-                  image={photo.src.large}
-                  downloadUrl={photo.src.original}
+                <VideoDesktop
+                  photoArray={video}
+                  colorStar={video}
+                  id={video.id}
+                  key={video.id}
+                  photographer={video.user.name}
+                  image={video.image}
+                  downloadUrl={video.video_files[2].link}
                 />
               )) ||
               (mediaQuery.isTablet && (
-                <PhotoMobile
-                  photoArray={photo}
-                  colorStar={photo}
-                  id={photo.id}
-                  key={photo.id}
-                  photographer={photo.photographer}
-                  image={photo.src.large}
-                  downloadUrl={photo.src.original}
+                <VideoMobile
+                  photoArray={video}
+                  colorStar={video}
+                  id={video.id}
+                  key={video.id}
+                  photographer={video.photographer}
+                  image={video.image}
+                  downloadUrl={video.src.original}
                 />
               ))
           )}
-        </PhotoList>
+        </VideoList>
       ) : null}
+      <Pagination />
     </>
   );
 };

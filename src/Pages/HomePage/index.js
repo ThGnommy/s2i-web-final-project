@@ -8,8 +8,12 @@ import {
 import { SearchContainer } from "../../components/SearchContainer";
 import { Navbar } from "../../components/Navbar";
 import { Pagination } from "../../components/Pagination";
+import { useContext } from "react";
+import { StoreContext } from "../../StoreContext";
 
 export const HomePage = () => {
+  const { searchSwitch } = useContext(StoreContext);
+
   return (
     <>
       <Container>
@@ -18,7 +22,7 @@ export const HomePage = () => {
           <Title>A free stock photos website.</Title>
           <SearchContainer />
           <PhotoList />
-          <Pagination />
+          {/* <Pagination /> */}
         </ContainerSection>
       </Container>
     </>

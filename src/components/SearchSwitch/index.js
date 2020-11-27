@@ -12,8 +12,8 @@ export const SearchSwitch = () => {
 
   const handleSwitch = (e) => {
     // Prevent fetching onclick
-    setQuery("");
-    setInput("");
+    // setQuery("");
+    // setInput("");
     setSearchSwitch(e.target.checked);
   };
 

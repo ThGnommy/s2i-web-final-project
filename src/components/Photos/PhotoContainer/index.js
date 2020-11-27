@@ -3,6 +3,7 @@ import { PhotoDesktop } from "../PhotoDesktop";
 import { PhotoMobile } from "../PhotoMobile";
 import { PhotoList } from "../../../styled-component";
 import { StoreContext } from "../../../StoreContext";
+import { Pagination } from "../../Pagination";
 
 export const PhotoContainer = () => {
   const { photos, mediaQuery } = useContext(StoreContext);
@@ -38,6 +39,7 @@ export const PhotoContainer = () => {
           )}
         </PhotoList>
       ) : null}
+      <Pagination />
     </>
   );
 };

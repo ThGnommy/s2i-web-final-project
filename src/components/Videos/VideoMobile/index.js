@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
-import { SinglePhoto, PhotoContainer, TextPhoto } from "../../styled-component";
+import {
+  SinglePhoto,
+  PhotoContainer,
+  TextPhoto,
+} from "../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "./../../StoreContext";
+import { StoreContext } from "./../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { favourite } from "./../../api/firebase";
-import photoPropTypes from "./../../propTypes/propTypes";
+import { favourite } from "./../../../api/firebase";
+import videoPropTypes from "./../../../propTypes/propTypes";
 
 export const VideoMobile = ({
   id,
@@ -69,4 +73,4 @@ export const VideoMobile = ({
   );
 };
 
-PhotoMobile.propType = photoPropTypes;
+VideoMobile.propType = videoPropTypes.video;
