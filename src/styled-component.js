@@ -24,6 +24,12 @@ export const PhotoContainer = styled.div`
   opacity: 0.5;
 `;
 
+export const VideoContainer = styled(PhotoContainer)`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`;
+
 export const PaginationContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -244,12 +250,9 @@ export const PaginationButton = styled.button`
 `;
 
 export const SingleVideo = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  background-image: ${(props) => props.backgroundImage};
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   border-radius: 5px;
   margin: 1rem;
   width: 400px;
@@ -257,16 +260,25 @@ export const SingleVideo = styled.div`
   text-align: center;
   font-size: 2vw;
   box-shadow: 0px 6px 24px -6px rgba(0, 0, 0, 0.5);
-  transition: filter 250ms ease-in;
   align-items: flex-end;
   justify-content: space-evenly;
+  flex-direction: column;
 
-  & div {
+  & video {
     width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
   }
 
   @media (max-width: 959px) {
     width: 90vw;
+
+    & > svg {
+      position: absolute;
+      left: 50%;
+    }
   }
 `;
 

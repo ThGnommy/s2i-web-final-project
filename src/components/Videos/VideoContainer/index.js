@@ -21,7 +21,7 @@ export const VideoContainer = () => {
                   id={video.id}
                   key={video.id}
                   photographer={video.user.name}
-                  image={video.image}
+                  video={video.video_files[0].link}
                   downloadUrl={video.video_files[2].link}
                 />
               )) ||
@@ -31,9 +31,9 @@ export const VideoContainer = () => {
                   colorStar={video}
                   id={video.id}
                   key={video.id}
-                  photographer={video.photographer}
-                  image={video.image}
-                  downloadUrl={video.src.original}
+                  photographer={video.user.name}
+                  video={video.video_files[0].link}
+                  downloadUrl={video.video_files[2].link}
                 />
               ))
           )}

@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import {
-  SinglePhoto,
-  PhotoContainer,
+  SingleVideo,
+  VideoContainer,
   TextPhoto,
 } from "../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,7 +13,7 @@ import videoPropTypes from "./../../../propTypes/propTypes";
 import { favourite } from "./../../../api/firebase";
 export const VideoDesktop = ({
   id,
-  image,
+  video,
   photographer,
   photoArray,
   colorStar,
@@ -23,12 +23,16 @@ export const VideoDesktop = ({
 
   const { setFavorites, favorites, downloadVideo } = useContext(StoreContext);
 
+  const myVideo = useRef();
+
   const isHover = () => {
     setHover(true);
+    myVideo.current.play();
   };
 
   const isNotHover = () => {
     setHover(false);
+    myVideo.current.pause();
   };
 
   // Check for the favorite icon
@@ -38,7 +42,7 @@ export const VideoDesktop = ({
   const handleFavorite = (photo) => {
     if (!isFavorite) {
       setFavorites((prevState) => [...prevState, photo]);
-      favourite.addFavourite({ id, src: image, downloadUrl, photographer });
+      favourite.addFavourite({ id, src: video, downloadUrl, photographer });
     } else return;
   };
 
@@ -51,15 +55,17 @@ export const VideoDesktop = ({
           transition={{ duration: 0.4 }}
           exit={{ scale: 0 }}
         >
-          <SinglePhoto
+          <SingleVideo
             as={motion.div}
             onMouseEnter={isHover}
             onMouseLeave={isNotHover}
-            backgroundImage={`url(${image})`}
           >
+            <video ref={myVideo}>
+              <source src={`${video}`} type="video/mp4" />
+            </video>
             {hover && (
               <>
-                <PhotoContainer
+                <VideoContainer
                   as={motion.div}
                   initial={{ opacity: 0 }}
                   transition={{ duration: 0.4 }}
@@ -69,10 +75,10 @@ export const VideoDesktop = ({
                   {/* Download icon */}
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color='green'
+                    color="green"
                     style={{ marginLeft: "0.5rem", cursor: "pointer" }}
                     onClick={() => downloadVideo(downloadUrl)}
-                    size='1x'
+                    size="1x"
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
@@ -81,12 +87,12 @@ export const VideoDesktop = ({
                     color={starColor}
                     style={{ marginRight: "0.5rem", cursor: "pointer" }}
                     onClick={() => handleFavorite(photoArray)}
-                    size='1x'
+                    size="1x"
                   />
-                </PhotoContainer>
+                </VideoContainer>
               </>
             )}
-          </SinglePhoto>
+          </SingleVideo>
         </motion.div>
       </AnimatePresence>
     </>

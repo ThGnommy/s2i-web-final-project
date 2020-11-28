@@ -98,16 +98,19 @@ export const StoreContextProvider = ({ children }) => {
     const getVideos = async () => {
       try {
         await axios
-          .get(`https://api.pexels.com/videos/search?query=${query}`, {
-            headers: {
-              Authorization: process.env.REACT_APP_PEXELS_KEY,
-            },
-            params: {
-              total_results: 10000,
-              per_page: 10,
-              page: page,
-            },
-          })
+          .get(
+            `https://api.pexels.com/videos/search?query=${query}&orientation=portrait`,
+            {
+              headers: {
+                Authorization: process.env.REACT_APP_PEXELS_KEY,
+              },
+              params: {
+                total_results: 10000,
+                per_page: 10,
+                page: page,
+              },
+            }
+          )
           .then((res) => {
             // Check if next page exist
             let total_pages = res.data.total_results / 10;
