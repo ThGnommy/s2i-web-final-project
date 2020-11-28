@@ -30,7 +30,7 @@ export const StoreContextProvider = ({ children }) => {
 
   // Video States
   const [videos, setVideos] = useState([]);
-  const [favoritesVideos, setFavoriteVideos] = useState([]);
+  // const [favoritesVideos, setFavoriteVideos] = useState([]);
 
   const [nextPage, setNextPage] = useState(true);
   const [page, setPage] = useState(1);
@@ -110,7 +110,11 @@ export const StoreContextProvider = ({ children }) => {
           })
           .then((res) => {
             // Check if next page exist
-            if (!res.data.next_page) {
+            let total_pages = res.data.total_results / 10;
+            total_pages = Math.floor(total_pages);
+            // console.warn(total_pages);
+
+            if (page === total_pages) {
               setNextPage(false);
             } else {
               setNextPage(true);

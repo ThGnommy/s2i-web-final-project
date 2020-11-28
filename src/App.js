@@ -11,7 +11,6 @@ const App = () => {
 
   useEffect(() => {
     instance.auth.onAuthStateChanged((currentUser) => {
-      console.log(currentUser);
       if (!currentUser) {
         setUserIsLogged(false);
       } else setUserIsLogged(true);
@@ -23,10 +22,10 @@ const App = () => {
       <Router>
         <Switch>
           {userIsLogged ? (
-            <Route state={photos} path='/favorites' component={FavoritesPage} />
+            <Route state={photos} path="/favorites" component={FavoritesPage} />
           ) : null}
           {/* <Route state={photos} path='/favorites' component={FavoritesPage} /> */}
-          <Route state={photos} path='/' component={HomePage} />
+          <Route state={photos} path="/" component={HomePage} />
         </Switch>
       </Router>
     </>

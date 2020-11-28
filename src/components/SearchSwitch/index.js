@@ -5,16 +5,13 @@ import { Switch, SwitchContainer, SwitchText } from "./../../styled-component";
 import { ThemeContext } from "styled-components";
 
 export const SearchSwitch = () => {
-  const { searchSwitch, setSearchSwitch, setQuery, setInput } = useContext(
-    StoreContext
-  );
+  const { searchSwitch, setSearchSwitch, setPage } = useContext(StoreContext);
   const themeContext = useContext(ThemeContext);
 
   const handleSwitch = (e) => {
     // Prevent fetching onclick
-    // setQuery("");
-    // setInput("");
     setSearchSwitch(e.target.checked);
+    setPage(1);
   };
 
   useEffect(() => {
@@ -33,7 +30,7 @@ export const SearchSwitch = () => {
         </SwitchText>
         <Switch>
           <label>
-            <input onChange={handleSwitch} type='checkbox' />
+            <input onChange={handleSwitch} type="checkbox" />
             <span></span>
           </label>
         </Switch>

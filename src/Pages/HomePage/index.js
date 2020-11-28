@@ -1,19 +1,14 @@
 import React from "react";
 import {
-  PhotoList,
+  // PhotoList,
   Container,
   ContainerSection,
   Title,
 } from "./../../styled-component";
 import { SearchContainer } from "../../components/SearchContainer";
 import { Navbar } from "../../components/Navbar";
-import { Pagination } from "../../components/Pagination";
-import { useContext } from "react";
-import { StoreContext } from "../../StoreContext";
 
 export const HomePage = () => {
-  const { searchSwitch } = useContext(StoreContext);
-
   return (
     <>
       <Container>
@@ -21,8 +16,7 @@ export const HomePage = () => {
         <ContainerSection>
           <Title>A free stock photos website.</Title>
           <SearchContainer />
-          <PhotoList />
-          {/* <Pagination /> */}
+          {/* <PhotoList /> */}
         </ContainerSection>
       </Container>
     </>

@@ -9,7 +9,7 @@ import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
 import { StoreContext } from "./../../StoreContext";
 import { ThemeContext } from "styled-components";
 export const Pagination = () => {
-  const { mediaQuery, page, setPage, photos, nextPage } = useContext(
+  const { mediaQuery, page, setPage, photos, nextPage, videos } = useContext(
     StoreContext
   );
   const themeProvider = useContext(ThemeContext);
@@ -26,7 +26,7 @@ export const Pagination = () => {
 
   return (
     <>
-      {photos.length > 0 ? (
+      {photos.length > 0 || videos.length > 0 ? (
         <PaginationContainer>
           <PaginationButton onClick={pagePrev}>
             <FontAwesomeIcon
