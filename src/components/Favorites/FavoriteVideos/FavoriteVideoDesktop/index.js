@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import {
   SingleVideo,
   VideoContainer,
@@ -35,6 +35,13 @@ export const FavoriteVideoDesktop = ({
     setHover(false);
     myVideo.current.pause();
   };
+
+  useEffect(() => {
+    const ref = myVideo.current;
+    return () => {
+      ref.pause();
+    };
+  }, []);
 
   const handleDeleteVideo = async (video) => {
     setFavoritesVideos(favoritesVideos.filter((o) => o.id !== video.id));

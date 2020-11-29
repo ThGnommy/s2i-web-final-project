@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import {
   SingleVideo,
   VideoContainer,
@@ -39,6 +39,13 @@ export const VideoDesktop = ({
     setHover(false);
     myVideo.current.pause();
   };
+
+  useEffect(() => {
+    const ref = myVideo.current;
+    return () => {
+      ref.pause();
+    };
+  }, []);
 
   // Check for the favorite icon
   let isFavorite = favoritesVideos.find((o) => o.id === colorStar.id);

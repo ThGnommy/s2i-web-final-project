@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import {
   SingleVideo,
   VideoContainer,
@@ -39,6 +39,14 @@ export const FavoriteVideoMobile = ({
     myVideo.current.pause();
     setPlay(false);
   };
+
+  useEffect(() => {
+    const ref = myVideo.current;
+    return () => {
+      ref.pause();
+      console.log("video paused");
+    };
+  }, []);
 
   const handleDeletePhoto = async (video) => {
     setFavoritesVideos(favoritesVideos.filter((o) => o.id !== video.id));

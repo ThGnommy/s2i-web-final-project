@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import {
   SingleVideo,
   VideoContainer,
@@ -42,6 +42,13 @@ export const VideoMobile = ({
     myVideo.current.pause();
     setPlay(false);
   };
+
+  useEffect(() => {
+    const ref = myVideo.current;
+    return () => {
+      ref.pause();
+    };
+  }, []);
 
   // Check for the favorite icon
   let isFavorite = favoritesVideos.find((o) => o.id === colorStar.id);
