@@ -21,7 +21,9 @@ export const PhotoDesktop = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites, downloadImage } = useContext(StoreContext);
+  const { setFavoritesPhotos, favoritesPhotos, downloadImage } = useContext(
+    StoreContext
+  );
 
   const isHover = () => {
     setHover(true);
@@ -32,13 +34,18 @@ export const PhotoDesktop = ({
   };
 
   // Check for the favorite icon
-  let isFavorite = favorites.find((o) => o.id === colorStar.id);
+  let isFavorite = favoritesPhotos.find((o) => o.id === colorStar.id);
   const starColor = isFavorite ? "yellow" : "white";
 
   const handleFavorite = (photo) => {
     if (!isFavorite) {
-      setFavorites((prevState) => [...prevState, photo]);
-      favourite.addFavourite({ id, src: image, downloadUrl, photographer });
+      setFavoritesPhotos((prevState) => [...prevState, photo]);
+      favourite.addFavouritePhoto({
+        id,
+        src: image,
+        downloadUrl,
+        photographer,
+      });
     } else return;
   };
 
@@ -69,10 +76,10 @@ export const PhotoDesktop = ({
                   {/* Download icon */}
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color='green'
+                    color="green"
                     style={{ marginLeft: "0.5rem", cursor: "pointer" }}
                     onClick={() => downloadImage(downloadUrl)}
-                    size='1x'
+                    size="1x"
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
@@ -81,7 +88,7 @@ export const PhotoDesktop = ({
                     color={starColor}
                     style={{ marginRight: "0.5rem", cursor: "pointer" }}
                     onClick={() => handleFavorite(photoArray)}
-                    size='1x'
+                    size="1x"
                   />
                 </PhotoContainer>
               </>

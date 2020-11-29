@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
-import { PhotoList, Title } from "./../../../styled-component";
-import { StoreContext } from "./../../../StoreContext";
-import { FavoritePhotoMobile } from "./../FavoritePhotoMobile";
-import { FavoritePhotoDesktop } from "./../FavoritePhotoDesktop";
+import { PhotoList, Title } from "../../../../styled-component";
+import { StoreContext } from "../../../../StoreContext";
+import { FavoritePhotoMobile } from "../FavoritePhotoMobile";
+import { FavoritePhotoDesktop } from "../FavoritePhotoDesktop";
 
-export const FavoritesContainer = () => {
-  const { favorites, mediaQuery } = useContext(StoreContext);
+export const FavoritesPhotoContainer = () => {
+  const { favoritesPhotos, mediaQuery } = useContext(StoreContext);
 
   return (
     <>
-      {favorites.length > 0 ? (
+      {favoritesPhotos.length > 0 ? (
         <PhotoList>
-          {favorites.map(
+          {favoritesPhotos.map(
             (photo) =>
               (mediaQuery.isDesktop && (
                 <FavoritePhotoDesktop

@@ -3,14 +3,14 @@ import {
   SinglePhoto,
   PhotoContainer,
   TextPhoto,
-} from "../../../styled-component";
+} from "../../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "../../../StoreContext";
+import { StoreContext } from "../../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import photoPropTypes from "./../../../propTypes/propTypes";
-import { deleteFavoriteFromDB } from "../../../api/firebase/favourite";
+import photoPropTypes from "./../../../../propTypes/propTypes";
+import { deleteFavoritePhotoFromDB } from "../../../../api/firebase/favourite";
 
 export const FavoritePhotoMobile = ({
   image,
@@ -18,13 +18,16 @@ export const FavoritePhotoMobile = ({
   currentPhoto,
   downloadUrl,
 }) => {
-  const { setFavorites, favorites, mediaQuery, downloadImage } = useContext(
-    StoreContext
-  );
+  const {
+    setFavoritesPhotos,
+    favoritesPhotos,
+    mediaQuery,
+    downloadImage,
+  } = useContext(StoreContext);
 
   const handleDeletePhoto = async (photo) => {
-    setFavorites(favorites.filter((o) => o.id !== photo.id));
-    deleteFavoriteFromDB(photo);
+    setFavoritesPhotos(favoritesPhotos.filter((o) => o.id !== photo.id));
+    deleteFavoritePhotoFromDB(photo);
   };
 
   return (
@@ -41,7 +44,7 @@ export const FavoritePhotoMobile = ({
               {/* Download icon */}
               <FontAwesomeIcon
                 icon={faDownload}
-                color='green'
+                color="green"
                 style={{ marginLeft: "0.5rem" }}
                 size={mediaQuery.isMobile ? "4x" : "2x"}
                 onClick={() => downloadImage(downloadUrl)}
@@ -50,7 +53,7 @@ export const FavoritePhotoMobile = ({
               {/* Delete icon */}
               <FontAwesomeIcon
                 icon={faTimes}
-                color='red'
+                color="red"
                 style={{ marginRight: "0.5rem" }}
                 onClick={() => handleDeletePhoto(currentPhoto)}
                 size={mediaQuery.isMobile ? "4x" : "2x"}

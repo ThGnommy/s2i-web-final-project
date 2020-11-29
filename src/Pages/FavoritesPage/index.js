@@ -6,15 +6,19 @@ import {
   Title,
 } from "./../../styled-component";
 import { Navbar } from "../../components/Navbar";
-import { FavoritesContainer } from "./../../components/Favorites/FavoritesContainer";
+import { FavoritesPhotoContainer } from "../../components/Favorites/FavoritePhotos/FavoritesPhotoContainer";
+import { FavoritesVideoContainer } from "../../components/Favorites/FavoriteVideos/FavoritesVideoContainer";
 import { db, auth } from "../../api/firebase/instance";
 import { StoreContext } from "../../StoreContext";
 import { ThemeContext } from "styled-components";
 
 export const FavoritesPage = () => {
-  const { setFavorites, setFavoriteSelector, favoriteSelector } = useContext(
-    StoreContext
-  );
+  const {
+    setFavoritesPhotos,
+    setFavoritesVideos,
+    setFavoriteSelector,
+    favoriteSelector,
+  } = useContext(StoreContext);
   const themeContext = useContext(ThemeContext);
 
   useEffect(() => {
@@ -24,7 +28,8 @@ export const FavoritesPage = () => {
         .get()
         .then((r) => {
           if (r.exists) {
-            setFavorites(r.data().favs);
+            setFavoritesPhotos(r.data().favsPhoto);
+            setFavoritesVideos(r.data().favsVideo);
           }
         })
         .catch((error) => {
@@ -39,7 +44,7 @@ export const FavoritesPage = () => {
         return;
       }
     });
-  }, [setFavorites]);
+  }, [setFavoritesPhotos, setFavoritesVideos]);
 
   return (
     <>
@@ -54,18 +59,16 @@ export const FavoritesPage = () => {
                 color: !favoriteSelector
                   ? themeContext.textLight
                   : themeContext.textDark,
-                textDecoration: !favoriteSelector ? "underline" : "none",
               }}
             >
               Photos
             </p>
-            <span className='divider'>/</span>
+            <span className="divider">/</span>
             <p
               style={{
                 color: favoriteSelector
                   ? themeContext.textLight
                   : themeContext.textDark,
-                textDecoration: favoriteSelector ? "underline" : "none",
               }}
               onClick={() => setFavoriteSelector(true)}
             >
@@ -73,7 +76,11 @@ export const FavoritesPage = () => {
             </p>
           </PhotoVideoSelector>
           {/* <hr style={{ width: "90%", marginBottom: "2rem" }} /> */}
-          <FavoritesContainer />
+          {!favoriteSelector ? (
+            <FavoritesPhotoContainer />
+          ) : (
+            <FavoritesVideoContainer />
+          )}
         </ContainerSection>
       </Container>
     </>

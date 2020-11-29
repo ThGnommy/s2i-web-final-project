@@ -22,9 +22,12 @@ export const VideoMobile = ({
   colorStar,
   downloadUrl,
 }) => {
-  const { setFavorites, favorites, mediaQuery, downloadImage } = useContext(
-    StoreContext
-  );
+  const {
+    setFavoritesVideos,
+    favoritesVideos,
+    mediaQuery,
+    downloadImage,
+  } = useContext(StoreContext);
 
   const myVideo = useRef();
   const [play, setPlay] = useState(false);
@@ -40,13 +43,18 @@ export const VideoMobile = ({
   };
 
   // Check for the favorite icon
-  let isFavorite = favorites.find((o) => o.id === colorStar.id);
+  let isFavorite = favoritesVideos.find((o) => o.id === colorStar.id);
   const starColor = isFavorite ? "yellow" : "white";
 
-  const handleFavorite = (photo) => {
+  const handleFavorite = (video) => {
     if (!isFavorite) {
-      setFavorites((prevState) => [...prevState, photo]);
-      favourite.addFavourite({ id, src: video, downloadUrl, photographer });
+      setFavoritesVideos((prevState) => [...prevState, video]);
+      favourite.addFavouriteVideo({
+        id,
+        src: video,
+        downloadUrl,
+        photographer,
+      });
     } else return;
   };
 
@@ -60,7 +68,7 @@ export const VideoMobile = ({
           exit={{ scale: 0 }}
         >
           <SingleVideo as={motion.div}>
-            <video ref={myVideo}>
+            <video loop ref={myVideo}>
               <source src={`${video}`} type="video/mp4" />
             </video>
             {!play ? (

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { VideoDesktop } from "../VideoDesktop";
 import { VideoMobile } from "../VideoMobile";
 import { VideoList } from "../../../styled-component";

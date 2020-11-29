@@ -21,7 +21,9 @@ export const VideoDesktop = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites, downloadVideo } = useContext(StoreContext);
+  const { setFavoritesVideos, favoritesVideos, downloadVideo } = useContext(
+    StoreContext
+  );
 
   const myVideo = useRef();
 
@@ -36,13 +38,18 @@ export const VideoDesktop = ({
   };
 
   // Check for the favorite icon
-  let isFavorite = favorites.find((o) => o.id === colorStar.id);
+  let isFavorite = favoritesVideos.find((o) => o.id === colorStar.id);
   const starColor = isFavorite ? "yellow" : "white";
 
-  const handleFavorite = (photo) => {
+  const handleFavorite = (video) => {
     if (!isFavorite) {
-      setFavorites((prevState) => [...prevState, photo]);
-      favourite.addFavourite({ id, src: video, downloadUrl, photographer });
+      setFavoritesVideos((prevState) => [...prevState, video]);
+      favourite.addFavouriteVideo({
+        id,
+        src: video,
+        downloadUrl,
+        photographer,
+      });
     } else return;
   };
 
@@ -60,7 +67,7 @@ export const VideoDesktop = ({
             onMouseEnter={isHover}
             onMouseLeave={isNotHover}
           >
-            <video ref={myVideo}>
+            <video loop ref={myVideo}>
               <source src={`${video}`} type="video/mp4" />
             </video>
             {hover && (

@@ -3,14 +3,14 @@ import {
   SinglePhoto,
   PhotoContainer,
   TextPhoto,
-} from "../../../styled-component";
+} from "../../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "./../../../StoreContext";
+import { StoreContext } from "./../../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import photoPropTypes from "./../../../propTypes/propTypes";
-import { deleteFavoriteFromDB } from "../../../api/firebase/favourite";
+import photoPropTypes from "./../../../../propTypes/propTypes";
+import { deleteFavoritePhotoFromDB } from "../../../../api/firebase/favourite";
 
 export const FavoritePhotoDesktop = ({
   image,
@@ -20,7 +20,9 @@ export const FavoritePhotoDesktop = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavorites, favorites, downloadImage } = useContext(StoreContext);
+  const { setFavoritesPhotos, favoritesPhotos, downloadImage } = useContext(
+    StoreContext
+  );
 
   const isHover = () => {
     setHover(true);
@@ -31,8 +33,8 @@ export const FavoritePhotoDesktop = ({
   };
 
   const handleDeletePhoto = async (photo) => {
-    setFavorites(favorites.filter((o) => o.id !== photo.id));
-    deleteFavoriteFromDB(photo);
+    setFavoritesPhotos(favoritesPhotos.filter((o) => o.id !== photo.id));
+    deleteFavoritePhotoFromDB(photo);
   };
 
   return (
@@ -61,19 +63,19 @@ export const FavoritePhotoDesktop = ({
                 {/* Download icon */}
                 <FontAwesomeIcon
                   icon={faDownload}
-                  color='green'
+                  color="green"
                   style={{ marginLeft: "0.5rem", cursor: "pointer" }}
-                  size='1x'
+                  size="1x"
                   onClick={() => downloadImage(downloadUrl)}
                 />
                 <TextPhoto>{photographer}</TextPhoto>
                 {/* Delete icon */}
                 <FontAwesomeIcon
                   icon={faTimes}
-                  color='red'
+                  color="red"
                   style={{ marginRight: "0.5rem", cursor: "pointer" }}
                   onClick={() => handleDeletePhoto(currentPhoto)}
-                  size='1x'
+                  size="1x"
                 />
               </PhotoContainer>
             )}

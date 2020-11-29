@@ -26,11 +26,11 @@ export const StoreContextProvider = ({ children }) => {
 
   // Photo States
   const [photos, setPhotos] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [favoritesPhotos, setFavoritesPhotos] = useState([]);
 
   // Video States
   const [videos, setVideos] = useState([]);
-  // const [favoritesVideos, setFavoriteVideos] = useState([]);
+  const [favoritesVideos, setFavoritesVideos] = useState([]);
 
   const [nextPage, setNextPage] = useState(true);
   const [page, setPage] = useState(1);
@@ -41,13 +41,13 @@ export const StoreContextProvider = ({ children }) => {
   const [userIsLogged, setUserIsLogged] = useState(false);
 
   useEffect(() => {
-    const getFavorites = async () => {
+    const getFavoritesPhoto = async () => {
       const doc = db.collection("users").doc(auth.currentUser.uid);
       await doc
         .get()
         .then((r) => {
-          if (r.exists) {
-            setFavorites(r.data().favs);
+          if (r.exists && r.data().favsPhoto) {
+            setFavoritesPhotos(r.data().favsPhoto);
           }
         })
         .catch((error) => {
@@ -57,7 +57,31 @@ export const StoreContextProvider = ({ children }) => {
 
     auth.onAuthStateChanged(function (user) {
       if (user) {
-        getFavorites();
+        getFavoritesPhoto();
+      } else {
+        return;
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const getFavoritesVideo = async () => {
+      const doc = db.collection("users").doc(auth.currentUser.uid);
+      await doc
+        .get()
+        .then((r) => {
+          if (r.exists && r.data().favsVideo) {
+            setFavoritesVideos(r.data().favsVideo);
+          }
+        })
+        .catch((error) => {
+          throw Promise.reject(error);
+        });
+    };
+
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        getFavoritesVideo();
       } else {
         return;
       }
@@ -146,8 +170,10 @@ export const StoreContextProvider = ({ children }) => {
         setPage,
         query,
         nextPage,
-        favorites,
-        setFavorites,
+        favoritesPhotos,
+        setFavoritesPhotos,
+        favoritesVideos,
+        setFavoritesVideos,
         mediaQuery,
         downloadImage,
         downloadVideo,
