@@ -1,5 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { FavoritesPage } from "./Pages/FavoritesPage";
 import { HomePage } from "./Pages/HomePage";
 import "./reset.css";
@@ -24,8 +29,14 @@ const App = () => {
           {userIsLogged ? (
             <Route state={photos} path="/favorites" component={FavoritesPage} />
           ) : null}
-          {/* <Route state={photos} path='/favorites' component={FavoritesPage} /> */}
           <Route state={photos} path="/" component={HomePage} />
+        </Switch>
+        <Switch>
+          {!userIsLogged ? (
+            <Route exact path="/favorites">
+              <Redirect to="/" />
+            </Route>
+          ) : null}
         </Switch>
       </Router>
     </>

@@ -123,7 +123,7 @@ export const StoreContextProvider = ({ children }) => {
       try {
         await axios
           .get(
-            `https://api.pexels.com/videos/search?query=${query}&orientation=portrait`,
+            `https://api.pexels.com/videos/search?query=${query}&orientation=portrait&size=small`,
             {
               headers: {
                 Authorization: process.env.REACT_APP_PEXELS_KEY,

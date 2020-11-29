@@ -18,7 +18,7 @@ export const FavoritesVideoContainer = () => {
                   currentPhoto={video}
                   key={video.id}
                   photographer={video.photographer}
-                  video={video.src.video_files[1].link}
+                  video={video.src.video_files[0].link}
                   downloadUrl={video.downloadUrl}
                 />
               )) ||
@@ -27,7 +27,7 @@ export const FavoritesVideoContainer = () => {
                   currentPhoto={video}
                   key={video.id}
                   photographer={video.photographer}
-                  video={video.src.video_files[1].link}
+                  video={video.src.video_files[0].link}
                   downloadUrl={video.downloadUrl}
                 />
               ))
