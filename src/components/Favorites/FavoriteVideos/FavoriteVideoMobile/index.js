@@ -24,7 +24,7 @@ export const FavoriteVideoMobile = ({
     setFavoritesVideos,
     favoritesVideos,
     mediaQuery,
-    downloadImage,
+    downloadVideo,
   } = useContext(StoreContext);
 
   const myVideo = useRef();
@@ -88,7 +88,7 @@ export const FavoriteVideoMobile = ({
                 color="green"
                 style={{ marginLeft: "0.5rem" }}
                 size={mediaQuery.isMobile ? "4x" : "2x"}
-                onClick={() => downloadImage(downloadUrl)}
+                onClick={() => downloadVideo(downloadUrl)}
               />
               <TextPhoto>{photographer}</TextPhoto>
               {/* Delete icon */}
