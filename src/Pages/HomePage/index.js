@@ -9,7 +9,7 @@ export const HomePage = () => {
       <Container>
         <Navbar />
         <ContainerSection>
-          <Title>A free stock photos website.</Title>
+          <Title>A free stock photos & videos website.</Title>
           <SearchContainer />
         </ContainerSection>
       </Container>
