@@ -27,8 +27,10 @@ export const FavoritesPage = () => {
       await doc
         .get()
         .then((r) => {
-          if (r.exists) {
+          if (r.exists && r.data().favsPhoto) {
             setFavoritesPhotos(r.data().favsPhoto);
+          }
+          if (r.exists && r.data().favsVideo) {
             setFavoritesVideos(r.data().favsVideo);
           }
         })
