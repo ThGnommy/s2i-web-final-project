@@ -21,9 +21,12 @@ export const VideoDesktop = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavoritesVideos, favoritesVideos, downloadVideo } = useContext(
-    StoreContext
-  );
+  const {
+    setFavoritesVideos,
+    favoritesVideos,
+    downloadVideo,
+    userIsLogged,
+  } = useContext(StoreContext);
 
   const myVideo = useRef();
 
@@ -89,13 +92,15 @@ export const VideoDesktop = ({
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
-                  <FontAwesomeIcon
-                    icon={faStar}
-                    color={starColor}
-                    style={{ marginRight: "0.5rem", cursor: "pointer" }}
-                    onClick={() => handleFavorite(photoArray)}
-                    size="1x"
-                  />
+                  {userIsLogged ? (
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      color={starColor}
+                      style={{ marginRight: "0.5rem", cursor: "pointer" }}
+                      onClick={() => handleFavorite(photoArray)}
+                      size="1x"
+                    />
+                  ) : null}
                 </VideoContainer>
               </>
             )}

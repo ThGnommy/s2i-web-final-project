@@ -25,6 +25,7 @@ export const PhotoMobile = ({
     favoritesPhotos,
     mediaQuery,
     downloadImage,
+    userIsLogged,
   } = useContext(StoreContext);
 
   // Check for the favorite icon
@@ -65,13 +66,15 @@ export const PhotoMobile = ({
                 />
                 <TextPhoto>{photographer}</TextPhoto>
                 {/* Favorite icon */}
-                <FontAwesomeIcon
-                  icon={faStar}
-                  color={starColor}
-                  style={{ marginRight: "0.5rem" }}
-                  onClick={() => handleFavorite(photoArray)}
-                  size={mediaQuery.isMobile ? "4x" : "2x"}
-                />
+                {userIsLogged ? (
+                  <FontAwesomeIcon
+                    icon={faStar}
+                    color={starColor}
+                    style={{ marginRight: "0.5rem" }}
+                    onClick={() => handleFavorite(photoArray)}
+                    size={mediaQuery.isMobile ? "4x" : "2x"}
+                  />
+                ) : null}
               </PhotoContainer>
             </>
           </SinglePhoto>

@@ -11,6 +11,7 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import photoPropTypes from "./../../../propTypes/propTypes";
 import { favourite } from "./../../../api/firebase";
+
 export const PhotoDesktop = ({
   id,
   image,
@@ -20,10 +21,12 @@ export const PhotoDesktop = ({
   downloadUrl,
 }) => {
   const [hover, setHover] = useState(false);
-
-  const { setFavoritesPhotos, favoritesPhotos, downloadImage } = useContext(
-    StoreContext
-  );
+  const {
+    setFavoritesPhotos,
+    favoritesPhotos,
+    downloadImage,
+    userIsLogged,
+  } = useContext(StoreContext);
 
   const isHover = () => {
     setHover(true);
@@ -83,13 +86,15 @@ export const PhotoDesktop = ({
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
-                  <FontAwesomeIcon
-                    icon={faStar}
-                    color={starColor}
-                    style={{ marginRight: "0.5rem", cursor: "pointer" }}
-                    onClick={() => handleFavorite(photoArray)}
-                    size="1x"
-                  />
+                  {userIsLogged ? (
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      color={starColor}
+                      style={{ marginRight: "0.5rem", cursor: "pointer" }}
+                      onClick={() => handleFavorite(photoArray)}
+                      size="1x"
+                    />
+                  ) : null}
                 </PhotoContainer>
               </>
             )}
