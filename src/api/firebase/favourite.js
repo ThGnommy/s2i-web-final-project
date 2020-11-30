@@ -78,8 +78,8 @@ export const addFavouriteVideo = async ({
             photographer,
           }),
         })
-        .then(function (docRef) {
-          console.log("Document written with ID: ", docRef);
+        .then(function (doc) {
+          console.log("Document written with ID: ", doc);
         })
         .catch(function (error) {
           console.error("Error adding document: ", error);

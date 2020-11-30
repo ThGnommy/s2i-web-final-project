@@ -56,7 +56,7 @@ export const VideoDesktop = ({
       setFavoritesVideos((prevState) => [...prevState, video]);
       favourite.addFavouriteVideo({
         id,
-        src: video,
+        src: video.video_files[0].link,
         downloadUrl,
         photographer,
       });
@@ -78,7 +78,7 @@ export const VideoDesktop = ({
             onMouseLeave={isNotHover}
           >
             <video loop ref={myVideo}>
-              <source src={`${video}`} type="video/mp4" />
+              <source src={`${video}`} type='video/mp4' />
             </video>
             {hover && (
               <>
@@ -92,10 +92,10 @@ export const VideoDesktop = ({
                   {/* Download icon */}
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color="green"
+                    color='green'
                     style={{ marginLeft: "0.5rem", cursor: "pointer" }}
                     onClick={() => downloadVideo(downloadUrl)}
-                    size="1x"
+                    size='1x'
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
@@ -105,7 +105,7 @@ export const VideoDesktop = ({
                       color={starColor}
                       style={{ marginRight: "0.5rem", cursor: "pointer" }}
                       onClick={() => handleFavorite(photoArray)}
-                      size="1x"
+                      size='1x'
                     />
                   ) : null}
                 </VideoContainer>

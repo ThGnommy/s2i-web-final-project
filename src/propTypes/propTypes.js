@@ -10,5 +10,9 @@ export default {
   },
   videos: {
     id: PropTypes.string,
+    photographer: PropTypes.string,
+    currentPhoto: PropTypes.string,
+    downloadUrl: PropTypes.string,
+    colorStar: PropTypes.string,
   },
 };

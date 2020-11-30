@@ -59,7 +59,7 @@ export const VideoMobile = ({
       setFavoritesVideos((prevState) => [...prevState, video]);
       favourite.addFavouriteVideo({
         id,
-        src: video,
+        src: video.video_files[0].link,
         downloadUrl,
         photographer,
       });
@@ -77,20 +77,20 @@ export const VideoMobile = ({
         >
           <SingleVideo as={motion.div}>
             <video loop ref={myVideo}>
-              <source src={`${video}`} type="video/mp4" />
+              <source src={`${video}`} type='video/mp4' />
             </video>
             {!play ? (
               <FontAwesomeIcon
                 onClick={playVideo}
                 icon={faPlay}
-                color="white"
+                color='white'
                 size={mediaQuery.isMobile ? "4x" : "2x"}
               />
             ) : (
               <FontAwesomeIcon
                 onClick={pauseVideo}
                 icon={faPause}
-                color="white"
+                color='white'
                 size={mediaQuery.isMobile ? "4x" : "2x"}
               />
             )}
@@ -100,7 +100,7 @@ export const VideoMobile = ({
                 {/* Download icon */}
                 <FontAwesomeIcon
                   icon={faDownload}
-                  color="green"
+                  color='green'
                   style={{ marginLeft: "0.5rem" }}
                   onClick={() => downloadVideo(downloadUrl)}
                   size={mediaQuery.isMobile ? "4x" : "2x"}

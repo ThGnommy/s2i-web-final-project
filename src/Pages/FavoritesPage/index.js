@@ -32,6 +32,7 @@ export const FavoritesPage = () => {
           }
           if (r.exists && r.data().favsVideo) {
             setFavoritesVideos(r.data().favsVideo);
+            console.log("wkjfnekrlfnkfejlnljknf");
           }
         })
         .catch((error) => {
@@ -65,7 +66,7 @@ export const FavoritesPage = () => {
             >
               Photos
             </p>
-            <span className="divider">/</span>
+            <span className='divider'>/</span>
             <p
               style={{
                 color: favoriteSelector
