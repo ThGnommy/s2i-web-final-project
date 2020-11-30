@@ -139,9 +139,13 @@ export const StoreContextProvider = ({ children }) => {
             // Check if next page exist
             let total_pages = res.data.total_results / 10;
             total_pages = Math.floor(total_pages);
-            // console.warn(total_pages);
+            // console.warn(
+            //   "%c%s",
+            //   "color: green; background: yellow; font-size: 24px;",
+            //   `Total Pages: ${total_pages}, Total Results: ${res.data.total_results}`
+            // );
 
-            if (page === total_pages) {
+            if (page === total_pages + 1) {
               setNextPage(false);
             } else {
               setNextPage(true);
