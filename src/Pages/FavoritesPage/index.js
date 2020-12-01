@@ -54,7 +54,7 @@ export const FavoritesPage = () => {
       <Container>
         <Navbar />
         <ContainerSection>
-          <Title>Favorites Photos</Title>
+          <Title>Favorites</Title>
           <PhotoVideoSelector>
             <p
               onClick={() => setFavoriteSelector(false)}
