@@ -11,7 +11,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faPause } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import photoPropTypes from "../../../../propTypes/propTypes";
+import videoPropTypes from "../../../../propTypes/propTypes";
 import { deleteFavoriteVideoFromDB } from "../../../../api/firebase/favourite";
 
 export const FavoriteVideoMobile = ({
@@ -64,20 +64,20 @@ export const FavoriteVideoMobile = ({
         >
           <SingleVideo as={motion.div}>
             <video loop ref={myVideo}>
-              <source src={`${video}`} type="video/mp4" />
+              <source src={`${video}`} type='video/mp4' />
             </video>
             {!play ? (
               <FontAwesomeIcon
                 onClick={playVideo}
                 icon={faPlay}
-                color="white"
+                color='white'
                 size={mediaQuery.isMobile ? "4x" : "2x"}
               />
             ) : (
               <FontAwesomeIcon
                 onClick={pauseVideo}
                 icon={faPause}
-                color="white"
+                color='white'
                 size={mediaQuery.isMobile ? "4x" : "2x"}
               />
             )}
@@ -85,7 +85,7 @@ export const FavoriteVideoMobile = ({
               {/* Download icon */}
               <FontAwesomeIcon
                 icon={faDownload}
-                color="green"
+                color='green'
                 style={{ marginLeft: "0.5rem" }}
                 size={mediaQuery.isMobile ? "4x" : "2x"}
                 onClick={() => downloadVideo(downloadUrl)}
@@ -94,7 +94,7 @@ export const FavoriteVideoMobile = ({
               {/* Delete icon */}
               <FontAwesomeIcon
                 icon={faTimes}
-                color="red"
+                color='red'
                 style={{ marginRight: "0.5rem" }}
                 onClick={() => handleDeletePhoto(currentPhoto)}
                 size={mediaQuery.isMobile ? "4x" : "2x"}
@@ -107,4 +107,4 @@ export const FavoriteVideoMobile = ({
   );
 };
 
-FavoriteVideoMobile.propType = photoPropTypes;
+FavoriteVideoMobile.propType = videoPropTypes.videos;

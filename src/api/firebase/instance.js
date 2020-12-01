@@ -3,13 +3,13 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDitycBjtwo-9fptEyK3hWRfbXNKXNX4BY",
-  authDomain: "pexel-9395d.firebaseapp.com",
-  databaseURL: "https://pexel-9395d.firebaseio.com",
-  projectId: "pexel-9395d",
-  storageBucket: "pexel-9395d.appspot.com",
-  messagingSenderId: "685383064213",
-  appId: "1:685383064213:web:c695e2c3980ec53967d99c",
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID,
 };
 
 // Initialize Cloud Firestore through Firebase
