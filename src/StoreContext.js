@@ -38,8 +38,6 @@ export const StoreContextProvider = ({ children }) => {
   const [searchSwitch, setSearchSwitch] = useState(false);
   const [favoriteSelector, setFavoriteSelector] = useState(false);
 
-  const [userIsLogged, setUserIsLogged] = useState(false);
-
   useEffect(() => {
     const getFavoritesPhoto = async () => {
       const doc = db.collection("users").doc(auth.currentUser.uid);
@@ -183,8 +181,6 @@ export const StoreContextProvider = ({ children }) => {
         mediaQuery,
         downloadImage,
         downloadVideo,
-        setUserIsLogged,
-        userIsLogged,
         searchSwitch,
         setSearchSwitch,
         favoriteSelector,

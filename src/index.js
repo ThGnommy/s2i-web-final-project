@@ -7,13 +7,16 @@ import { ThemeProvider } from "styled-components";
 
 // redux setup
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import rootReducers from "./redux/reducers";
+import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 
-export const store = createStore(
+const composeEnchancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
   rootReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnchancer(applyMiddleware(thunk))
 );
 
 // styled components theme

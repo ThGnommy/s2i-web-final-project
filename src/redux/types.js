@@ -1,2 +1,3 @@
 export const GET_USER_INFO = "GET_USER_INFO";
-export const SET_USER_IS_LOGGED = "SET_USER_IS_LOGGED";
+export const USER_SIGNIN = "USER_SIGNIN";
+export const USER_LOGOUT = "USER_LOGOUT";

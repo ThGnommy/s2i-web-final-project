@@ -10,27 +10,24 @@ import { HomePage } from "./Pages/HomePage";
 import "./reset.css";
 import { StoreContext } from "./StoreContext";
 import { instance } from "./api/firebase";
-import { useDispatch } from "react-redux";
-import { getUserInfo, setUserState } from "./redux/actions/userAction";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo, userSignin } from "./redux/actions/userAction";
 
 const App = () => {
-  const { photos, setUserIsLogged, userIsLogged } = useContext(StoreContext);
-
-  // const { userLogged } = useSelector((state) => state.user);
+  const { photos } = useContext(StoreContext);
 
   const dispatch = useDispatch();
 
+  const { userIsLogged } = useSelector((state) => state.user);
+
   useEffect(() => {
     instance.auth.onAuthStateChanged((currentUser) => {
-      if (!currentUser) {
-        setUserIsLogged(false);
-      } else {
-        setUserIsLogged(true);
-        dispatch(setUserState());
-        dispatch(getUserInfo(currentUser.email, currentUser.photoURL));
+      if (currentUser) {
+        dispatch(userSignin());
+        dispatch(getUserInfo(currentUser.photoURL, currentUser.email));
       }
     });
-  }, [setUserIsLogged, dispatch]);
+  }, [dispatch]);
 
   return (
     <>

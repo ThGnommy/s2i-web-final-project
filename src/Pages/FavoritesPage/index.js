@@ -11,6 +11,7 @@ import { FavoritesVideoContainer } from "../../components/Favorites/FavoriteVide
 import { db, auth } from "../../api/firebase/instance";
 import { StoreContext } from "../../StoreContext";
 import { ThemeContext } from "styled-components";
+import { Footer } from "../../components/Footer";
 
 export const FavoritesPage = () => {
   const {
@@ -32,7 +33,6 @@ export const FavoritesPage = () => {
           }
           if (r.exists && r.data().favsVideo) {
             setFavoritesVideos(r.data().favsVideo);
-            console.log("wkjfnekrlfnkfejlnljknf");
           }
         })
         .catch((error) => {
@@ -66,7 +66,7 @@ export const FavoritesPage = () => {
             >
               Photos
             </p>
-            <span className='divider'>/</span>
+            <span className="divider">/</span>
             <p
               style={{
                 color: favoriteSelector
@@ -85,6 +85,7 @@ export const FavoritesPage = () => {
             <FavoritesVideoContainer />
           )}
         </ContainerSection>
+        <Footer />
       </Container>
     </>
   );

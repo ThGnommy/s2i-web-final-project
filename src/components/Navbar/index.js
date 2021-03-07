@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { StoreContext } from "../../StoreContext";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Menu, NavButton, StyledLink } from "../../styled-component";
 import { auth, instance } from "./../../api/firebase";
 export const Navbar = () => {
-  const { userIsLogged } = useContext(StoreContext);
+  const { userIsLogged } = useSelector((state) => state.user);
 
   const handleRegister = () => {
     instance.auth.onAuthStateChanged((currentUser) => {
@@ -26,7 +26,7 @@ export const Navbar = () => {
   const registerButton = <NavButton onClick={handleRegister}>Signin</NavButton>;
 
   const logoutButton = (
-    <StyledLink onClick={handleLogout} to='/'>
+    <StyledLink onClick={handleLogout} to="/">
       Signout
     </StyledLink>
   );
@@ -37,9 +37,9 @@ export const Navbar = () => {
         <h1>My Pexels</h1>
         <hr />
         <ul>
-          <StyledLink to='/'>Home</StyledLink>
+          <StyledLink to="/">Home</StyledLink>
           {userIsLogged ? (
-            <StyledLink to='/favorites'>Favorites</StyledLink>
+            <StyledLink to="/favorites">Favorites</StyledLink>
           ) : null}
           {!userIsLogged ? registerButton : logoutButton}
         </ul>

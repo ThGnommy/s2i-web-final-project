@@ -8,8 +8,7 @@ export const Container = styled.section`
   text-align: center;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
-  height: 100%;
+  min-height: 88vh;
   background: ${(props) => props.theme.bgDark};
   font-family: -apple-system, BlinkMacSystemFont, segoe ui, roboto, oxygen,
     cantarell, helvetica neue, ubuntu, sans-serif;
@@ -40,10 +39,10 @@ export const PaginationContainer = styled.div`
 export const ContainerSection = styled(Container)`
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  padding-top: 2rem;
 `;
 
-export const SearchSection = styled.section`
+export const SearchSection = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -55,10 +54,11 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  /* padding: 1rem; */
   background-color: #000;
   color: #fff;
   width: 100%;
+  height: 6vh;
 
   & hr {
     display: none;
@@ -69,6 +69,7 @@ export const Menu = styled.div`
     font-size: 2rem;
     cursor: default;
     transition: color 300ms ease-in-out;
+    margin-left: 1rem;
   }
 
   & h1:hover {
@@ -86,6 +87,8 @@ export const Menu = styled.div`
   @media (max-width: 470px) {
     flex-direction: column;
     justify-content: center;
+    height: auto;
+    padding: 1rem;
 
     & ul {
       flex-direction: column;
@@ -362,5 +365,38 @@ export const PhotoVideoSelector = styled.div`
   & span.divider {
     color: ${(props) => props.theme.textLight};
     margin: 0 2rem;
+  }
+`;
+
+export const FooterContainer = styled.footer`
+  display: flex;
+  position: relative;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: black;
+  height: 6vh;
+  img {
+    border-radius: 50%;
+    margin-right: 3rem;
+    color: #fff;
+    width: 60px;
+  }
+  p {
+    color: #fff;
+  }
+
+  @media (max-width: 470px) {
+    height: auto;
+    padding: 1rem;
+  }
+
+  @media (max-width: 342px) {
+    flex-direction: column;
+    & img {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
   }
 `;

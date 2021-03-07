@@ -9,17 +9,18 @@ import { VideoContainer } from "../Videos/VideoContainer";
 export const SearchContainer = () => {
   const { input, setQuery, setPage, searchSwitch } = useContext(StoreContext);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     setQuery(input);
     setPage(1);
   };
 
   return (
     <>
-      <SearchSection>
+      <SearchSection onSubmit={handleClick}>
         <Searchbar />
         <SearchSwitch />
-        <ButtonSearch onClick={handleClick}>Search</ButtonSearch>
+        <ButtonSearch>Search</ButtonSearch>
         {!searchSwitch ? <PhotoContainer /> : <VideoContainer />}
       </SearchSection>
     </>
