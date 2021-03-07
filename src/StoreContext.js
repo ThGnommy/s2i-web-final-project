@@ -158,6 +158,7 @@ export const StoreContextProvider = ({ children }) => {
         return error;
       }
     };
+
     !searchSwitch ? getPhotos() : getVideos();
   }, [query, page, searchSwitch]);
 

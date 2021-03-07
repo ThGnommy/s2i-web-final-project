@@ -2,9 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import "./";
 import { StoreContextProvider } from "./StoreContext";
 import { ThemeProvider } from "styled-components";
+
+// redux setup
+
+import { createStore } from "redux";
+import rootReducers from "./redux/reducers";
+import { Provider } from "react-redux";
+
+export const store = createStore(
+  rootReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+// styled components theme
 
 const theme = {
   bgDark: "#303236",
@@ -20,9 +32,11 @@ const theme = {
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <StoreContextProvider>
-        <App />
-      </StoreContextProvider>
+      <Provider store={store}>
+        <StoreContextProvider>
+          <App />
+        </StoreContextProvider>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
