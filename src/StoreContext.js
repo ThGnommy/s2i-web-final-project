@@ -2,7 +2,8 @@ import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { db, auth } from "./api/firebase/instance";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setNextPage } from "./redux/actions/mediaAction";
 export const StoreContext = createContext();
 
 // Breakpoints
@@ -25,6 +26,10 @@ export const StoreContextProvider = ({ children }) => {
   const { query } = useSelector((state) => state.search);
   // false = photos - true = videos
   const { switchType } = useSelector((state) => state.switchSelector);
+
+  const { currentPage } = useSelector((state) => state.media);
+  const dispatch = useDispatch();
+
   // Photo States
   const [photos, setPhotos] = useState([]);
   const [favoritesPhotos, setFavoritesPhotos] = useState([]);
@@ -33,8 +38,8 @@ export const StoreContextProvider = ({ children }) => {
   const [videos, setVideos] = useState([]);
   const [favoritesVideos, setFavoritesVideos] = useState([]);
 
-  const [nextPage, setNextPage] = useState(true);
-  const [page, setPage] = useState(1);
+  // const [nextPage, setNextPage] = useState(true);
+  // const [page, setPage] = useState(1);
 
   useEffect(() => {
     const getFavoritesPhoto = async () => {
@@ -95,13 +100,13 @@ export const StoreContextProvider = ({ children }) => {
             params: {
               total_results: 10000,
               per_page: 10,
-              page: page,
+              page: currentPage,
             },
           })
           .then((res) => {
             // Check if next page exist
             if (!res.data.next_page) {
-              setNextPage(false);
+              dispatch(setNextPage(false));
             } else {
               setNextPage(true);
             }
@@ -127,7 +132,7 @@ export const StoreContextProvider = ({ children }) => {
               params: {
                 total_results: 10000,
                 per_page: 10,
-                page: page,
+                page: currentPage,
               },
             }
           )
@@ -136,16 +141,16 @@ export const StoreContextProvider = ({ children }) => {
             let total_results = res.data.total_results;
             let total_pages = total_results / 10;
             total_pages = Math.floor(total_pages);
-            console.warn(
-              "%c%s",
-              "color: green; background: yellow; font-size: 24px;",
-              `Total Pages: ${total_pages}, Total Results: ${total_results}`
-            );
+            // console.warn(
+            //   "%c%s",
+            //   "color: green; background: yellow; font-size: 24px;",
+            //   `Total Pages: ${total_pages}, Total Results: ${total_results}`
+            // );
 
-            if (page === total_pages + 1) {
-              setNextPage(false);
-            } else if (total_pages > page) {
-              setNextPage(true);
+            if (currentPage === total_pages + 1) {
+              dispatch(setNextPage(false));
+            } else if (total_pages > currentPage) {
+              dispatch(setNextPage(true));
             }
             if (!res) return;
             setVideos(res.data.videos);
@@ -156,18 +161,15 @@ export const StoreContextProvider = ({ children }) => {
     };
 
     !switchType ? getPhotos() : getVideos();
-  }, [query, page, switchType]);
+  }, [query, currentPage, switchType, dispatch]);
 
   return (
     <StoreContext.Provider
       value={{
         photos,
         videos,
-        page,
         setPhotos,
         setVideos,
-        setPage,
-        nextPage,
         favoritesPhotos,
         setFavoritesPhotos,
         favoritesVideos,

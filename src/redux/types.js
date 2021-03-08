@@ -15,3 +15,5 @@ export const SHOW_FAVORITES = "SET_FAVORITES_PHOTOS";
 
 export const GET_PHOTOS = "GET_PHOTOS";
 export const GET_VIDEOS = "GET_VIDEOS";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_NEXT_PAGE = "SET_NEXT_PAGE";
