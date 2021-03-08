@@ -1,10 +1,14 @@
 import { combineReducers } from "redux";
 import { reducerUser } from "./reducerUser";
-import { reducerPhoto } from "./reducerPhoto";
+import { reducerMedia } from "./reducerMedia";
+import { reducerSearch } from "./reducerSearch";
+import { reducerSwitch } from "./reducerSwitch";
 
 const rootReducers = combineReducers({
   user: reducerUser,
-  photo: reducerPhoto,
+  media: reducerMedia,
+  search: reducerSearch,
+  switchSelector: reducerSwitch,
 });
 
 export default rootReducers;

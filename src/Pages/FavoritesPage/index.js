@@ -12,15 +12,15 @@ import { db, auth } from "../../api/firebase/instance";
 import { StoreContext } from "../../StoreContext";
 import { ThemeContext } from "styled-components";
 import { Footer } from "../../components/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoritesSelector } from "../../redux/actions/switchSelectorAction";
 
 export const FavoritesPage = () => {
-  const {
-    setFavoritesPhotos,
-    setFavoritesVideos,
-    setFavoriteSelector,
-    favoriteSelector,
-  } = useContext(StoreContext);
+  const { setFavoritesPhotos, setFavoritesVideos } = useContext(StoreContext);
   const themeContext = useContext(ThemeContext);
+
+  const { favoriteSelector } = useSelector((state) => state.switchSelector);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getFavorites = async () => {
@@ -57,7 +57,7 @@ export const FavoritesPage = () => {
           <Title>Favorites</Title>
           <PhotoVideoSelector>
             <p
-              onClick={() => setFavoriteSelector(false)}
+              onClick={() => dispatch(setFavoritesSelector(false))}
               style={{
                 color: !favoriteSelector
                   ? themeContext.textLight
@@ -73,12 +73,11 @@ export const FavoritesPage = () => {
                   ? themeContext.textLight
                   : themeContext.textDark,
               }}
-              onClick={() => setFavoriteSelector(true)}
+              onClick={() => dispatch(setFavoritesSelector(true))}
             >
               Videos
             </p>
           </PhotoVideoSelector>
-          {/* <hr style={{ width: "90%", marginBottom: "2rem" }} /> */}
           {!favoriteSelector ? (
             <FavoritesPhotoContainer />
           ) : (

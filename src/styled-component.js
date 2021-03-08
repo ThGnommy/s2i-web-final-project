@@ -8,7 +8,7 @@ export const Container = styled.section`
   text-align: center;
   align-items: center;
   flex-direction: column;
-  min-height: 88vh;
+  min-height: 80vh;
   background: ${(props) => props.theme.bgDark};
   font-family: -apple-system, BlinkMacSystemFont, segoe ui, roboto, oxygen,
     cantarell, helvetica neue, ubuntu, sans-serif;
@@ -54,11 +54,10 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: 1rem; */
   background-color: #000;
   color: #fff;
   width: 100%;
-  height: 6vh;
+  height: 10vh;
 
   & hr {
     display: none;
@@ -70,6 +69,7 @@ export const Menu = styled.div`
     cursor: default;
     transition: color 300ms ease-in-out;
     margin-left: 1rem;
+    padding: 1rem 0;
   }
 
   & h1:hover {
@@ -370,13 +370,12 @@ export const PhotoVideoSelector = styled.div`
 
 export const FooterContainer = styled.footer`
   display: flex;
-  position: relative;
   bottom: 0;
   align-items: center;
   justify-content: center;
   width: 100%;
   background: black;
-  height: 6vh;
+  height: 10vh;
   img {
     border-radius: 50%;
     margin-right: 3rem;

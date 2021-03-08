@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { db, auth } from "./api/firebase/instance";
+import { useSelector } from "react-redux";
 export const StoreContext = createContext();
 
 // Breakpoints
@@ -21,9 +22,9 @@ export const downloadVideo = (url) => {
 };
 
 export const StoreContextProvider = ({ children }) => {
-  const [input, setInput] = useState("");
-  const [query, setQuery] = useState("");
-
+  const { query } = useSelector((state) => state.search);
+  // false = photos - true = videos
+  const { switchType } = useSelector((state) => state.switchSelector);
   // Photo States
   const [photos, setPhotos] = useState([]);
   const [favoritesPhotos, setFavoritesPhotos] = useState([]);
@@ -34,9 +35,6 @@ export const StoreContextProvider = ({ children }) => {
 
   const [nextPage, setNextPage] = useState(true);
   const [page, setPage] = useState(1);
-  // false = photos - true = videos
-  const [searchSwitch, setSearchSwitch] = useState(false);
-  const [favoriteSelector, setFavoriteSelector] = useState(false);
 
   useEffect(() => {
     const getFavoritesPhoto = async () => {
@@ -157,8 +155,8 @@ export const StoreContextProvider = ({ children }) => {
       }
     };
 
-    !searchSwitch ? getPhotos() : getVideos();
-  }, [query, page, searchSwitch]);
+    !switchType ? getPhotos() : getVideos();
+  }, [query, page, switchType]);
 
   return (
     <StoreContext.Provider
@@ -166,13 +164,9 @@ export const StoreContextProvider = ({ children }) => {
         photos,
         videos,
         page,
-        input,
-        setInput,
         setPhotos,
         setVideos,
-        setQuery,
         setPage,
-        query,
         nextPage,
         favoritesPhotos,
         setFavoritesPhotos,
@@ -181,10 +175,6 @@ export const StoreContextProvider = ({ children }) => {
         mediaQuery,
         downloadImage,
         downloadVideo,
-        searchSwitch,
-        setSearchSwitch,
-        favoriteSelector,
-        setFavoriteSelector,
       }}
     >
       {children}

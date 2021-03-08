@@ -5,13 +5,18 @@ import { StoreContext } from "./../../StoreContext";
 import { PhotoContainer } from "./../Photos/PhotoContainer";
 import { SearchSwitch } from "../SearchSwitch";
 import { VideoContainer } from "../Videos/VideoContainer";
-
+import { setQuery } from "../../redux/actions/searchAction";
+import { useDispatch, useSelector } from "react-redux";
 export const SearchContainer = () => {
-  const { input, setQuery, setPage, searchSwitch } = useContext(StoreContext);
+  const { setPage } = useContext(StoreContext);
+
+  const { input } = useSelector((state) => state.search);
+  const { switchType } = useSelector((state) => state.switchSelector);
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
-    setQuery(input);
+    dispatch(setQuery(input));
     setPage(1);
   };
 
@@ -21,7 +26,7 @@ export const SearchContainer = () => {
         <Searchbar />
         <SearchSwitch />
         <ButtonSearch>Search</ButtonSearch>
-        {!searchSwitch ? <PhotoContainer /> : <VideoContainer />}
+        {!switchType ? <PhotoContainer /> : <VideoContainer />}
       </SearchSection>
     </>
   );

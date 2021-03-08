@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
-import { StoreContext } from "../../StoreContext";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { SearchInput } from "./../../styled-component";
+import { setInput } from "../../redux/actions/searchAction";
 export const Searchbar = () => {
-  const { setInput } = useContext(StoreContext);
+  const dispatch = useDispatch();
 
   const handleInput = (e) => {
-    setInput(e.target.value);
+    dispatch(setInput(e.target.value));
   };
 
   return (

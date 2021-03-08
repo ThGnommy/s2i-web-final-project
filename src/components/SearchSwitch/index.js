@@ -3,27 +3,31 @@ import { useContext } from "react";
 import { StoreContext } from "../../StoreContext";
 import { Switch, SwitchContainer, SwitchText } from "./../../styled-component";
 import { ThemeContext } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { setSwitchType } from "../../redux/actions/switchSelectorAction";
 
 export const SearchSwitch = () => {
-  const { searchSwitch, setSearchSwitch, setPage } = useContext(StoreContext);
+  const { setPage } = useContext(StoreContext);
   const themeContext = useContext(ThemeContext);
 
+  const { switchType } = useSelector((state) => state.switchSelector);
+  const dispatch = useDispatch();
+
   const handleSwitch = (e) => {
-    // Prevent fetching onclick
-    setSearchSwitch(e.target.checked);
+    dispatch(setSwitchType(e.target.checked));
     setPage(1);
   };
 
   useEffect(() => {
-    setSearchSwitch(false);
-  }, [setSearchSwitch]);
+    dispatch(setSwitchType(false));
+  }, [dispatch]);
 
   return (
     <>
       <SwitchContainer>
         <SwitchText
           TextColor={
-            searchSwitch ? themeContext.textDark : themeContext.textLight
+            switchType ? themeContext.textDark : themeContext.textLight
           }
         >
           Photo
@@ -36,7 +40,7 @@ export const SearchSwitch = () => {
         </Switch>
         <SwitchText
           TextColor={
-            !searchSwitch ? themeContext.textDark : themeContext.textLight
+            !switchType ? themeContext.textDark : themeContext.textLight
           }
         >
           Video
