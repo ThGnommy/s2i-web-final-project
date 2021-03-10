@@ -41,13 +41,11 @@ export const PhotoDesktop = ({
   // Check for the favorite icon
   let isFavorite = favoritesPhotos.find((o) => o.id === colorStar.id);
 
-  console.log(favoritesPhotos.find((o) => o.id === colorStar.id));
-
   const starColor = isFavorite ? "yellow" : "white";
 
   const handleFavorite = (photo) => {
     if (!isFavorite) {
-      dispatch(setFavoritesPhotos((prevState) => [...prevState, photo]));
+      dispatch(setFavoritesPhotos([...favoritesPhotos, photo]));
       favourite.addFavouritePhoto({
         id,
         src: image,

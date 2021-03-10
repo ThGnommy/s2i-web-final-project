@@ -11,6 +11,8 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { favourite } from "./../../../api/firebase";
 import photoPropTypes from "./../../../propTypes/propTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoritesPhotos } from "../../../redux/actions/mediaAction";
 
 export const PhotoMobile = ({
   id,
@@ -20,13 +22,12 @@ export const PhotoMobile = ({
   colorStar,
   downloadUrl,
 }) => {
-  const {
-    setFavoritesPhotos,
-    favoritesPhotos,
-    mediaQuery,
-    downloadImage,
-    userIsLogged,
-  } = useContext(StoreContext);
+  const { mediaQuery, downloadImage } = useContext(StoreContext);
+
+  const { favoritesPhotos } = useSelector((state) => state.media);
+  const { userIsLogged } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   // Check for the favorite icon
   let isFavorite = favoritesPhotos.find((o) => o.id === colorStar.id);
@@ -34,7 +35,7 @@ export const PhotoMobile = ({
 
   const handleFavorite = (photo) => {
     if (!isFavorite) {
-      setFavoritesPhotos((prevState) => [...prevState, photo]);
+      dispatch(setFavoritesPhotos([...favoritesPhotos, photo]));
       favourite.addFavouritePhoto({
         id,
         src: image,

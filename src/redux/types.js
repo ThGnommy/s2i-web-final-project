@@ -12,7 +12,6 @@ export const SET_SWITCH = "SET_SWITCH";
 export const SHOW_FAVORITES = "SHOW_FAVORITES";
 
 // photo and video types
-
 export const GET_PHOTOS = "GET_PHOTOS";
 export const GET_VIDEOS = "GET_VIDEOS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";

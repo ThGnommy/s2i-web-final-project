@@ -19,7 +19,7 @@ export const getVideos = (array) => (dispatch) => {
   dispatch({
     type: GET_VIDEOS,
     payload: {
-      photos: array,
+      videos: array,
     },
   });
 };

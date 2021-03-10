@@ -11,6 +11,8 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import videoPropTypes from "./../../../propTypes/propTypes";
 import { favourite } from "./../../../api/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoritesVideos } from "../../../redux/actions/mediaAction";
 export const VideoDesktop = ({
   id,
   video,
@@ -21,12 +23,12 @@ export const VideoDesktop = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const {
-    setFavoritesVideos,
-    favoritesVideos,
-    downloadVideo,
-    userIsLogged,
-  } = useContext(StoreContext);
+  const { downloadVideo } = useContext(StoreContext);
+
+  const { favoritesVideos } = useSelector((state) => state.media);
+  const { userIsLogged } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const myVideo = useRef();
 
@@ -53,7 +55,7 @@ export const VideoDesktop = ({
 
   const handleFavorite = (video) => {
     if (!isFavorite) {
-      setFavoritesVideos((prevState) => [...prevState, video]);
+      dispatch(setFavoritesVideos([...favoritesVideos, video]));
       favourite.addFavouriteVideo({
         id,
         src: video.video_files[0].link,
@@ -78,7 +80,7 @@ export const VideoDesktop = ({
             onMouseLeave={isNotHover}
           >
             <video loop ref={myVideo}>
-              <source src={`${video}`} type='video/mp4' />
+              <source src={`${video}`} type="video/mp4" />
             </video>
             {hover && (
               <>
@@ -92,10 +94,10 @@ export const VideoDesktop = ({
                   {/* Download icon */}
                   <FontAwesomeIcon
                     icon={faDownload}
-                    color='green'
+                    color="green"
                     style={{ marginLeft: "0.5rem", cursor: "pointer" }}
                     onClick={() => downloadVideo(downloadUrl)}
-                    size='1x'
+                    size="1x"
                   />
                   <TextPhoto>{photographer}</TextPhoto>
                   {/* Favorite icon */}
@@ -105,7 +107,7 @@ export const VideoDesktop = ({
                       color={starColor}
                       style={{ marginRight: "0.5rem", cursor: "pointer" }}
                       onClick={() => handleFavorite(photoArray)}
-                      size='1x'
+                      size="1x"
                     />
                   ) : null}
                 </VideoContainer>

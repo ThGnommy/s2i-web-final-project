@@ -4,9 +4,12 @@ import { VideoMobile } from "../VideoMobile";
 import { VideoList } from "../../../styled-component";
 import { StoreContext } from "../../../StoreContext";
 import { Pagination } from "../../Pagination";
+import { useSelector } from "react-redux";
 
 export const VideoContainer = () => {
-  const { videos, mediaQuery } = useContext(StoreContext);
+  const { mediaQuery } = useContext(StoreContext);
+
+  const { videos } = useSelector((state) => state.media);
 
   return (
     <>
