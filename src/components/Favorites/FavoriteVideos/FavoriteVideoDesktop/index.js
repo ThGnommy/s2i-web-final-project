@@ -11,6 +11,8 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import videoPropTypes from "./../../../../propTypes/propTypes";
 import { deleteFavoriteVideoFromDB } from "../../../../api/firebase/favourite";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoritesVideos } from "../../../../redux/actions/mediaAction";
 
 export const FavoriteVideoDesktop = ({
   video,
@@ -19,11 +21,10 @@ export const FavoriteVideoDesktop = ({
   downloadUrl,
 }) => {
   const [hover, setHover] = useState(false);
+  const { downloadVideo } = useContext(StoreContext);
 
-  const { setFavoritesVideos, favoritesVideos, downloadVideo } = useContext(
-    StoreContext
-  );
-
+  const { favoritesVideos } = useSelector((state) => state.media);
+  const dispatch = useDispatch();
   const myVideo = useRef();
 
   const isHover = () => {
@@ -44,7 +45,9 @@ export const FavoriteVideoDesktop = ({
   }, []);
 
   const handleDeleteVideo = async (video) => {
-    setFavoritesVideos(favoritesVideos.filter((o) => o.id !== video.id));
+    dispatch(
+      setFavoritesVideos(favoritesVideos.filter((o) => o.id !== video.id))
+    );
     deleteFavoriteVideoFromDB(video);
   };
 
@@ -63,7 +66,7 @@ export const FavoriteVideoDesktop = ({
             onMouseLeave={isNotHover}
           >
             <video loop ref={myVideo}>
-              <source src={`${video}`} type='video/mp4' />
+              <source src={`${video}`} type="video/mp4" />
             </video>
             {hover && (
               <VideoContainer
@@ -76,19 +79,19 @@ export const FavoriteVideoDesktop = ({
                 {/* Download icon */}
                 <FontAwesomeIcon
                   icon={faDownload}
-                  color='green'
+                  color="green"
                   style={{ marginLeft: "0.5rem", cursor: "pointer" }}
-                  size='1x'
+                  size="1x"
                   onClick={() => downloadVideo(downloadUrl)}
                 />
                 <TextPhoto>{photographer}</TextPhoto>
                 {/* Delete icon */}
                 <FontAwesomeIcon
                   icon={faTimes}
-                  color='red'
+                  color="red"
                   style={{ marginRight: "0.5rem", cursor: "pointer" }}
                   onClick={() => handleDeleteVideo(currentPhoto)}
-                  size='1x'
+                  size="1x"
                 />
               </VideoContainer>
             )}

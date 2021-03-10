@@ -15,9 +15,9 @@ export const reducerUser = (state = initialState, action) => {
         email: action.payload.email,
       };
     case USER_SIGNIN:
-      return { ...state, userIsLogged: action.payload.userLogged };
+      return { ...state, userIsLogged: action.payload.userIsLogged };
     case USER_LOGOUT:
-      return { ...state, userIsLogged: action.payload.userLogged };
+      return { ...state, userIsLogged: action.payload.userIsLogged };
     default:
       return { ...state };
   }

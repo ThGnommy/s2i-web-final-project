@@ -29,7 +29,7 @@ export const FavoritesPage = () => {
         .get()
         .then((r) => {
           if (r.exists && r.data().favsPhoto) {
-            setFavoritesPhotos(r.data().favsPhoto);
+            // dispatch(setFavoritesPhotos(r.data().favsPhoto));
           }
           if (r.exists && r.data().favsVideo) {
             setFavoritesVideos(r.data().favsVideo);

@@ -13,6 +13,8 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import videoPropTypes from "../../../../propTypes/propTypes";
 import { deleteFavoriteVideoFromDB } from "../../../../api/firebase/favourite";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoritesVideos } from "../../../../redux/actions/mediaAction";
 
 export const FavoriteVideoMobile = ({
   video,
@@ -20,15 +22,13 @@ export const FavoriteVideoMobile = ({
   currentPhoto,
   downloadUrl,
 }) => {
-  const {
-    setFavoritesVideos,
-    favoritesVideos,
-    mediaQuery,
-    downloadVideo,
-  } = useContext(StoreContext);
+  const { mediaQuery, downloadVideo } = useContext(StoreContext);
 
   const myVideo = useRef();
   const [play, setPlay] = useState(false);
+
+  const { favoritesVideos } = useSelector((state) => state.media);
+  const dispatch = useDispatch();
 
   const playVideo = () => {
     myVideo.current.play();
@@ -49,7 +49,9 @@ export const FavoriteVideoMobile = ({
   }, []);
 
   const handleDeletePhoto = async (video) => {
-    setFavoritesVideos(favoritesVideos.filter((o) => o.id !== video.id));
+    dispatch(
+      setFavoritesVideos(favoritesVideos.filter((o) => o.id !== video.id))
+    );
     deleteFavoriteVideoFromDB(video);
   };
 
@@ -64,20 +66,20 @@ export const FavoriteVideoMobile = ({
         >
           <SingleVideo as={motion.div}>
             <video loop ref={myVideo}>
-              <source src={`${video}`} type='video/mp4' />
+              <source src={`${video}`} type="video/mp4" />
             </video>
             {!play ? (
               <FontAwesomeIcon
                 onClick={playVideo}
                 icon={faPlay}
-                color='white'
+                color="white"
                 size={mediaQuery.isMobile ? "4x" : "2x"}
               />
             ) : (
               <FontAwesomeIcon
                 onClick={pauseVideo}
                 icon={faPause}
-                color='white'
+                color="white"
                 size={mediaQuery.isMobile ? "4x" : "2x"}
               />
             )}
@@ -85,7 +87,7 @@ export const FavoriteVideoMobile = ({
               {/* Download icon */}
               <FontAwesomeIcon
                 icon={faDownload}
-                color='green'
+                color="green"
                 style={{ marginLeft: "0.5rem" }}
                 size={mediaQuery.isMobile ? "4x" : "2x"}
                 onClick={() => downloadVideo(downloadUrl)}
@@ -94,7 +96,7 @@ export const FavoriteVideoMobile = ({
               {/* Delete icon */}
               <FontAwesomeIcon
                 icon={faTimes}
-                color='red'
+                color="red"
                 style={{ marginRight: "0.5rem" }}
                 onClick={() => handleDeletePhoto(currentPhoto)}
                 size={mediaQuery.isMobile ? "4x" : "2x"}

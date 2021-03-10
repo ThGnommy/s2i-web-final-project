@@ -1,9 +1,15 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { createContext, useEffect } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { db, auth } from "./api/firebase/instance";
 import { useDispatch, useSelector } from "react-redux";
-import { setNextPage } from "./redux/actions/mediaAction";
+import {
+  getPhotos,
+  getVideos,
+  setFavoritesPhotos,
+  setFavoritesVideos,
+  setNextPage,
+} from "./redux/actions/mediaAction";
 export const StoreContext = createContext();
 
 // Breakpoints
@@ -30,25 +36,14 @@ export const StoreContextProvider = ({ children }) => {
   const { currentPage } = useSelector((state) => state.media);
   const dispatch = useDispatch();
 
-  // Photo States
-  const [photos, setPhotos] = useState([]);
-  const [favoritesPhotos, setFavoritesPhotos] = useState([]);
-
-  // Video States
-  const [videos, setVideos] = useState([]);
-  const [favoritesVideos, setFavoritesVideos] = useState([]);
-
-  // const [nextPage, setNextPage] = useState(true);
-  // const [page, setPage] = useState(1);
-
   useEffect(() => {
-    const getFavoritesPhoto = async () => {
+    const getFavoritesPhoto = () => {
       const doc = db.collection("users").doc(auth.currentUser.uid);
-      await doc
+      doc
         .get()
         .then((r) => {
           if (r.exists && r.data().favsPhoto) {
-            setFavoritesPhotos(r.data().favsPhoto);
+            dispatch(setFavoritesPhotos(r.data().favsPhoto));
           }
         })
         .catch((error) => {
@@ -56,14 +51,14 @@ export const StoreContextProvider = ({ children }) => {
         });
     };
 
-    auth.onAuthStateChanged(function (user) {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         getFavoritesPhoto();
       } else {
         return;
       }
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const getFavoritesVideo = async () => {
@@ -72,7 +67,7 @@ export const StoreContextProvider = ({ children }) => {
         .get()
         .then((r) => {
           if (r.exists && r.data().favsVideo) {
-            setFavoritesVideos(r.data().favsVideo);
+            dispatch(setFavoritesVideos(r.data().favsVideo));
           }
         })
         .catch((error) => {
@@ -80,17 +75,17 @@ export const StoreContextProvider = ({ children }) => {
         });
     };
 
-    auth.onAuthStateChanged(function (user) {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         getFavoritesVideo();
       } else {
         return;
       }
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    const getPhotos = async () => {
+    const fetchPhotos = async () => {
       try {
         await axios
           .get(`https://api.pexels.com/v1/search?query=${query}`, {
@@ -113,14 +108,14 @@ export const StoreContextProvider = ({ children }) => {
 
             if (!res) return;
 
-            setPhotos(res.data.photos);
+            dispatch(getPhotos(res.data.photos));
           });
       } catch (error) {
         return error;
       }
     };
 
-    const getVideos = async () => {
+    const fetchVideos = async () => {
       try {
         await axios
           .get(
@@ -147,33 +142,27 @@ export const StoreContextProvider = ({ children }) => {
             //   `Total Pages: ${total_pages}, Total Results: ${total_results}`
             // );
 
+            console.log(res.data);
+
             if (currentPage === total_pages + 1) {
               dispatch(setNextPage(false));
             } else if (total_pages > currentPage) {
               dispatch(setNextPage(true));
             }
             if (!res) return;
-            setVideos(res.data.videos);
+            dispatch(getVideos(res.data.videos));
           });
       } catch (error) {
         return error;
       }
     };
 
-    !switchType ? getPhotos() : getVideos();
+    !switchType ? fetchPhotos() : fetchVideos();
   }, [query, currentPage, switchType, dispatch]);
 
   return (
     <StoreContext.Provider
       value={{
-        photos,
-        videos,
-        setPhotos,
-        setVideos,
-        favoritesPhotos,
-        setFavoritesPhotos,
-        favoritesVideos,
-        setFavoritesVideos,
         mediaQuery,
         downloadImage,
         downloadVideo,

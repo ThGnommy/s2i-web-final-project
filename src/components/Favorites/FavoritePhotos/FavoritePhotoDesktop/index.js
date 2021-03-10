@@ -11,7 +11,8 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import photoPropTypes from "./../../../../propTypes/propTypes";
 import { deleteFavoritePhotoFromDB } from "../../../../api/firebase/favourite";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoritesPhotos } from "../../../../redux/actions/mediaAction";
 export const FavoritePhotoDesktop = ({
   image,
   photographer,
@@ -20,9 +21,9 @@ export const FavoritePhotoDesktop = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const { setFavoritesPhotos, favoritesPhotos, downloadImage } = useContext(
-    StoreContext
-  );
+  const { downloadImage } = useContext(StoreContext);
+  const { favoritesPhotos } = useSelector((state) => state.media);
+  const dispatch = useDispatch();
 
   const isHover = () => {
     setHover(true);
@@ -33,7 +34,9 @@ export const FavoritePhotoDesktop = ({
   };
 
   const handleDeletePhoto = async (photo) => {
-    setFavoritesPhotos(favoritesPhotos.filter((o) => o.id !== photo.id));
+    dispatch(
+      setFavoritesPhotos(favoritesPhotos.filter((o) => o.id !== photo.id))
+    );
     deleteFavoritePhotoFromDB(photo);
   };
 

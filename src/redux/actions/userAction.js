@@ -4,7 +4,7 @@ export const userSignin = () => (dispatch) => {
   dispatch({
     type: USER_SIGNIN,
     payload: {
-      userLogged: true,
+      userIsLogged: true,
     },
   });
 };
@@ -13,7 +13,7 @@ export const userLogout = () => (dispatch) => {
   dispatch({
     type: USER_LOGOUT,
     payload: {
-      userLogged: false,
+      userIsLogged: false,
     },
   });
 };

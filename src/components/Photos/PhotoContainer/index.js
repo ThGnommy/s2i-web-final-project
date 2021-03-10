@@ -4,9 +4,12 @@ import { PhotoMobile } from "../PhotoMobile";
 import { PhotoList } from "../../../styled-component";
 import { StoreContext } from "../../../StoreContext";
 import { Pagination } from "../../Pagination";
+import { useSelector } from "react-redux";
 
 export const PhotoContainer = () => {
-  const { photos, mediaQuery } = useContext(StoreContext);
+  const { mediaQuery } = useContext(StoreContext);
+
+  const { photos } = useSelector((state) => state.media);
 
   return (
     <>

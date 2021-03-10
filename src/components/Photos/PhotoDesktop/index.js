@@ -11,6 +11,8 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import photoPropTypes from "./../../../propTypes/propTypes";
 import { favourite } from "./../../../api/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoritesPhotos } from "../../../redux/actions/mediaAction";
 
 export const PhotoDesktop = ({
   id,
@@ -21,12 +23,12 @@ export const PhotoDesktop = ({
   downloadUrl,
 }) => {
   const [hover, setHover] = useState(false);
-  const {
-    setFavoritesPhotos,
-    favoritesPhotos,
-    downloadImage,
-    userIsLogged,
-  } = useContext(StoreContext);
+  const { downloadImage } = useContext(StoreContext);
+
+  const { favoritesPhotos } = useSelector((state) => state.media);
+  const { userIsLogged } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const isHover = () => {
     setHover(true);
@@ -38,11 +40,14 @@ export const PhotoDesktop = ({
 
   // Check for the favorite icon
   let isFavorite = favoritesPhotos.find((o) => o.id === colorStar.id);
+
+  console.log(favoritesPhotos.find((o) => o.id === colorStar.id));
+
   const starColor = isFavorite ? "yellow" : "white";
 
   const handleFavorite = (photo) => {
     if (!isFavorite) {
-      setFavoritesPhotos((prevState) => [...prevState, photo]);
+      dispatch(setFavoritesPhotos((prevState) => [...prevState, photo]));
       favourite.addFavouritePhoto({
         id,
         src: image,
