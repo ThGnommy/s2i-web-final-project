@@ -99,11 +99,16 @@ export const StoreContextProvider = ({ children }) => {
             },
           })
           .then((res) => {
-            // Check if next page exist
-            if (!res.data.next_page) {
+            console.log(res.data.total_results);
+
+            let total_results = res.data.total_results;
+            let total_pages = total_results / 10;
+            total_pages = Math.floor(total_pages);
+
+            if (currentPage === total_pages + 1) {
               dispatch(setNextPage(false));
-            } else {
-              setNextPage(true);
+            } else if (total_pages > currentPage) {
+              dispatch(setNextPage(true));
             }
 
             if (!res) return;
@@ -136,20 +141,14 @@ export const StoreContextProvider = ({ children }) => {
             let total_results = res.data.total_results;
             let total_pages = total_results / 10;
             total_pages = Math.floor(total_pages);
-            // console.warn(
-            //   "%c%s",
-            //   "color: green; background: yellow; font-size: 24px;",
-            //   `Total Pages: ${total_pages}, Total Results: ${total_results}`
-            // );
-
-            console.log(res.data);
 
             if (currentPage === total_pages + 1) {
               dispatch(setNextPage(false));
-            } else if (total_pages > currentPage) {
+            } else if (total_pages >= currentPage) {
               dispatch(setNextPage(true));
             }
             if (!res) return;
+
             dispatch(getVideos(res.data.videos));
           });
       } catch (error) {

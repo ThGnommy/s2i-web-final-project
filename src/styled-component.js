@@ -42,7 +42,7 @@ export const ContainerSection = styled(Container)`
   padding-top: 2rem;
 `;
 
-export const SearchSection = styled.form`
+export const SearchSection = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;

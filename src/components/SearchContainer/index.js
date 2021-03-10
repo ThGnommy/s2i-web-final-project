@@ -21,10 +21,10 @@ export const SearchContainer = () => {
 
   return (
     <>
-      <SearchSection onSubmit={handleClick}>
+      <SearchSection>
         <Searchbar />
         <SearchSwitch />
-        <ButtonSearch>Search</ButtonSearch>
+        <ButtonSearch onClick={handleClick}>Search</ButtonSearch>
         {!switchType ? <PhotoContainer /> : <VideoContainer />}
       </SearchSection>
     </>
