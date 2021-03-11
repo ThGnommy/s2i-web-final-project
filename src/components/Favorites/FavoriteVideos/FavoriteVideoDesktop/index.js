@@ -1,11 +1,10 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   SingleVideo,
   VideoContainer,
   TextPhoto,
 } from "../../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "./../../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +12,7 @@ import videoPropTypes from "./../../../../propTypes/propTypes";
 import { deleteFavoriteVideoFromDB } from "../../../../api/firebase/favourite";
 import { useDispatch, useSelector } from "react-redux";
 import { setFavoritesVideos } from "../../../../redux/actions/mediaAction";
+import { downloadVideo } from "../../../../utils";
 
 export const FavoriteVideoDesktop = ({
   video,
@@ -21,7 +21,6 @@ export const FavoriteVideoDesktop = ({
   downloadUrl,
 }) => {
   const [hover, setHover] = useState(false);
-  const { downloadVideo } = useContext(StoreContext);
 
   const { favoritesVideos } = useSelector((state) => state.media);
   const dispatch = useDispatch();

@@ -9,14 +9,12 @@ import { setCurrentPage } from "../../redux/actions/mediaAction";
 export const SearchSwitch = () => {
   const themeContext = useContext(ThemeContext);
 
-  const mediaState = useSelector((state) => state.madia);
   const { switchType } = useSelector((state) => state.switchSelector);
   const dispatch = useDispatch();
 
   const handleSwitch = (e) => {
     dispatch(setSwitchType(e.target.checked));
     dispatch(setCurrentPage(1));
-    console.log(mediaState);
   };
 
   useEffect(() => {

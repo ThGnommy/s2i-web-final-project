@@ -6,12 +6,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
-import { StoreContext } from "./../../StoreContext";
 import { ThemeContext } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../redux/actions/mediaAction";
+import { mediaQuery } from "../../utils";
 export const Pagination = () => {
-  const { mediaQuery } = useContext(StoreContext);
   const themeProvider = useContext(ThemeContext);
 
   const { photos, videos } = useSelector((state) => state.media);

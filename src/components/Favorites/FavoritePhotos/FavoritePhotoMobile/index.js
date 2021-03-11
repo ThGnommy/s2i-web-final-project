@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   SinglePhoto,
   PhotoContainer,
   TextPhoto,
 } from "../../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "../../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +12,7 @@ import photoPropTypes from "./../../../../propTypes/propTypes";
 import { deleteFavoritePhotoFromDB } from "../../../../api/firebase/favourite";
 import { useDispatch, useSelector } from "react-redux";
 import { setFavoritesPhotos } from "../../../../redux/actions/mediaAction";
+import { downloadImage, mediaQuery } from "../../../../utils";
 
 export const FavoritePhotoMobile = ({
   image,
@@ -20,8 +20,6 @@ export const FavoritePhotoMobile = ({
   currentPhoto,
   downloadUrl,
 }) => {
-  const { mediaQuery, downloadImage } = useContext(StoreContext);
-
   const { favoritesPhotos } = useSelector((state) => state.media);
   const dispatch = useDispatch();
 

@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { VideoList, Title } from "../../../../styled-component";
-import { StoreContext } from "../../../../StoreContext";
 import { FavoriteVideoMobile } from "../FavoriteVideoMobile";
 import { FavoriteVideoDesktop } from "./../FavoriteVideoDesktop";
 import { useSelector } from "react-redux";
+import { mediaQuery } from "../../../../utils";
 
 export const FavoritesVideoContainer = () => {
-  const { mediaQuery } = useContext(StoreContext);
-
   const { favoritesVideos } = useSelector((state) => state.media);
 
   return (

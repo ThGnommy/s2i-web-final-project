@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { VideoDesktop } from "../VideoDesktop";
 import { VideoMobile } from "../VideoMobile";
 import { VideoList } from "../../../styled-component";
-import { StoreContext } from "../../../StoreContext";
 import { Pagination } from "../../Pagination";
 import { useSelector } from "react-redux";
+import { mediaQuery } from "../../../utils";
 
 export const VideoContainer = () => {
-  const { mediaQuery } = useContext(StoreContext);
-
   const { videos } = useSelector((state) => state.media);
 
   return (

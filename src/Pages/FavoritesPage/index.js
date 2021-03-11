@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Container,
   ContainerSection,
@@ -12,6 +12,11 @@ import { ThemeContext } from "styled-components";
 import { Footer } from "../../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { setFavoritesSelector } from "../../redux/actions/switchSelectorAction";
+import { auth, db } from "../../api/firebase/instance";
+import {
+  setFavoritesPhotos,
+  setFavoritesVideos,
+} from "../../redux/actions/mediaAction";
 
 export const FavoritesPage = () => {
   const themeContext = useContext(ThemeContext);
@@ -19,32 +24,32 @@ export const FavoritesPage = () => {
   const { favoriteSelector } = useSelector((state) => state.switchSelector);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const getFavorites = async () => {
-  //     const doc = db.collection("users").doc(auth.currentUser.uid);
-  //     await doc
-  //       .get()
-  //       .then((r) => {
-  //         if (r.exists && r.data().favsPhoto) {
-  //           dispatch(setFavoritesPhotos(r.data().favsPhoto));
-  //         }
-  //         if (r.exists && r.data().favsVideo) {
-  //           dispatch(setFavoritesVideos(r.data().favsVideo));
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         throw Promise.reject(error);
-  //       });
-  //   };
+  useEffect(() => {
+    const getFavorites = async () => {
+      const doc = db.collection("users").doc(auth.currentUser.uid);
+      await doc
+        .get()
+        .then((r) => {
+          if (r.exists && r.data().favsPhoto) {
+            dispatch(setFavoritesPhotos(r.data().favsPhoto));
+          }
+          if (r.exists && r.data().favsVideo) {
+            dispatch(setFavoritesVideos(r.data().favsVideo));
+          }
+        })
+        .catch((error) => {
+          throw Promise.reject(error);
+        });
+    };
 
-  //   auth.onAuthStateChanged(function (user) {
-  //     if (user) {
-  //       getFavorites();
-  //     } else {
-  //       return;
-  //     }
-  //   });
-  // }, [setFavoritesPhotos, setFavoritesVideos]);
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        getFavorites();
+      } else {
+        return;
+      }
+    });
+  }, [dispatch]);
 
   return (
     <>

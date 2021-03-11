@@ -2,11 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { StoreContextProvider } from "./StoreContext";
 import { ThemeProvider } from "styled-components";
 
 // redux setup
-
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducers from "./redux/reducers";
 import thunk from "redux-thunk";
@@ -36,9 +34,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <StoreContextProvider>
-          <App />
-        </StoreContextProvider>
+        <App />
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,

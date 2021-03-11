@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { PhotoList, Title } from "../../../../styled-component";
-import { StoreContext } from "../../../../StoreContext";
 import { FavoritePhotoMobile } from "../FavoritePhotoMobile";
 import { FavoritePhotoDesktop } from "../FavoritePhotoDesktop";
 import { useSelector } from "react-redux";
+import { mediaQuery } from "../../../../utils";
 
 export const FavoritesPhotoContainer = () => {
-  const { mediaQuery } = useContext(StoreContext);
   const { favoritesPhotos } = useSelector((state) => state.media);
   return (
     <>

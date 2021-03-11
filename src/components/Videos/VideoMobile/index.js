@@ -1,11 +1,10 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   SingleVideo,
   VideoContainer,
   TextPhoto,
 } from "../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "./../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +12,9 @@ import { faPause } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { favourite } from "./../../../api/firebase";
 import videoPropTypes from "./../../../propTypes/propTypes";
+import { downloadVideo, mediaQuery } from "../../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoritesVideos } from "../../../redux/actions/mediaAction";
 
 export const VideoMobile = ({
   id,
@@ -22,13 +24,10 @@ export const VideoMobile = ({
   colorStar,
   downloadUrl,
 }) => {
-  const {
-    setFavoritesVideos,
-    favoritesVideos,
-    mediaQuery,
-    downloadVideo,
-    userIsLogged,
-  } = useContext(StoreContext);
+  const { userIsLogged } = useSelector((state) => state.user);
+  const { favoritesVideos } = useSelector((state) => state.media);
+
+  const dispatch = useDispatch();
 
   const myVideo = useRef();
   const [play, setPlay] = useState(false);
@@ -56,7 +55,7 @@ export const VideoMobile = ({
 
   const handleFavorite = (video) => {
     if (!isFavorite) {
-      setFavoritesVideos((prevState) => [...prevState, video]);
+      dispatch(setFavoritesVideos([...favoritesVideos, video]));
       favourite.addFavouriteVideo({
         id,
         src: video.video_files[0].link,
@@ -77,20 +76,20 @@ export const VideoMobile = ({
         >
           <SingleVideo as={motion.div}>
             <video loop ref={myVideo}>
-              <source src={`${video}`} type='video/mp4' />
+              <source src={`${video}`} type="video/mp4" />
             </video>
             {!play ? (
               <FontAwesomeIcon
                 onClick={playVideo}
                 icon={faPlay}
-                color='white'
+                color="white"
                 size={mediaQuery.isMobile ? "4x" : "2x"}
               />
             ) : (
               <FontAwesomeIcon
                 onClick={pauseVideo}
                 icon={faPause}
-                color='white'
+                color="white"
                 size={mediaQuery.isMobile ? "4x" : "2x"}
               />
             )}
@@ -100,7 +99,7 @@ export const VideoMobile = ({
                 {/* Download icon */}
                 <FontAwesomeIcon
                   icon={faDownload}
-                  color='green'
+                  color="green"
                   style={{ marginLeft: "0.5rem" }}
                   onClick={() => downloadVideo(downloadUrl)}
                   size={mediaQuery.isMobile ? "4x" : "2x"}

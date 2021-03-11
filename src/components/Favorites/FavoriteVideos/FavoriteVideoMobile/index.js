@@ -1,11 +1,10 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   SingleVideo,
   VideoContainer,
   TextPhoto,
 } from "../../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "../../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faPause } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +14,7 @@ import videoPropTypes from "../../../../propTypes/propTypes";
 import { deleteFavoriteVideoFromDB } from "../../../../api/firebase/favourite";
 import { useDispatch, useSelector } from "react-redux";
 import { setFavoritesVideos } from "../../../../redux/actions/mediaAction";
+import { downloadVideo, mediaQuery } from "../../../../utils";
 
 export const FavoriteVideoMobile = ({
   video,
@@ -22,8 +22,6 @@ export const FavoriteVideoMobile = ({
   currentPhoto,
   downloadUrl,
 }) => {
-  const { mediaQuery, downloadVideo } = useContext(StoreContext);
-
   const myVideo = useRef();
   const [play, setPlay] = useState(false);
 
@@ -44,7 +42,6 @@ export const FavoriteVideoMobile = ({
     const ref = myVideo.current;
     return () => {
       ref.pause();
-      console.log("video paused");
     };
   }, []);
 

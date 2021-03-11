@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   SinglePhoto,
   PhotoContainer,
   TextPhoto,
 } from "../../../styled-component";
 import { motion, AnimatePresence } from "framer-motion";
-import { StoreContext } from "./../../../StoreContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +12,7 @@ import photoPropTypes from "./../../../propTypes/propTypes";
 import { favourite } from "./../../../api/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { setFavoritesPhotos } from "../../../redux/actions/mediaAction";
+import { downloadImage } from "../../../utils";
 
 export const PhotoDesktop = ({
   id,
@@ -23,7 +23,6 @@ export const PhotoDesktop = ({
   downloadUrl,
 }) => {
   const [hover, setHover] = useState(false);
-  const { downloadImage } = useContext(StoreContext);
 
   const { favoritesPhotos } = useSelector((state) => state.media);
   const { userIsLogged } = useSelector((state) => state.user);
