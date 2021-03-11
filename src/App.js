@@ -86,8 +86,6 @@ const App = () => {
           .get(`https://api.pexels.com/v1/search?query=${query}`, {
             headers: {
               Authorization: process.env.REACT_APP_PEXELS_KEY,
-              "Cross-Origin-Embedder-Policy": "require-corp",
-              "Cross-Origin-Opener-Policy": "same-origin",
             },
             params: {
               total_results: 10000,
@@ -124,8 +122,6 @@ const App = () => {
             {
               headers: {
                 Authorization: process.env.REACT_APP_PEXELS_KEY,
-                "Cross-Origin-Embedder-Policy": "require-corp",
-                "Cross-Origin-Opener-Policy": "same-origin",
               },
               params: {
                 total_results: 10000,
