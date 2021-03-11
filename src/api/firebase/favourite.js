@@ -25,10 +25,7 @@ export const addFavouritePhoto = async ({
             photographer,
           }),
         })
-        .then(function (docRef) {
-          console.log("Document written with ID: ", docRef);
-        })
-        .catch(function (error) {
+        .catch((error) => {
           console.error("Error adding document: ", error);
           throw Promise.reject(error);
         });
@@ -42,11 +39,7 @@ export const addFavouritePhoto = async ({
             photographer,
           }),
         })
-        .then(function (docRef) {
-          console.log("Document written with ID: ", docRef);
-        })
-        .catch(function (error) {
-          console.error("Error adding document: ", error);
+        .catch((error) => {
           throw Promise.reject(error);
         });
     }
@@ -78,11 +71,7 @@ export const addFavouriteVideo = async ({
             photographer,
           }),
         })
-        .then(function (doc) {
-          console.log("Document written with ID: ", doc);
-        })
-        .catch(function (error) {
-          console.error("Error adding document: ", error);
+        .catch((error) => {
           throw Promise.reject(error);
         });
     } else {
@@ -95,11 +84,7 @@ export const addFavouriteVideo = async ({
             photographer,
           }),
         })
-        .then(function (docRef) {
-          console.log("Document written with ID: ", docRef);
-        })
-        .catch(function (error) {
-          console.error("Error adding document: ", error);
+        .catch((error) => {
           throw Promise.reject(error);
         });
     }

@@ -138,6 +138,7 @@ export const Title = styled.h1`
   font-size: 2rem;
   color: #fff;
   margin-bottom: 2rem;
+  padding: 0 1rem;
 `;
 
 export const SmallTitle = styled.h2`

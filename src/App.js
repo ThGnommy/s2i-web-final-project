@@ -22,11 +22,10 @@ import {
 } from "./redux/actions/mediaAction";
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  const { userIsLogged, photos } = useSelector((state) => state.user);
   const { query } = useSelector((state) => state.search);
   const { currentPage } = useSelector((state) => state.media);
+  const { userIsLogged, photos } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   // false = photos - true = videos
   const { switchType } = useSelector((state) => state.switchSelector);
